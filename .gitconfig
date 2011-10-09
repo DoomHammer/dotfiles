@@ -1,0 +1,18 @@
+[color]
+	ui = auto
+[user]
+	email = DoomHammerNG@gmail.com
+	name = Piotr Gaczkowski
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 0x0+0+0
+	history-view-vpane-position = 515
+	main-window-view = FileView
+	file-view-vpane-position = 409
+[core]
+	excludesfile = /home/doomhammer/.gitignore
+[alias]
+	st = status
+	pom = push origin master
+[github]
+	user = DoomHammer
