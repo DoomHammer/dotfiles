@@ -29,6 +29,7 @@ Bundle 'Lokaltog/vim-easymotion'
 " End of bundles
 
 filetype plugin indent on
+syntax on
 
 " Some nice COLOURS! {{{
 set background=dark

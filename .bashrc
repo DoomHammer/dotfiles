@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+export TERM=xterm-256color
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -12,6 +14,7 @@ HISTCONTROL=ignoredups:ignorespace
 # append to the history file, don't overwrite it
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
 # Store multiline commands as one line.
 shopt -s cmdhist
 
@@ -96,7 +99,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -123,16 +125,16 @@ for i in $HOME/local/*; do
   [ -d $i/share/aclocal ] && ACLOCAL_FLAGS="-I ${i}/share/aclocal:${ACLOCAL_FLAGS}"
 done
 
-for i in $HOME/.local/lib/python*; do
-  [ -d $i/site-packages ] && PYTHONPATH="${i}:${i}/site-packages:${PYTHONPATH}"
-done
+#for i in $HOME/.local/lib/python*; do
+#  [ -d $i/site-packages ] && PYTHONPATH="${i}:${i}/site-packages:${PYTHONPATH}"
+#done
 
 # Ruby stuff
 GEM_HOME="$HOME/local/ruby/lib/gems"
-#RUBYLIB=$HOME/local/ruby/lib:$RUBYLIB
+RUBYLIB=$HOME/local/ruby/lib:$RUBYLIB
 PATH="$GEM_HOME/bin:$PATH"
 export GEM_HOME
-#export RUBYLIB
+export RUBYLIB
 
 export PATH
 export CPATH
@@ -141,9 +143,7 @@ export LIBRARY_PATH
 export PKG_CONFIG_PATH
 export MANPATH
 export ACLOCAL_FLAGS
-export PYTHONPATH
-
-export TERM=xterm-256color
+#export PYTHONPATH
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
