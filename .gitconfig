@@ -17,3 +17,15 @@
 	user = DoomHammer
 [deja]
 	cheatpath = dotfiles/cheats
+
+# read from given uri
+# push to writable one
+# http://bit.ly/g9c9Y2
+#
+[url "http://github.com/"]
+  insteadOf = "gh:"
+
+[url "git@github.com:"]
+  pushInsteadOf = "https://github.com/"
+  pushInsteadOf = "http://github.com/"
+  pushInsteadOf = "gh:"
