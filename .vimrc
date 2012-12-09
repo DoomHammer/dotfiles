@@ -24,6 +24,8 @@ Bundle 'vcscommand.vim'
 Bundle 'gmcs.vim'
 " Compilation of lonely files
 Bundle 'SingleCompile'
+" EasyMotion
+Bundle 'Lokaltog/vim-easymotion'
 " End of bundles
 
 filetype plugin indent on
