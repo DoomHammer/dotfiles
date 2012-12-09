@@ -15,3 +15,5 @@
 	st = status
 [github]
 	user = DoomHammer
+[deja]
+	cheatpath = dotfiles/cheats
