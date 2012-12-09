@@ -13,6 +13,5 @@
 	excludesfile = /home/doomhammer/.gitignore
 [alias]
 	st = status
-	pom = push origin master
 [github]
 	user = DoomHammer
