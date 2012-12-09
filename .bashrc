@@ -11,6 +11,9 @@ HISTCONTROL=ignoredups:ignorespace
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+# Store multiline commands as one line.
+shopt -s cmdhist
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
@@ -19,6 +22,9 @@ HISTFILESIZE=2000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# Spellcheck directories
+shopt -s dirspell
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -116,6 +122,18 @@ for i in $HOME/local/*; do
   [ -d $i/etc/bash_completion.d ] && for j in $i/etc/bash_completion.d/*; do . $j; done
   [ -d $i/share/aclocal ] && ACLOCAL_FLAGS="-I ${i}/share/aclocal:${ACLOCAL_FLAGS}"
 done
+
+for i in $HOME/.local/lib/python*; do
+  [ -d $i/site-packages ] && PYTHONPATH="${i}:${i}/site-packages:${PYTHONPATH}"
+done
+
+# Ruby stuff
+GEM_HOME="$HOME/local/ruby/lib/gems"
+#RUBYLIB=$HOME/local/ruby/lib:$RUBYLIB
+PATH="$GEM_HOME/bin:$PATH"
+export GEM_HOME
+#export RUBYLIB
+
 export PATH
 export CPATH
 export LD_LIBRARY_PATH
@@ -123,5 +141,9 @@ export LIBRARY_PATH
 export PKG_CONFIG_PATH
 export MANPATH
 export ACLOCAL_FLAGS
+export PYTHONPATH
 
 export TERM=xterm-256color
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
