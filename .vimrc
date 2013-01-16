@@ -26,6 +26,10 @@ Bundle 'gmcs.vim'
 Bundle 'SingleCompile'
 " EasyMotion
 Bundle 'Lokaltog/vim-easymotion'
+" DWM-inspired split management
+Bundle 'dwm.vim'
+" Vim Outliner
+Bundle 'vimoutliner/vimoutliner'
 " End of bundles
 
 filetype plugin indent on
@@ -44,6 +48,10 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+" Better autocompletion for filenames, buffers, colors, etc.
+set wildmenu
+set wildmode=longest:full,full
+
 " SingleCompile
 nmap <F8> :SCCompile<cr> 
 nmap <F9> :SCCompileRun<cr> 
@@ -51,3 +59,6 @@ nmap <F9> :SCCompileRun<cr>
 " C# settings
 autocmd BufNewFile,BufRead *.cs compiler gmcs
 autocmd BufNewFile,BufRead *.cs set makeprg=make
+
+" Session settings for mksession
+set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
