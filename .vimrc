@@ -1,3 +1,21 @@
+" Windows specific {
+    if has('win32') || has ('win64')
+        " Adds git runtime path so it is able to use Fugitive within and Bundle GVIM,
+        " while using the "git bash only" option when installing git for windows
+
+        " uses standard git install directories
+        let gitdir='C:\Program Files (x86)\Git\bin'
+        let gitdiralt='C:\Program Files\Git\bin'
+
+        if isdirectory(gitdir)
+            let $PATH.=';' .gitdir
+        elseif isdirectory(gitdiralt)
+            let $PATH.=';' . gitdiralt
+        endif
+
+    endif
+" }
+
 set nocompatible
 filetype off " Required!
 
@@ -16,6 +34,10 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'altercation/vim-colors-solarized'
 " CoffeeScript support in Vim
 Bundle 'kchmck/vim-coffee-script'
+" EasyMotion
+Bundle 'Lokaltog/vim-easymotion'
+" Vim Outliner
+Bundle 'vimoutliner/vimoutliner'
 " Jade support
 Bundle 'jade.vim'
 " VCS
@@ -24,12 +46,8 @@ Bundle 'vcscommand.vim'
 Bundle 'gmcs.vim'
 " Compilation of lonely files
 Bundle 'SingleCompile'
-" EasyMotion
-Bundle 'Lokaltog/vim-easymotion'
 " DWM-inspired split management
 Bundle 'dwm.vim'
-" Vim Outliner
-Bundle 'vimoutliner/vimoutliner'
 " End of bundles
 
 filetype plugin indent on
