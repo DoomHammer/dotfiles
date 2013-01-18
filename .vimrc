@@ -29,6 +29,7 @@ Bundle 'gmarik/vundle'
 "
 " original repos on github
 Bundle 'tpope/vim-fugitive'
+" The NerdTree
 Bundle 'scrooloose/nerdtree'
 " Nice colours for our Vim
 Bundle 'altercation/vim-colors-solarized'
@@ -38,6 +39,10 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'Lokaltog/vim-easymotion'
 " Vim Outliner
 Bundle 'vimoutliner/vimoutliner'
+" Python mode
+Bundle 'klen/python-mode'
+" What's a snake without Jedi powers?
+Bundle 'DoomHammer/jedi-vim'
 " Jade support
 Bundle 'jade.vim'
 " VCS
@@ -52,6 +57,8 @@ Bundle 'dwm.vim'
 
 filetype plugin indent on
 syntax on
+
+let g:pymode_rope = 0
 
 " Some nice COLOURS! {{{
 set background=dark
