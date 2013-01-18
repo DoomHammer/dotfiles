@@ -59,6 +59,9 @@ filetype plugin indent on
 syntax on
 
 let g:pymode_rope = 0
+let g:jedi#pydoc = ""
+let g:jedi#rename_command = ""
+let g:jedi#autocompletion_command = ""
 
 " Some nice COLOURS! {{{
 set background=dark
