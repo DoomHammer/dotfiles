@@ -41,6 +41,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'vimoutliner/vimoutliner'
 " Python mode
 Bundle 'klen/python-mode'
+" Better session management
+Bundle 'xolox/vim-session'
 " What's a snake without Jedi powers?
 Bundle 'DoomHammer/jedi-vim'
 " Jade support
@@ -53,6 +55,10 @@ Bundle 'gmcs.vim'
 Bundle 'SingleCompile'
 " DWM-inspired split management
 Bundle 'dwm.vim'
+" Taglist to navigate within a project
+Bundle 'taglist.vim'
+" And of course auto-update of said tags
+Bundle 'AutoTag'
 " End of bundles
 
 filetype plugin indent on
@@ -65,6 +71,7 @@ let g:jedi#autocompletion_command = ""
 
 " Some nice COLOURS! {{{
 set background=dark
+let g:solarized_termcolors=256
 colorscheme solarized
 " }}}
 
@@ -88,5 +95,5 @@ nmap <F9> :SCCompileRun<cr>
 autocmd BufNewFile,BufRead *.cs compiler gmcs
 autocmd BufNewFile,BufRead *.cs set makeprg=make
 
-" Session settings for mksession
+" Session settings for mksession and vim-session
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
