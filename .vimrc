@@ -41,6 +41,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'vimoutliner/vimoutliner'
 " Python mode
 Bundle 'klen/python-mode'
+" Misc
+Bundle 'xolox/vim-misc'
 " Better session management
 Bundle 'xolox/vim-session'
 " What's a snake without Jedi powers?
@@ -59,6 +61,8 @@ Bundle 'dwm.vim'
 Bundle 'taglist.vim'
 " And of course auto-update of said tags
 Bundle 'AutoTag'
+" EditorConfig
+Bundle 'editorconfig/editorconfig-vim'
 " End of bundles
 
 filetype plugin indent on

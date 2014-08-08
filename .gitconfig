@@ -13,6 +13,9 @@
 	main-window-view = FileView
 	file-view-vpane-position = 409
 
+[push]
+	default = simple
+
 [core]
 	excludesfile = /home/doomhammer/.gitignore
 
@@ -24,9 +27,6 @@
 
 [github]
 	user = DoomHammer
-
-[deja]
-	cheatpath = dotfiles/cheats
 
 # read from given uri
 # push to writable one

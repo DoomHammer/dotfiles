@@ -38,6 +38,7 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
+    screen) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -127,6 +128,10 @@ done
 #  [ -d $i/site-packages ] && PYTHONPATH="${i}:${i}/site-packages:${PYTHONPATH}"
 #done
 
+EDITOR=vim
+GIT_EDITOR=vim
+VISUAL=vim
+
 # Ruby stuff
 GEM_HOME="$HOME/local/ruby/lib/gems"
 RUBYLIB=$HOME/local/ruby/lib:$RUBYLIB
@@ -134,6 +139,9 @@ PATH="$GEM_HOME/bin:$PATH"
 export GEM_HOME
 export RUBYLIB
 
+export EDITOR
+export GIT_EDITOR
+export VISUAL
 export PATH
 export CPATH
 export LD_LIBRARY_PATH
@@ -145,3 +153,5 @@ export ACLOCAL_FLAGS
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+source $HOME/.bashrc.local
