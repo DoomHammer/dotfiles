@@ -63,6 +63,10 @@ Bundle 'taglist.vim'
 Bundle 'AutoTag'
 " EditorConfig
 Bundle 'editorconfig/editorconfig-vim'
+" Ack, ack, ack
+Bundle 'mileszs/ack.vim'
+" Ag, the SilverSearcher
+Bundle 'rking/ag.vim'
 " End of bundles
 
 filetype plugin indent on
