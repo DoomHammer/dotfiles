@@ -1,91 +1,69 @@
-" Windows specific {
-    if has('win32') || has ('win64')
-        " Adds git runtime path so it is able to use Fugitive within and Bundle GVIM,
-        " while using the "git bash only" option when installing git for windows
+if has('nvim')
+  let vimplugdir='~/.nvim/plugged'
+else
+  let vimplugdir='~/.vim/plugged'
+endif
 
-        " uses standard git install directories
-        let gitdir='C:\Program Files (x86)\Git\bin'
-        let gitdiralt='C:\Program Files\Git\bin'
+call plug#begin(vimplugdir)
 
-        if isdirectory(gitdir)
-            let $PATH.=';' .gitdir
-        elseif isdirectory(gitdiralt)
-            let $PATH.=';' . gitdiralt
-        endif
+Plug 'tpope/vim-sensible'
+Plug 'neilagabriel/vim-geeknote'
 
-    endif
-" }
+" Make sure you use single quotes
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'tpope/vim-tbone'
+Plug 'junegunn/vim-peekaboo'
 
-set nocompatible
-filetype off " Required!
+" I see your true colors...
+Plug 'junegunn/seoul256.vim'
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+Plug 'junegunn/fzf'
 
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-"
-" My Bundles here:
-"
-" original repos on github
-Bundle 'tpope/vim-fugitive'
+" Git goodies
+Plug 'tpope/vim-fugitive'
 " The NerdTree
-Bundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " Nice colours for our Vim
-Bundle 'altercation/vim-colors-solarized'
-" CoffeeScript support in Vim
-Bundle 'kchmck/vim-coffee-script'
-" EasyMotion
-Bundle 'Lokaltog/vim-easymotion'
-" Vim Outliner
-Bundle 'vimoutliner/vimoutliner'
-" Python mode
-Bundle 'klen/python-mode'
-" Misc
-Bundle 'xolox/vim-misc'
+Plug 'altercation/vim-colors-solarized'
 " Better session management
-Bundle 'xolox/vim-session'
-" What's a snake without Jedi powers?
-Bundle 'DoomHammer/jedi-vim'
-" Jade support
-Bundle 'jade.vim'
-" VCS
-Bundle 'vcscommand.vim'
-" C# Compiler support
-Bundle 'gmcs.vim'
-" Compilation of lonely files
-Bundle 'SingleCompile'
-" DWM-inspired split management
-Bundle 'dwm.vim'
-" Taglist to navigate within a project
-Bundle 'taglist.vim'
-" And of course auto-update of said tags
-Bundle 'AutoTag'
-" EditorConfig
-Bundle 'editorconfig/editorconfig-vim'
-" Ack, ack, ack
-Bundle 'mileszs/ack.vim'
+Plug 'xolox/vim-session'
 " Ag, the SilverSearcher
-Bundle 'rking/ag.vim'
-" End of bundles
+Plug 'rking/ag.vim'
+" " CoffeeScript support in Vim
+" Bundle 'kchmck/vim-coffee-script'
+" " EasyMotion
+" Bundle 'Lokaltog/vim-easymotion'
+" " Vim Outliner
+" Bundle 'vimoutliner/vimoutliner'
+" " Python mode
+" Bundle 'klen/python-mode'
+" " Misc
+" Bundle 'xolox/vim-misc'
+" " What's a snake without Jedi powers?
+" Bundle 'DoomHammer/jedi-vim'
+" " Jade support
+" Bundle 'jade.vim'
+" " VCS
+" Bundle 'vcscommand.vim'
+" " C# Compiler support
+" Bundle 'gmcs.vim'
+" " Compilation of lonely files
+" Bundle 'SingleCompile'
+" " DWM-inspired split management
+" Bundle 'dwm.vim'
+" " Taglist to navigate within a project
+" Bundle 'taglist.vim'
+" " And of course auto-update of said tags
+" Bundle 'AutoTag'
+" " EditorConfig
+" Bundle 'editorconfig/editorconfig-vim'
+"
 
-filetype plugin indent on
-syntax on
+call plug#end()
 
-let g:pymode_rope = 0
-let g:jedi#pydoc = ""
-let g:jedi#rename_command = ""
-let g:jedi#autocompletion_command = ""
-
-" Some nice COLOURS! {{{
-set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
-" }}}
-
-" Wearing LaTeX rubber gloves, oh my! {{{
-autocmd BufWritePost,FileWritePost *.tex silent !if [ -f .rubber ]; then rubber -dfsq --cache --inplace `cat .rubber` & fi
-" }}}
+colo seoul256
 
 set expandtab
 set shiftwidth=2
@@ -95,13 +73,11 @@ set softtabstop=2
 set wildmenu
 set wildmode=longest:full,full
 
-" SingleCompile
-nmap <F8> :SCCompile<cr> 
-nmap <F9> :SCCompileRun<cr> 
+set list
+set listchars=tab:▸\ ,eol:¬
 
-" C# settings
-autocmd BufNewFile,BufRead *.cs compiler gmcs
-autocmd BufNewFile,BufRead *.cs set makeprg=make
+" Work with tmux mouse integration
+set mouse=a
 
 " Session settings for mksession and vim-session
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
