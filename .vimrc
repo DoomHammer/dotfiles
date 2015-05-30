@@ -81,3 +81,10 @@ set mouse=a
 
 " Session settings for mksession and vim-session
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
+
+if has('nvim')
+  colo peachpuff
+
+  set ttimeout
+  set ttimeoutlen=0
+endif
