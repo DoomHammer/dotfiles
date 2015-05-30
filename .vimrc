@@ -4,6 +4,28 @@ else
   let vimplugdir='~/.vim/plugged'
 endif
 
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.sh --clang-completer
+    "!./install.sh --clang-completer --gocode-completer --omnisharp-completer
+  endif
+endfunction
+
+function! UpdateRemote(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    UpdateRemotePlugins
+    echom "Remeber to restart!"
+  endif
+endfunction
+
 call plug#begin(vimplugdir)
 
 Plug 'tpope/vim-sensible'
@@ -24,13 +46,17 @@ Plug 'junegunn/fzf'
 " Git goodies
 Plug 'tpope/vim-fugitive'
 " The NerdTree
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 " Nice colours for our Vim
 Plug 'altercation/vim-colors-solarized'
 " Better session management
-Plug 'xolox/vim-session'
+Plug 'vim-misc' | Plug 'xolox/vim-session'
 " Ag, the SilverSearcher
 Plug 'rking/ag.vim'
+" Man browser for Vim
+Plug 'bruno-/vim-man'
+" Without you, I'm nothing
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -60,8 +86,14 @@ Plug 'rking/ag.vim'
 " " EditorConfig
 " Bundle 'editorconfig/editorconfig-vim'
 "
+if has('nvim')
+  Plug 'critiqjo/lldb.nvim', { 'do': function('UpdateRemote') }
+endif
 
 call plug#end()
+
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+"autocmd FileType c,cpp,c++ nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 colo seoul256
 
