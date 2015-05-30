@@ -22,7 +22,7 @@ export LC_ALL=en_US.UTF-8
 
 # FIXME: allow installation with several open shells
 if [[ ! -f ~/.antigen.zsh ]]; then
-	curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen.zsh
+  curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen.zsh
 fi
 source ~/.antigen.zsh
 
@@ -48,8 +48,8 @@ virtualenv
 EOBUNDLES
 
 if [ -d $HOME/src/vim-plug-zsh ]; then
-	antigen bundle $HOME/src/vim-plug-zsh
-	[ -f ~/.vimrc ] && grep -q 'call plug#begin' ~/.vimrc && vim-plug
+  antigen bundle $HOME/src/vim-plug-zsh
+  [ -f ~/.vimrc ] && grep -q 'call plug#begin' ~/.vimrc && vim-plug
 fi
 
 antigen theme gentoo
@@ -57,27 +57,27 @@ antigen theme gentoo
 antigen apply
 
 is_linux () {
-	[[ $('uname') == 'Linux' ]];
+  [[ $('uname') == 'Linux' ]];
 }
 
 is_osx () {
-	[[ $('uname') == 'Darwin' ]]
+  [[ $('uname') == 'Darwin' ]]
 }
 
 if is_osx; then
-	export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-	if [[ ! -f '/usr/local/bin/brew' ]]; then
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-		brew tap homebrew/boneyard
-	fi
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+  if [[ ! -f '/usr/local/bin/brew' ]]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew tap homebrew/boneyard
+  fi
 elif is_linux; then
-	if [[ ! -d $HOME/.linuxbrew ]]; then
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
-		brew doctor
-	fi
+  if [[ ! -d $HOME/.linuxbrew ]]; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+    brew doctor
+  fi
 
-	export PATH=$HOME/.linuxbrew/bin:$PATH
-	export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
+  export PATH=$HOME/.linuxbrew/bin:$PATH
+  export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 fi
 
 setopt interactivecomments
@@ -88,21 +88,21 @@ alias tmux='tmux -2'
 
 # TMUX
 if [[ -z $TMUX ]]; then
-	# Attempt to discover a detached session and attach it, else create a new session
-	CURRENT_USER=$(whoami)
-	if tmux has-session -t $CURRENT_USER 2>/dev/null; then
-		tmux attach-session -t $CURRENT_USER
-	else
-		tmux new-session -s $CURRENT_USER
-	fi
+  # Attempt to discover a detached session and attach it, else create a new session
+  CURRENT_USER=$(whoami)
+  if tmux has-session -t $CURRENT_USER 2>/dev/null; then
+    tmux attach-session -t $CURRENT_USER
+  else
+    tmux new-session -s $CURRENT_USER
+  fi
 fi
 
 if which exa >/dev/null 2>&1
 then
-	alias ls='exa'
+  alias ls='exa'
 elif which ls++ >/dev/null 2>&1
 then
-	alias ls='ls++'
+  alias ls='ls++'
 fi
 
 if which nvim >/dev/null 2>&1
