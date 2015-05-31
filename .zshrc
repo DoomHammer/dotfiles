@@ -47,11 +47,6 @@ virtualenv
 
 EOBUNDLES
 
-if [ -d $HOME/src/vim-plug-zsh ]; then
-  antigen bundle $HOME/src/vim-plug-zsh
-  [ -f ~/.vimrc ] && grep -q 'call plug#begin' ~/.vimrc && vim-plug
-fi
-
 antigen theme gentoo
 
 antigen apply
@@ -111,4 +106,12 @@ then
 fi
 
 alias ll='ls -l'
-alias vi='vim'
+if which vim >/dev/null 2>&1
+then
+  alias vi='vim'
+fi
+
+if [ -d $HOME/src/vim-plug-zsh ]; then
+  antigen bundle $HOME/src/vim-plug-zsh
+  #[ -f ~/.vimrc ] && grep -q 'call plug#begin' ~/.vimrc && vim-plug
+fi
