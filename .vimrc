@@ -57,6 +57,8 @@ Plug 'rking/ag.vim'
 Plug 'bruno-/vim-man'
 " Without you, I'm nothing
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+" Local configuration for projects
+Plug 'embear/vim-localvimrc'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -93,7 +95,6 @@ endif
 call plug#end()
 
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
-"autocmd FileType c,cpp,c++ nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 colo seoul256
 
