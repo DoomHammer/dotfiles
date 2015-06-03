@@ -151,7 +151,4 @@ export MANPATH
 export ACLOCAL_FLAGS
 #export PYTHONPATH
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-source $HOME/.bashrc.local
+[ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
