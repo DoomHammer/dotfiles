@@ -32,7 +32,6 @@ Plug 'tpope/vim-sensible'
 Plug 'neilagabriel/vim-geeknote'
 
 " Make sure you use single quotes
-Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'tpope/vim-tbone'
