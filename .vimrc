@@ -120,3 +120,7 @@ if has('nvim')
   set ttimeout
   set ttimeoutlen=0
 endif
+
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
