@@ -92,7 +92,10 @@ Plug 'majutsushi/tagbar'
 " Bundle 'editorconfig/editorconfig-vim'
 "
 if has('nvim')
+  " Great lldb interface for neovim
   Plug 'critiqjo/lldb.nvim', { 'do': function('UpdateRemote') }
+  " Asynchronous make for neovim
+  Plug 'benekastah/neomake'
 endif
 
 call plug#end()
