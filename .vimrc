@@ -60,6 +60,10 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'embear/vim-localvimrc'
 " Dockerfile support
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+" Automatic generation of CTags
+Plug 'xolox/vim-easytags'
+" Nice browser for CTags
+Plug 'majutsushi/tagbar'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -68,8 +72,6 @@ Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 " Bundle 'vimoutliner/vimoutliner'
 " " Python mode
 " Bundle 'klen/python-mode'
-" " Misc
-" Bundle 'xolox/vim-misc'
 " " What's a snake without Jedi powers?
 " Bundle 'DoomHammer/jedi-vim'
 " " Jade support
@@ -95,7 +97,15 @@ endif
 
 call plug#end()
 
+" Now configure those plugins
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+let g:easytags_async=1
+let g:easytags_dynamic_files=1
+let g:easytags_suppress_ctags_warning=1
+
+" Session settings for mksession and vim-session
+set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
 
 colo seoul256
 
@@ -112,9 +122,6 @@ set listchars=tab:▸\ ,eol:¬
 
 " Work with tmux mouse integration
 set mouse=a
-
-" Session settings for mksession and vim-session
-set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
 
 if has('nvim')
   colo peachpuff
