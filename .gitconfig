@@ -1,67 +1,67 @@
 # vi:sw=8:sts=8:ts=8:noexpandtab
 [color]
-	ui = auto
+  ui = auto
 
 [user]
-	email = DoomHammerNG@gmail.com
-	name = Piotr Gaczkowski
+  email = DoomHammerNG@gmail.com
+  name = Piotr Gaczkowski
 
 [core]
-	autocrlf = false
-	excludesfile = ~/.gitignore
-	whitespace = blank-at-eol,blank-at-eof,space-before-tab,tab-in-indent
+  autocrlf = false
+  excludesfile = ~/.gitignore
+  whitespace = blank-at-eol,blank-at-eof,space-before-tab,tab-in-indent
 
 [push]
-	default = simple
+  default = simple
 
 [rerere]
-	enabled = true
-	autoupdate = true
+  enabled = true
+  autoupdate = true
 
 [alias]
-	a = add
-	s = status
-	st = status
-	ci = commit
-	b = branch
-	co = checkout
-	re = remote
-	d = diff
-	dc = diff --cached
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	ls = ls-files
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	# Pull Upstream
-	pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+  a = add
+  s = status
+  st = status
+  ci = commit
+  b = branch
+  co = checkout
+  re = remote
+  d = diff
+  dc = diff --cached
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = ls-files
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  # Pull Upstream
+  pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
 
 ###
 ### Git-up specific
 ### https://github.com/aanand/git-up
 ###
 [git-up "rebase"]
-	arguments = --preserve-merges
+  arguments = --preserve-merges
 
 ###
 ### Github specific
 ###
 [github]
-	user = DoomHammer
+  user = DoomHammer
 
 # read from given uri
 # push to writable one
 # http://bit.ly/g9c9Y2
 #
 [url "http://github.com/"]
-	insteadOf = "gh:"
+  insteadOf = "gh:"
 
 [url "git@github.com:"]
-	pushInsteadOf = "https://github.com/"
-	pushInsteadOf = "http://github.com/"
-	pushInsteadOf = "gh:"
+  pushInsteadOf = "https://github.com/"
+  pushInsteadOf = "http://github.com/"
+  pushInsteadOf = "gh:"
 
 ###
 ### Include local overrides
 ###
 [include]
-	path = .gitconfig.local
+  path = .gitconfig.local
