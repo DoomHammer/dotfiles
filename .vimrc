@@ -58,6 +58,8 @@ Plug 'bruno-/vim-man'
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 " Local configuration for projects
 Plug 'embear/vim-localvimrc'
+" Dockerfile support
+Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
