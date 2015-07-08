@@ -29,7 +29,6 @@ source ~/.antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
-sharat87/autoenv
 brew
 colored-man
 command-not-found
@@ -45,6 +44,8 @@ tmuxinator
 vagrant
 virtualenv
 
+sharat87/autoenv
+rimraf/k
 EOBUNDLES
 
 antigen theme gentoo
