@@ -77,8 +77,8 @@ elif is_linux; then
 fi
 
 setopt interactivecomments
-
 setopt CORRECT
+unsetopt nomatch
 
 alias tmux='tmux -2'
 
