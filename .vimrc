@@ -64,6 +64,8 @@ Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plug 'xolox/vim-easytags'
 " Nice browser for CTags
 Plug 'majutsushi/tagbar'
+" Tmux .conf
+Plug 'tmux-plugins/vim-tmux'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion

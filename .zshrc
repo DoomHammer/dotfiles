@@ -13,7 +13,7 @@ compinit
 # End of lines added by compinstall
 
 
-export EDITOR=vim
+export EDITOR=vi
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 # FIXME: check first if they are available
@@ -80,6 +80,9 @@ setopt interactivecomments
 setopt CORRECT
 unsetopt nomatch
 
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 alias tmux='tmux -2'
 
 # TMUX
