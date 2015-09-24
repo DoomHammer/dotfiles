@@ -66,6 +66,8 @@ Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
 " Tmux .conf
 Plug 'tmux-plugins/vim-tmux'
+" Tmux Focus Events
+Plug 'tmux-plugins/vim-tmux-focus-events'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
