@@ -44,6 +44,7 @@ tmuxinator
 vagrant
 virtualenv
 
+doomhammer/oh-my-zsh plugins/chruby --branch=fix-chruby-test-expression
 sharat87/autoenv
 rimraf/k
 EOBUNDLES
