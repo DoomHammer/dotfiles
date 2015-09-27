@@ -51,8 +51,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 " Nice colours for our Vim
 Plug 'altercation/vim-colors-solarized'
-" Better session management
-Plug 'vim-misc' | Plug 'xolox/vim-session'
 " Ag, the SilverSearcher
 Plug 'rking/ag.vim'
 " Man browser for Vim
@@ -64,13 +62,15 @@ Plug 'embear/vim-localvimrc'
 " Dockerfile support
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 " Automatic generation of CTags
-Plug 'xolox/vim-easytags'
+Plug 'vim-misc' | Plug 'xolox/vim-easytags'
 " Nice browser for CTags
 Plug 'majutsushi/tagbar'
 " Tmux .conf
 Plug 'tmux-plugins/vim-tmux'
 " Tmux Focus Events
 Plug 'tmux-plugins/vim-tmux-focus-events'
+" Automatically save session
+Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 " Highlight trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
 " " CoffeeScript support in Vim
@@ -113,8 +113,11 @@ let g:easytags_suppress_ctags_warning=1
 " Default fzf layout
 let g:fzf_layout = { 'down': '40%' }
 
-" Session settings for mksession and vim-session
-set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
+" Session settings
+set sessionoptions=buffers,curdir,folds,help,resize,tabpages,winpos,winsize
+
+let g:prosession_on_startup = 1
+let g:prosession_tmux_title = 1
 
 """
 """
