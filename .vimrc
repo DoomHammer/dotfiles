@@ -4,13 +4,14 @@ else
   let vimplugdir='~/.vim/plugged'
 endif
 
+
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
-    !./install.sh --clang-completer
+    !./install.py --clang-completer
     "!./install.sh --clang-completer --gocode-completer --omnisharp-completer
   endif
 endfunction
@@ -55,7 +56,7 @@ Plug 'rking/ag.vim'
 " Man browser for Vim
 Plug 'bruno-/vim-man'
 " Without you, I'm nothing
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM')}
 " Local configuration for projects
 Plug 'embear/vim-localvimrc'
 " Dockerfile support
