@@ -26,32 +26,6 @@ if [[ ! -f ~/.antigen.zsh ]]; then
 fi
 source ~/.antigen.zsh
 
-antigen use oh-my-zsh
-
-antigen bundles <<EOBUNDLES
-brew
-colored-man
-command-not-found
-docker
-extract
-git
-golang
-pip
-python
-ssh-agent
-sudo
-tmuxinator
-vagrant
-virtualenv
-
-doomhammer/oh-my-zsh plugins/chruby --branch=fix-chruby-test-expression
-sharat87/autoenv
-rimraf/k
-EOBUNDLES
-
-antigen theme gentoo
-
-antigen apply
 
 is_linux () {
   [[ $('uname') == 'Linux' ]];
@@ -76,6 +50,37 @@ elif is_linux; then
   export PATH=$HOME/.linuxbrew/bin:$PATH
   export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 fi
+
+antigen use oh-my-zsh
+
+antigen bundles <<EOBUNDLES
+brew
+colored-man
+command-not-found
+docker
+extract
+git
+golang
+pip
+python
+ssh-agent
+sudo
+tmuxinator
+vagrant
+virtualenv
+
+doomhammer/oh-my-zsh plugins/chruby --branch=fix-chruby-test-expression
+sharat87/autoenv
+rimraf/k
+EOBUNDLES
+
+if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
+  antigen bundle $(brew --prefix fzf)/shell
+fi
+
+antigen theme gentoo
+
+antigen apply
 
 setopt interactivecomments
 setopt CORRECT
@@ -115,6 +120,24 @@ if which vim >/dev/null 2>&1
 then
   alias vi='vim'
 fi
+
+if [[ ! -z $TMUX ]]; then
+  alias fzf='fzf-tmux'
+fi
+
+if [[ -x `which ag` ]]; then
+  export FZF_DEFAULT_COMMAND='ag -l -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+
+# v - open files in ~/.viminfo
+v() {
+  local files
+  files=$(grep '^>' ~/.viminfo | cut -c3- |
+          while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+}
 
 if [ -d $HOME/src/vim-plug-zsh ]; then
   antigen bundle $HOME/src/vim-plug-zsh
