@@ -139,6 +139,8 @@ set wildmode=longest:full,full
 set list
 set listchars=tab:▸\ 
 
+set clipboard=unnamed
+
 " Work with tmux mouse integration
 set mouse=a
 
