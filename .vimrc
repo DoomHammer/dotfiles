@@ -69,6 +69,8 @@ Plug 'majutsushi/tagbar'
 Plug 'tmux-plugins/vim-tmux'
 " Tmux Focus Events
 Plug 'tmux-plugins/vim-tmux-focus-events'
+" Nice status bar
+Plug 'bling/vim-airline'
 " Automatically save session
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 " Highlight trailing whitespace
@@ -113,6 +115,9 @@ let g:easytags_suppress_ctags_warning=1
 " Default fzf layout
 let g:fzf_layout = { 'down': '40%' }
 
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
 " Session settings
 set sessionoptions=buffers,curdir,folds,help,resize,tabpages,winpos,winsize
 
@@ -127,6 +132,32 @@ let g:prosession_tmux_title = 1
 let g:python_host_prog='/usr/bin/python'
 
 colo seoul256
+
+"""
+""" Fun with buffers
+""" Based on https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+"""
+set hidden
+
+
+" To open a new empty buffer
+nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers with FZF
+nmap <leader>bl :Buffers<CR>
+
+nmap <leader>t :TagbarToggle<CR>
+nmap <leader>n :NERDTreeTabsToggle<CR>
 
 set expandtab
 set shiftwidth=2
