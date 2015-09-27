@@ -41,7 +41,9 @@ Plug 'junegunn/vim-peekaboo'
 " I see your true colors...
 Plug 'junegunn/seoul256.vim'
 
+" Fuzzy searching
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Git goodies
 Plug 'tpope/vim-fugitive'
@@ -111,6 +113,9 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 let g:easytags_async=1
 let g:easytags_dynamic_files=1
 let g:easytags_suppress_ctags_warning=1
+
+" Default fzf layout
+let g:fzf_layout = { 'down': '40%' }
 
 " Session settings for mksession and vim-session
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
