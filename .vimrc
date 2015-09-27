@@ -89,12 +89,6 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Bundle 'gmcs.vim'
 " " Compilation of lonely files
 " Bundle 'SingleCompile'
-" " DWM-inspired split management
-" Bundle 'dwm.vim'
-" " Taglist to navigate within a project
-" Bundle 'taglist.vim'
-" " And of course auto-update of said tags
-" Bundle 'AutoTag'
 " " EditorConfig
 " Bundle 'editorconfig/editorconfig-vim'
 "
