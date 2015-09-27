@@ -71,6 +71,8 @@ Plug 'majutsushi/tagbar'
 Plug 'tmux-plugins/vim-tmux'
 " Tmux Focus Events
 Plug 'tmux-plugins/vim-tmux-focus-events'
+" Highlight trailing whitespace
+Plug 'ntpeters/vim-better-whitespace'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -125,7 +127,7 @@ set wildmenu
 set wildmode=longest:full,full
 
 set list
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ 
 
 " Work with tmux mouse integration
 set mouse=a
