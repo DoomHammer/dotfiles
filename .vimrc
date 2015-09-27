@@ -105,7 +105,9 @@ endif
 
 call plug#end()
 
-" Now configure those plugins
+"""
+""" Now configure those plugins
+"""
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 let g:easytags_async=1
