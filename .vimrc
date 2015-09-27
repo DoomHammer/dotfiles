@@ -116,6 +116,13 @@ let g:fzf_layout = { 'down': '40%' }
 " Session settings for mksession and vim-session
 set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winpos,winsize
 
+"""
+"""
+"""
+
+" Use system Python even in Virtualenv
+let g:python_host_prog='/usr/bin/python'
+
 colo seoul256
 
 set expandtab
