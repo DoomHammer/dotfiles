@@ -1,3 +1,5 @@
 .*.sw*
 .~lock.*#
 *.pyc
+Session.vim
+tags
