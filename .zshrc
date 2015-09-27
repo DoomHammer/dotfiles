@@ -102,22 +102,18 @@ if [[ -z $TMUX ]]; then
   fi
 fi
 
-if which exa >/dev/null 2>&1
-then
+if which exa >/dev/null 2>&1; then
   alias ls='exa'
-elif which ls++ >/dev/null 2>&1
-then
+elif which ls++ >/dev/null 2>&1; then
   alias ls='ls++'
 fi
 
-if which nvim >/dev/null 2>&1
-then
+if which nvim >/dev/null 2>&1; then
   alias vim='nvim'
 fi
 
 alias ll='ls -l'
-if which vim >/dev/null 2>&1
-then
+if which vim >/dev/null 2>&1; then
   alias vi='vim'
 fi
 
