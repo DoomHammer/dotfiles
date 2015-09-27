@@ -70,8 +70,9 @@ vagrant
 virtualenv
 
 doomhammer/oh-my-zsh plugins/chruby --branch=fix-chruby-test-expression
-sharat87/autoenv
 rimraf/k
+sharat87/autoenv
+zsh-users/zsh-completions
 EOBUNDLES
 
 if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
