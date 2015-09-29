@@ -75,6 +75,9 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 " Highlight trailing whitespace
 Plug 'ntpeters/vim-better-whitespace'
+" Vim color scheme designed to be very readable in both light and dark
+" environments.
+Plug 'gregsexton/Atom'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -133,7 +136,7 @@ let g:prosession_tmux_title = 1
 " Use system Python even in Virtualenv
 let g:python_host_prog='/usr/bin/python'
 
-colo seoul256
+colo atom
 
 """
 """ Fun with buffers
@@ -178,8 +181,6 @@ set clipboard=unnamed
 set mouse=a
 
 if has('nvim')
-  colo peachpuff
-
   set ttimeout
   set ttimeoutlen=0
 endif
