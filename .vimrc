@@ -82,6 +82,8 @@ Plug 'gregsexton/Atom'
 Plug 'gregsexton/gitv'
 " Ability to :SudoWrite? Priceless!
 Plug 'tpope/vim-eunuch'
+" Some syntax checking maybe?
+Plug 'scrooloose/syntastic'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -132,6 +134,12 @@ set sessionoptions=buffers,curdir,folds,help,resize,tabpages,winpos,winsize
 
 let g:prosession_on_startup = 1
 let g:prosession_tmux_title = 1
+
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 """
 """
