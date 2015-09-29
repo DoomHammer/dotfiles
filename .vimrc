@@ -78,6 +78,10 @@ Plug 'ntpeters/vim-better-whitespace'
 " Vim color scheme designed to be very readable in both light and dark
 " environments.
 Plug 'gregsexton/Atom'
+" Git explorer
+Plug 'gregsexton/gitv'
+" Ability to :SudoWrite? Priceless!
+Plug 'tpope/vim-eunuch'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
