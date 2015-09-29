@@ -55,6 +55,7 @@ antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
 brew
+chruby
 colored-man
 command-not-found
 docker
@@ -69,7 +70,6 @@ tmuxinator
 vagrant
 virtualenv
 
-doomhammer/oh-my-zsh plugins/chruby --branch=fix-chruby-test-expression
 rimraf/k
 sharat87/autoenv
 zsh-users/zsh-completions
