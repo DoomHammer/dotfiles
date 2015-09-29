@@ -126,6 +126,7 @@ if [[ -x `which ag` ]]; then
   export FZF_DEFAULT_COMMAND='ag -l -g ""'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
+export FZF_DEFAULT_OPTS="--extended-exact"
 
 # v - open files in ~/.viminfo
 v() {
