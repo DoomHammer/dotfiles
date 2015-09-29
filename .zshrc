@@ -56,7 +56,6 @@ antigen use oh-my-zsh
 antigen bundles <<EOBUNDLES
 brew
 chruby
-colored-man
 command-not-found
 docker
 extract
@@ -72,6 +71,7 @@ virtualenv
 
 rimraf/k
 sharat87/autoenv
+zlsun/solarized-man
 zsh-users/zsh-completions
 EOBUNDLES
 
