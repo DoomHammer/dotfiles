@@ -21,10 +21,10 @@ export LC_ALL=en_US.UTF-8
 
 
 # FIXME: allow installation with several open shells
-if [[ ! -f ~/.antigen.zsh ]]; then
-  curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > ~/.antigen.zsh
+if [[ ! -f ~/.zgen.zsh ]]; then
+  curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen.zsh
 fi
-source ~/.antigen.zsh
+source ~/.zgen.zsh
 
 
 is_linux () {
@@ -51,37 +51,39 @@ elif is_linux; then
   export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 fi
 
-antigen use oh-my-zsh
+if ! zgen saved; then
+  echo "Creating zgen save"
 
-antigen bundles <<EOBUNDLES
-brew
-chruby
-command-not-found
-docker
-extract
-git
-golang
-pip
-python
-ssh-agent
-sudo
-tmuxinator
-vagrant
-virtualenv
+  zgen oh-my-zsh
 
-rimraf/k
-sharat87/autoenv
-zlsun/solarized-man
-zsh-users/zsh-completions
-EOBUNDLES
+  zgen oh-my-zsh plugins/brew
+  zgen oh-my-zsh plugins/chruby
+  zgen oh-my-zsh plugins/command-not-found
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/extract
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/golang
+  zgen oh-my-zsh plugins/pip
+  zgen oh-my-zsh plugins/python
+  zgen oh-my-zsh plugins/ssh-agent
+  zgen oh-my-zsh plugins/sudo
+  zgen oh-my-zsh plugins/tmuxinator
+  zgen oh-my-zsh plugins/vagrant
+  zgen oh-my-zsh plugins/virtualenv
 
-if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
-  antigen bundle $(brew --prefix fzf)/shell
+  zgen load rimraf/k
+  zgen load sharat87/autoenv
+  zgen load zlsun/solarized-man
+  zgen load zsh-users/zsh-completions
+
+  if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
+    zgen load $(brew --prefix fzf)/shell
+  fi
+
+  zgen oh-my-zsh themes/gentoo
+
+  zgen save
 fi
-
-antigen theme gentoo
-
-antigen apply
 
 setopt interactivecomments
 setopt CORRECT
