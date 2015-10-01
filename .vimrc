@@ -145,7 +145,12 @@ let g:syntastic_check_on_wq = 0
 " Use system Python even in Virtualenv
 let g:python_host_prog='/usr/bin/python'
 
-colo atom
+"""
+""" Colorscheme
+"""
+let g:solarized_termcolors=256
+set background=dark
+colo solarized
 
 """
 """ Fun with buffers
