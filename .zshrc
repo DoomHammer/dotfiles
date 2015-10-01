@@ -71,6 +71,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/vagrant
   zgen oh-my-zsh plugins/virtualenv
 
+  zgen load joel-porquet/zsh-dircolors-solarized.git
   zgen load rimraf/k
   zgen load sharat87/autoenv
   zgen load zlsun/solarized-man
@@ -83,6 +84,10 @@ if ! zgen saved; then
   zgen oh-my-zsh themes/gentoo
 
   zgen save
+fi
+
+if [[ ! -f $HOME/.zsh-dircolors.config ]]; then
+  setupsolarized dircolors.256dark
 fi
 
 setopt interactivecomments
