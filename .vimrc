@@ -37,14 +37,11 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'tpope/vim-tbone'
 Plug 'junegunn/vim-peekaboo'
-
 " I see your true colors...
 Plug 'junegunn/seoul256.vim'
-
 " Fuzzy searching
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-
 " Git goodies
 Plug 'tpope/vim-fugitive'
 " The NerdTree
@@ -104,7 +101,7 @@ Plug 'scrooloose/syntastic'
 " Bundle 'SingleCompile'
 " " EditorConfig
 " Bundle 'editorconfig/editorconfig-vim'
-"
+
 if has('nvim')
   " Great lldb interface for neovim
   Plug 'critiqjo/lldb.nvim', { 'do': function('UpdateRemote') }
@@ -142,7 +139,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 """
-"""
+""" Misc definitions
 """
 
 " Use system Python even in Virtualenv
