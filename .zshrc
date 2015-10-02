@@ -81,7 +81,8 @@ if ! zgen saved; then
     zgen load $(brew --prefix fzf)/shell
   fi
 
-  zgen oh-my-zsh themes/gentoo
+  zgen load houjunchen/solarized-powerline solarized_powerline.zsh-theme
+#  zgen load NicoSantangelo/Alpharized alpharized.zsh-theme
 
   zgen save
 fi
