@@ -72,6 +72,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/virtualenv
 
   zgen load caarlos0/zsh-mkc
+  zgen load felixr/docker-zsh-completion
   zgen load joel-porquet/zsh-dircolors-solarized
   zgen load rimraf/k
   zgen load sharat87/autoenv
