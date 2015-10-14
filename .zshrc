@@ -78,6 +78,9 @@ if ! zgen saved; then
   zgen load zlsun/solarized-man
   zgen load zsh-users/zsh-completions
 
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zsh-users/zsh-history-substring-search
+
   if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
     zgen load $(brew --prefix fzf)/shell
   fi
