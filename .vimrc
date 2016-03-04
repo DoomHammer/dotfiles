@@ -1,5 +1,5 @@
 if has('nvim')
-  let vimplugdir='~/.nvim/plugged'
+  let vimplugdir='~/.config/nvim/plugged'
 else
   let vimplugdir='~/.vim/plugged'
 endif
