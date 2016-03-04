@@ -76,6 +76,7 @@ if ! zgen saved; then
   zgen load caarlos0/zsh-mkc
   zgen load felixr/docker-zsh-completion
   zgen load joel-porquet/zsh-dircolors-solarized
+  zgen load marzocchi/zsh-notify
   zgen load rimraf/k
   zgen load sharat87/autoenv
   zgen load zlsun/solarized-man
