@@ -107,7 +107,11 @@ unsetopt nomatch
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
-alias tmux='tmux -2'
+if [[ `tmux -V |cut -d ' ' -f2` -ge 2.1 ]]; then
+  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.1.conf'
+else
+  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.0.conf'
+fi
 
 # TMUX
 if [[ -z $TMUX ]]; then
