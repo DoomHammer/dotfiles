@@ -51,6 +51,8 @@ elif is_linux; then
   export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
 fi
 
+DISABLE_AUTO_UPDATE="true"
+
 if ! zgen saved; then
   echo "Creating zgen save"
 
