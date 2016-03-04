@@ -122,6 +122,8 @@ if which exa >/dev/null 2>&1; then
   alias ls='exa'
 elif which ls++ >/dev/null 2>&1; then
   alias ls='ls++'
+else
+  alias ls='ls --color=auto'
 fi
 
 if which nvim >/dev/null 2>&1; then
