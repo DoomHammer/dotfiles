@@ -175,6 +175,13 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Show all open buffers with FZF
 nmap <leader>bl :Buffers<CR>
 
+"""
+""" Visually indicate long columns
+""" Taken from https://www.youtube.com/watch?v=aHm36-na4-4
+"""
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
 nmap <leader>t :TagbarToggle<CR>
 nmap <leader>n :NERDTreeTabsToggle<CR>
 
