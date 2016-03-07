@@ -81,6 +81,10 @@ Plug 'gregsexton/gitv'
 Plug 'tpope/vim-eunuch'
 " Some syntax checking maybe?
 Plug 'scrooloose/syntastic'
+" Close all buffers but current
+Plug 'muziqiushan/bufonly'
+" Enhanced Commentify
+Plug 'EnhCommentify.vim'
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
