@@ -114,7 +114,8 @@ call plug#end()
 """
 """ Now configure those plugins
 """
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+"map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <Leader>n <plug>NERDTreeToggle<CR>
 
 let g:easytags_async=1
 let g:easytags_dynamic_files=1
