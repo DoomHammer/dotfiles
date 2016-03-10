@@ -43,7 +43,7 @@ if is_osx; then
   fi
 elif is_linux; then
   if [[ ! -d $HOME/.linuxbrew ]]; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"
     brew doctor
   fi
 
