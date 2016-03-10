@@ -24,8 +24,6 @@ export LC_ALL=en_US.UTF-8
 if [[ ! -f ~/.zgen.zsh ]]; then
   curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen.zsh
 fi
-source ~/.zgen.zsh
-
 
 is_linux () {
   [[ $('uname') == 'Linux' ]];
@@ -54,7 +52,9 @@ elif is_linux; then
 fi
 
 DISABLE_AUTO_UPDATE="true"
-PROMPT_LEAN_TMUX=" "
+PROMPT_LEAN_TMUX=""
+
+source ~/.zgen.zsh
 
 if ! zgen saved; then
   echo "Creating zgen save"
