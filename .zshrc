@@ -12,13 +12,11 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-
 export EDITOR=vi
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 # FIXME: check first if they are available
 export LC_ALL=en_US.UTF-8
-
 
 # FIXME: allow installation with several open shells
 if [[ ! -f ~/.zgen.zsh ]]; then
