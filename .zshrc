@@ -54,6 +54,7 @@ elif is_linux; then
 fi
 
 DISABLE_AUTO_UPDATE="true"
+PROMPT_LEAN_TMUX=" "
 
 if ! zgen saved; then
   echo "Creating zgen save"
@@ -92,8 +93,7 @@ if ! zgen saved; then
     zgen load $(brew --prefix fzf)/shell
   fi
 
-  zgen load houjunchen/solarized-powerline solarized_powerline.zsh-theme
-#  zgen load NicoSantangelo/Alpharized alpharized.zsh-theme
+  zgen load miekg/lean
 
   zgen save
 fi
