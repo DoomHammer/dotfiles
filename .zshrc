@@ -47,8 +47,10 @@ elif is_linux; then
     brew doctor
   fi
 
-  export PATH=$HOME/.linuxbrew/bin:$PATH
-  export PYTHONPATH=$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH
+  BREW_PREFIX=$(brew --prefix)
+  export PATH=$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH
+  export PYTHONPATH=$BREW_PREFIX/lib/python2.7/site-packages:$PYTHONPATH
+  export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
 fi
 
 DISABLE_AUTO_UPDATE="true"
