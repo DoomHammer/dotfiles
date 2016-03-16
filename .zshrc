@@ -38,13 +38,13 @@ if is_osx; then
     brew tap homebrew/boneyard
   fi
 elif is_linux; then
-  if [[ ! -d $HOME/.linuxbrew ]]; then
+  local BREW_PREFIX=$HOME/.linuxbrew
+  export PATH=$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH
+  if [[ ! -d $BREW_PREFIX ]]; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"
     brew doctor
   fi
 
-  BREW_PREFIX=$(brew --prefix)
-  export PATH=$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH
   export PYTHONPATH=$BREW_PREFIX/lib/python2.7/site-packages:$PYTHONPATH
   export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
 fi
