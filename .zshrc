@@ -47,6 +47,7 @@ elif is_linux; then
 
   export PYTHONPATH=$BREW_PREFIX/lib/python2.7/site-packages:$PYTHONPATH
   export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
+  export FPATH=$BREW_PREFIX/share/zsh/site-functions:$FPATH
 fi
 
 DISABLE_AUTO_UPDATE="true"
