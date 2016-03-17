@@ -39,7 +39,7 @@ if is_osx; then
   fi
 elif is_linux; then
   local BREW_PREFIX=$HOME/.linuxbrew
-  export PATH=$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH
+  export PATH=$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$BREW_PREFIX/share/python:$PATH
   if [[ ! -d $BREW_PREFIX ]]; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"
     brew doctor
