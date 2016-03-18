@@ -165,11 +165,11 @@ my_zplug() {
 }
 
 case $ZSH_PLUGIN_MANAGER in
-  zgen)
-    my_zgen
-    ;;
   zplug)
     my_zplug
+    ;;
+  zgen|*)
+    my_zgen
     ;;
 esac
 
