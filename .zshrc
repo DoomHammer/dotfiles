@@ -1,4 +1,8 @@
-setopt appendhistory autocd extendedglob
+setopt appendhistory
+setopt autocd
+setopt correct_all
+setopt extendedglob
+setopt interactive_comments
 
 bindkey -e
 
@@ -166,9 +170,6 @@ esac
 if [[ ! -f $HOME/.zsh-dircolors.config ]]; then
   setupsolarized dircolors.256dark
 fi
-
-setopt interactivecomments
-setopt CORRECT
 
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
