@@ -47,7 +47,6 @@ fi
 PROMPT_LEAN_TMUX=""
 
 my_zgen() {
-  DISABLE_AUTO_UPDATE="true"
   # FIXME: allow installation with several open shells
 
   if [[ ! -f ~/.zgen.zsh ]]; then
