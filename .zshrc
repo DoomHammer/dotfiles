@@ -228,13 +228,13 @@ if [[ -x `which ag` ]]; then
 fi
 export FZF_DEFAULT_OPTS="--extended-exact"
 
-# v - open files in ~/.viminfo
+# v - open files in ~/.viminfo and ~/.nviminfo
 v() {
   local files
-  files=$(grep '^>' ~/.viminfo | cut -c3- |
+  files=$(grep --no-filename '^>' ~/.viminfo ~/.nviminfo | cut -c3- |
           while read line; do
             [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+          done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
 if [ -d $HOME/src/vim-plug-zsh ]; then
