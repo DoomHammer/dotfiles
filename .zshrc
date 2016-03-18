@@ -236,8 +236,3 @@ v() {
             [ -f "${line/\~/$HOME}" ] && echo "$line"
           done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
-
-if [ -d $HOME/src/vim-plug-zsh ]; then
-  antigen bundle $HOME/src/vim-plug-zsh
-  #[ -f ~/.vimrc ] && grep -q 'call plug#begin' ~/.vimrc && vim-plug
-fi
