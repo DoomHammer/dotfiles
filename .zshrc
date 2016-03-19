@@ -25,6 +25,8 @@ is_osx () {
   [[ $('uname') == 'Darwin' ]]
 }
 
+fpath=(/usr/share/zsh/vendor-completions/ $fpath)
+
 if is_osx; then
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
   if [[ ! -f '/usr/local/bin/brew' ]]; then
