@@ -85,6 +85,10 @@ Plug 'scrooloose/syntastic'
 Plug 'muziqiushan/bufonly'
 " Enhanced Commentify
 Plug 'EnhCommentify.vim'
+
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -142,6 +146,23 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+function! s:goyo_enter()
+  if exists('$TMUX')
+    silent !tmux set status off
+  endif
+  Limelight
+endfunction
+
+function! s:goyo_leave()
+  if exists('$TMUX')
+    silent !tmux set status on
+  endif
+  Limelight!
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 """
 """ Misc definitions
