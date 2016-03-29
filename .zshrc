@@ -45,6 +45,7 @@ elif is_linux; then
 
   export PYTHONPATH=$BREW_PREFIX/lib/python2.7/site-packages:$PYTHONPATH
   export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
+  export XML_CATALOG_FILES=$BREW_PREFIX/etc/xml/catalog
   fpath=($BREW_PREFIX/share/zsh/site-functions $fpath)
 fi
 
