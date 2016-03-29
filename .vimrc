@@ -23,7 +23,7 @@ function! UpdateRemote(info)
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
     UpdateRemotePlugins
-    echom "Remeber to restart!"
+    echom "Remember to restart!"
   endif
 endfunction
 
