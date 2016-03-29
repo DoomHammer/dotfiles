@@ -39,6 +39,8 @@ elif is_linux; then
   if [[ ! -d $BREW_PREFIX ]]; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"
     brew doctor
+    mkdir -p $BREW_PREFIX/share/zsh/site-functions
+    ln -s $BREW_PREFIX/Library/Contributions/brew_zsh_completion.zsh $BREW_PREFIX/share/zsh/site-functions/_brew
   fi
 
   export PYTHONPATH=$BREW_PREFIX/lib/python2.7/site-packages:$PYTHONPATH
