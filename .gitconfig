@@ -10,6 +10,8 @@
   autocrlf = false
   excludesfile = ~/.gitignore
   whitespace = blank-at-eol,blank-at-eof,space-before-tab,tab-in-indent
+  # Use the best pager available
+  pager = (which diff-so-fancy >/dev/null 2>&1 && diff-so-fancy || which brew >/dev/null 2>&1 && $(brew --prefix git)/share/git-core/contrib/diff-highlight/diff-highlight || cat)|less
 
 [push]
   default = simple
