@@ -106,22 +106,33 @@ my_zgen() {
 }
 
 my_zplug() {
-  if [ ! -d ~/.zplug ]; then
+  if [ "$1" = "2" ]; then
+    zplug_repo=b4b4r07/zplug2
+    zplug_dir=~/.zplug2
+    zplug_init=init.zsh
+    zplug_cmd=use
+  else
+    zplug_repo=b4b4r07/zplug
+    zplug_dir=~/.zplug
+    zplug_init=zplug
+    zplug_cmd=of
+  fi
+  if [ ! -d "$zplug_dir" ]; then
     printf "Install zplug? [y/N]: "
     if read -q; then
       echo;
-      git clone https://github.com/b4b4r07/zplug ~/.zplug
-      source ~/.zplug/zplug
+      git clone "https://github.com/$zplug_repo" "$zplug_dir"
+      source "$zplug_dir"/"$zplug_init"
       # manage zplug by itself
       zplug update --self
     fi
   fi
 
-  if [ -f ~/.zplug/zplug ]; then
-    source ~/.zplug/zplug
+  if [ -f "$zplug_dir"/"$zplug_init" ]; then
+    source "$zplug_dir"/"$zplug_init"
 
     # Make sure you use double quotes
-    zplug "b4b4r07/zplug"
+    zplug "$zplug_repo"
 
     zplug "plugins/brew", from:oh-my-zsh
     zplug "plugins/chruby", from:oh-my-zsh
@@ -172,6 +183,9 @@ my_zplug() {
 case $ZSH_PLUGIN_MANAGER in
   zplug)
     my_zplug
+    ;;
+  zplug2)
+    my_zplug 2
     ;;
   zgen|*)
     my_zgen
