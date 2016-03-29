@@ -91,9 +91,8 @@ my_zgen() {
     zgen load sharat87/autoenv
     zgen load zlsun/solarized-man
     zgen load zsh-users/zsh-completions
-
-    zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-history-substring-search
+    zgen load zsh-users/zsh-syntax-highlighting
 
     if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
       zgen load $(brew --prefix fzf)/shell
@@ -157,9 +156,8 @@ my_zplug() {
     zplug "sharat87/autoenv"
     zplug "zlsun/solarized-man"
     zplug "zsh-users/zsh-completions"
-
-    zplug "zsh-users/zsh-syntax-highlighting", nice:19
     zplug "zsh-users/zsh-history-substring-search"
+    zplug "zsh-users/zsh-syntax-highlighting", nice:19
 
     if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
       zplug "$(brew --prefix fzf)/shell", from:local
