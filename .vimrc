@@ -147,9 +147,6 @@ let g:syntastic_check_on_wq = 0
 """ Misc definitions
 """
 
-" Use system Python even in Virtualenv
-let g:python_host_prog='/usr/bin/python'
-
 """
 """ Colorscheme
 """
