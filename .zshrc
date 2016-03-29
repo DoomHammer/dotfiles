@@ -52,10 +52,12 @@ fi
 PROMPT_LEAN_TMUX=""
 
 my_zgen() {
-  # FIXME: allow installation with several open shells
-
   if [[ ! -f ~/.zgen.zsh ]]; then
-    curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen.zsh
+    printf "Install zgen? [y/N]: "
+    if read -q; then
+      echo;
+      curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen.zsh
+    fi
   fi
 
   source ~/.zgen.zsh
