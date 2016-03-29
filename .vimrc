@@ -67,7 +67,7 @@ Plug 'tmux-plugins/vim-tmux'
 " Tmux Focus Events
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Nice status bar
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 " Automatically save session
 Plug 'tpope/vim-obsession' | Plug 'dhruvasagar/vim-prosession'
 " Highlight trailing whitespace
@@ -150,9 +150,9 @@ let g:syntastic_check_on_wq = 0
 """
 """ Colorscheme
 """
-let g:solarized_termcolors=256
 set background=dark
 colo solarized
+let g:airline_theme='solarized'
 
 """
 """ Fun with buffers
