@@ -5,14 +5,38 @@ else
 endif
 
 
+function! BrewWrap(command)
+  if executable('brew')
+    execute "!brew sh <<<'" . a:command . "'"
+  else
+    execute "!" . a:command
+  endif
+endfunction
+
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
   " - name:   name of the plugin
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer
-    "!./install.sh --clang-completer --gocode-completer --omnisharp-completer
+    let l:cmd = './install.py'
+    if executable('clang')
+      let l:cmd .= ' --clang-completer'
+    endif
+    if executable('go')
+      let l:cmd .= ' --gocode-completer'
+    endif
+    if executable('cargo')
+      let l:cmd .= ' --racer-completer'
+    endif
+    " Those two are not very nice yet
+"    if executable('xbuild') || executable('msbuild')
+"      let l:cmd .= ' --omnisharp-completer'
+"    endif
+"    if executable('npm')
+"      let l:cmd .= ' --tern-completer'
+"    endif
+    call BrewWrap(l:cmd)
   endif
 endfunction
 
