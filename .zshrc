@@ -76,7 +76,6 @@ my_zgen() {
     zgen oh-my-zsh plugins/virtualenv
 
     zgen load caarlos0/zsh-mkc
-    zgen load felixr/docker-zsh-completion
     zgen load joel-porquet/zsh-dircolors-solarized
     zgen load marzocchi/zsh-notify
     zgen load oconnor663/zsh-sensible
