@@ -80,6 +80,7 @@ my_zgen() {
     zgen load caarlos0/zsh-mkc
     zgen load joel-porquet/zsh-dircolors-solarized
     zgen load marzocchi/zsh-notify
+    zgen load mrowa44/emojify
     zgen load oconnor663/zsh-sensible
     zgen load rimraf/k
     zgen load sharat87/autoenv
@@ -98,6 +99,8 @@ my_zgen() {
 
     zgen save
   fi
+
+  alias emojify=~/.zgen/mrowa44/emojify-master/emojify
 }
 
 my_zplug() {
@@ -142,6 +145,7 @@ my_zplug() {
     zplug "caarlos0/zsh-mkc"
     zplug "joel-porquet/zsh-dircolors-solarized"
     zplug "marzocchi/zsh-notify"
+    zplug "mrowa44/emojify", as:command
     zplug "oconnor663/zsh-sensible"
     zplug "rimraf/k"
     zplug "sharat87/autoenv"
