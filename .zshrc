@@ -65,20 +65,13 @@ my_zgen() {
   if ! zgen saved; then
     echo "Creating zgen save"
 
-    zgen oh-my-zsh
 
-    zgen oh-my-zsh plugins/brew
-    zgen oh-my-zsh plugins/chruby
     zgen oh-my-zsh plugins/command-not-found
-    zgen oh-my-zsh plugins/docker
     zgen oh-my-zsh plugins/extract
-    zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/golang
     zgen oh-my-zsh plugins/pip
     zgen oh-my-zsh plugins/python
     zgen oh-my-zsh plugins/ssh-agent
     zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/tmuxinator
     zgen oh-my-zsh plugins/vagrant
     zgen oh-my-zsh plugins/virtualenv
 
@@ -133,18 +126,12 @@ my_zplug() {
     # Make sure you use double quotes
     zplug "$zplug_repo"
 
-    zplug "plugins/brew", from:oh-my-zsh
-    zplug "plugins/chruby", from:oh-my-zsh
     zplug "plugins/command-not-found", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/docker", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/extract", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/git", from:oh-my-zsh
-    zplug "plugins/golang", from:oh-my-zsh
     zplug "plugins/pip", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/python", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/tmuxinator", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/vagrant", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/virtualenv", from:oh-my-zsh, ignore:oh-my-zsh.sh
 
