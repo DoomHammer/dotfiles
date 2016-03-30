@@ -53,6 +53,8 @@ PROMPT_LEAN_TMUX=""
 ENHANCD_COMMAND="ecd"
 
 my_zgen() {
+  export HOMESHICK_DIR=~/.zgen/andsens/homeshick-master
+
   if [[ ! -f ~/.zgen.zsh ]]; then
     printf "Install zgen? [y/N]: "
     if read -q; then
@@ -76,6 +78,7 @@ my_zgen() {
     zgen oh-my-zsh plugins/vagrant
     zgen oh-my-zsh plugins/virtualenv
 
+    zgen load andsens/homeshick homeshick.sh
     zgen load b4b4r07/enhancd
     zgen load caarlos0/zsh-mkc
     zgen load joel-porquet/zsh-dircolors-solarized
@@ -97,6 +100,8 @@ my_zgen() {
 
     zgen load miekg/lean
 
+    fpath=($HOMESHICK_DIR/completions $fpath)
+
     zgen save
   fi
 
@@ -115,6 +120,7 @@ my_zplug() {
     zplug_init=zplug
     zplug_cmd=of
   fi
+  export HOMESHICK_DIR=$zplug_dir/repos/andsens/homeshick
   if [ ! -d "$zplug_dir" ]; then
     printf "Install zplug? [y/N]: "
     if read -q; then
@@ -141,6 +147,7 @@ my_zplug() {
     zplug "plugins/vagrant", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/virtualenv", from:oh-my-zsh, ignore:oh-my-zsh.sh
 
+    zplug "andsens/homeshick", $zplug_cmd:"homeshick.sh"
     zplug "b4b4r07/enhancd"
     zplug "caarlos0/zsh-mkc"
     zplug "joel-porquet/zsh-dircolors-solarized"
@@ -169,6 +176,8 @@ my_zplug() {
         echo; zplug install
       fi
     fi
+
+    fpath=($HOMESHICK_DIR/completions $fpath)
 
     # Then, source plugins and add commands to $PATH
     zplug load # --verbose
