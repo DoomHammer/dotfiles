@@ -50,6 +50,7 @@ elif is_linux; then
 fi
 
 PROMPT_LEAN_TMUX=""
+ENHANCD_COMMAND="ecd"
 
 my_zgen() {
   if [[ ! -f ~/.zgen.zsh ]]; then
@@ -75,6 +76,7 @@ my_zgen() {
     zgen oh-my-zsh plugins/vagrant
     zgen oh-my-zsh plugins/virtualenv
 
+    zgen load b4b4r07/enhancd
     zgen load caarlos0/zsh-mkc
     zgen load joel-porquet/zsh-dircolors-solarized
     zgen load marzocchi/zsh-notify
@@ -136,6 +138,7 @@ my_zplug() {
     zplug "plugins/vagrant", from:oh-my-zsh, ignore:oh-my-zsh.sh
     zplug "plugins/virtualenv", from:oh-my-zsh, ignore:oh-my-zsh.sh
 
+    zplug "b4b4r07/enhancd"
     zplug "caarlos0/zsh-mkc"
     zplug "joel-porquet/zsh-dircolors-solarized"
     zplug "marzocchi/zsh-notify"
