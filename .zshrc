@@ -86,6 +86,8 @@ my_zgen() {
     zgen load zsh-users/zsh-history-substring-search
     zgen load zsh-users/zsh-syntax-highlighting
 
+    zgen load DoomHammer/gogh themes/solarized.dark.sh overall
+
     if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
       zgen load $(brew --prefix fzf)/shell
     fi
@@ -144,6 +146,8 @@ my_zplug() {
     zplug "zsh-users/zsh-completions"
     zplug "zsh-users/zsh-history-substring-search"
     zplug "zsh-users/zsh-syntax-highlighting", nice:19
+
+    zplug "DoomHammer/gogh", $zplug_cmd:"themes/solarized.dark.sh", at:"overall"
 
     if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
       zplug "$(brew --prefix fzf)/shell", from:local
