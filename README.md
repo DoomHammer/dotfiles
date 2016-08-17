@@ -1,5 +1,4 @@
 Some of my dotfiles for your further amusement.
 
-Used to be managed by deja (https://github.com/mcantelon/node-deja).
-
-Currently it is roaming unmanaged.
+If you want them nicely managed just `yadm clone` them.
+[yadm](https://github.com/TheLocehiliosan/yadm) is a dotfile manager I endorse.
