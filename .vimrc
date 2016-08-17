@@ -72,8 +72,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 " Nice colours for our Vim
 Plug 'altercation/vim-colors-solarized'
-" Ag, the SilverSearcher
-Plug 'rking/ag.vim'
+" Ag, the SilverSearcher through his friend Ack
+Plug 'mileszs/ack.vim'
 " Man browser for Vim
 Plug 'bruno-/vim-man'
 " Without you, I'm nothing
@@ -146,6 +146,17 @@ call plug#end()
 """
 """ Now configure those plugins
 """
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep --smart-case'
+endif
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
 "map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <Leader>n <plug>NERDTreeToggle<CR>
 
