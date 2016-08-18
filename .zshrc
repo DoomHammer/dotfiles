@@ -53,149 +53,54 @@ fi
 PROMPT_LEAN_TMUX=""
 ENHANCD_COMMAND="ecd"
 
-my_zgen() {
-  export HOMESHICK_DIR=~/.zgen/andsens/homeshick-master
+export ZPLUG_HOME=$BREW_PREFIX/opt/zplug
 
-  if [[ ! -f ~/.zgen.zsh ]]; then
-    printf "Install zgen? [y/N]: "
+if [ -f $ZPLUG_HOME/init.zsh ]; then
+  source $ZPLUG_HOME/init.zsh
+
+  zplug "plugins/command-not-found", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/extract", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/pip", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/python", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  # Load after ssh-agent
+  zplug "plugins/gpg-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/vagrant", from:oh-my-zsh, ignore:oh-my-zsh.sh
+  zplug "plugins/virtualenv", from:oh-my-zsh, ignore:oh-my-zsh.sh
+
+  zplug "b4b4r07/enhancd"
+  zplug "caarlos0/zsh-mkc"
+  zplug "joel-porquet/zsh-dircolors-solarized"
+  zplug "marzocchi/zsh-notify"
+  zplug "mrowa44/emojify", as:command
+  zplug "oconnor663/zsh-sensible"
+  zplug "rimraf/k"
+  zplug "sharat87/autoenv"
+  zplug "zlsun/solarized-man"
+  zplug "zsh-users/zsh-completions"
+  zplug "zsh-users/zsh-history-substring-search"
+  zplug "zsh-users/zsh-syntax-highlighting", nice:19
+
+  zplug "DoomHammer/gogh", use:"themes/solarized.dark.sh", at:"overall"
+
+  if [[ $(brew ls --versions fzf|wc -l) -gt 0 ]]; then
+    zplug "$(brew --prefix fzf)/shell", from:local
+  fi
+
+  zplug "miekg/lean"
+
+  # Install plugins if there are plugins that have not been installed
+  if ! zplug check --verbose; then
+    printf "Install zsh plugins? [y/N]: "
     if read -q; then
-      echo;
-      curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen.zsh
+      echo; zplug install
     fi
   fi
 
-  source ~/.zgen.zsh
-
-  if ! zgen saved; then
-    echo "Creating zgen save"
-
-
-    zgen oh-my-zsh plugins/command-not-found
-    zgen oh-my-zsh plugins/extract
-    zgen oh-my-zsh plugins/pip
-    zgen oh-my-zsh plugins/python
-    zgen oh-my-zsh plugins/ssh-agent
-    zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/vagrant
-    zgen oh-my-zsh plugins/virtualenv
-
-    zgen load andsens/homeshick homeshick.sh
-    zgen load b4b4r07/enhancd
-    zgen load caarlos0/zsh-mkc
-    zgen load joel-porquet/zsh-dircolors-solarized
-    zgen load marzocchi/zsh-notify
-    zgen load mrowa44/emojify
-    zgen load oconnor663/zsh-sensible
-    zgen load rimraf/k
-    zgen load sharat87/autoenv
-    zgen load zlsun/solarized-man
-    zgen load zsh-users/zsh-completions
-    zgen load zsh-users/zsh-history-substring-search
-    zgen load zsh-users/zsh-syntax-highlighting
-
-    zgen load DoomHammer/gogh themes/solarized.dark.sh overall
-
-    if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
-      zgen load $(brew --prefix fzf)/shell
-    fi
-
-    zgen load miekg/lean
-
-    fpath=($HOMESHICK_DIR/completions $fpath)
-
-    zgen save
-  fi
-
-  alias emojify=~/.zgen/mrowa44/emojify-master/emojify
-}
-
-my_zplug() {
-  if [ "$1" = "2" ]; then
-    zplug_repo=b4b4r07/zplug2
-    zplug_dir=~/.zplug2
-    zplug_init=init.zsh
-    zplug_cmd=use
-  else
-    zplug_repo=b4b4r07/zplug
-    zplug_dir=~/.zplug
-    zplug_init=zplug
-    zplug_cmd=of
-  fi
-  export HOMESHICK_DIR=$zplug_dir/repos/andsens/homeshick
-  if [ ! -d "$zplug_dir" ]; then
-    printf "Install zplug? [y/N]: "
-    if read -q; then
-      echo;
-      git clone "https://github.com/$zplug_repo" "$zplug_dir"
-      source "$zplug_dir"/"$zplug_init"
-      # manage zplug by itself
-      zplug update --self
-    fi
-  fi
-
-  if [ -f "$zplug_dir"/"$zplug_init" ]; then
-    source "$zplug_dir"/"$zplug_init"
-
-    # Make sure you use double quotes
-    zplug "$zplug_repo"
-
-    zplug "plugins/command-not-found", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/extract", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/pip", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/python", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/vagrant", from:oh-my-zsh, ignore:oh-my-zsh.sh
-    zplug "plugins/virtualenv", from:oh-my-zsh, ignore:oh-my-zsh.sh
-
-    zplug "andsens/homeshick", $zplug_cmd:"homeshick.sh"
-    zplug "b4b4r07/enhancd"
-    zplug "caarlos0/zsh-mkc"
-    zplug "joel-porquet/zsh-dircolors-solarized"
-    zplug "marzocchi/zsh-notify"
-    zplug "mrowa44/emojify", as:command
-    zplug "oconnor663/zsh-sensible"
-    zplug "rimraf/k"
-    zplug "sharat87/autoenv"
-    zplug "zlsun/solarized-man"
-    zplug "zsh-users/zsh-completions"
-    zplug "zsh-users/zsh-history-substring-search"
-    zplug "zsh-users/zsh-syntax-highlighting", nice:19
-
-    zplug "DoomHammer/gogh", $zplug_cmd:"themes/solarized.dark.sh", at:"overall"
-
-    if [[ `brew ls --versions fzf|wc -l` -gt 0 ]]; then
-      zplug "$(brew --prefix fzf)/shell", from:local
-    fi
-
-    zplug "miekg/lean"
-
-    # Install plugins if there are plugins that have not been installed
-    if ! zplug check --verbose; then
-      printf "Install zsh plugins? [y/N]: "
-      if read -q; then
-        echo; zplug install
-      fi
-    fi
-
-    fpath=($HOMESHICK_DIR/completions $fpath)
-
-    # Then, source plugins and add commands to $PATH
-    zplug load # --verbose
-  fi
-}
-
-case $ZSH_PLUGIN_MANAGER in
-  zplug)
-    my_zplug
-    ;;
-  zplug2)
-    my_zplug 2
-    ;;
-  zgen|*)
-    my_zgen
-    ;;
-esac
+  # Then, source plugins and add commands to $PATH
+  zplug load # --verbose
+fi
 
 if [[ ! -f $HOME/.zsh-dircolors.config ]]; then
   setupsolarized dircolors.256dark
