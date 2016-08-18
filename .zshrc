@@ -72,7 +72,7 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
   zplug "b4b4r07/enhancd"
   zplug "caarlos0/zsh-mkc"
   zplug "joel-porquet/zsh-dircolors-solarized"
-  zplug "marzocchi/zsh-notify"
+  zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
   zplug "mrowa44/emojify", as:command
   zplug "oconnor663/zsh-sensible"
   zplug "rimraf/k"
