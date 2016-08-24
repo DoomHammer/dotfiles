@@ -18,7 +18,7 @@ function! BuildYCM(info)
   " - name:   name of the plugin
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
+  if a:info.status == 'installed' || a:info.status == 'updated' || a:info.force
     let l:cmd = './install.py'
     if executable('clang')
       let l:cmd .= ' --clang-completer'
