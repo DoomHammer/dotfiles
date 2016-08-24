@@ -20,9 +20,6 @@ function! BuildYCM(info)
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.status == 'updated' || a:info.force
     let l:cmd = './install.py'
-    if executable('clang')
-      let l:cmd .= ' --clang-completer'
-    endif
     if executable('go')
       let l:cmd .= ' --gocode-completer'
     endif
@@ -36,6 +33,10 @@ function! BuildYCM(info)
 "    if executable('npm')
 "      let l:cmd .= ' --tern-completer'
 "    endif
+    if executable('clang')
+      let l:cmd .= ' --clang-completer'
+      let l:cmd = '(export CC=$(which clang); export CXX=$(which clang++); ' . l:cmd . ')'
+    endif
     call BrewWrap(l:cmd)
   endif
 endfunction
