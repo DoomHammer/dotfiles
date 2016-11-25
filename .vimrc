@@ -105,7 +105,7 @@ Plug 'gregsexton/gitv'
 " Ability to :SudoWrite? Priceless!
 Plug 'tpope/vim-eunuch'
 " Some syntax checking maybe?
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
 " Close all buffers but current
 Plug 'muziqiushan/bufonly'
 " Enhanced Commentify
