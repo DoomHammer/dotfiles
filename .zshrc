@@ -47,6 +47,7 @@ elif is_linux; then
   export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
   export XML_CATALOG_FILES=$BREW_PREFIX/etc/xml/catalog
   export ANDROID_HOME=$BREW_PREFIX/opt/android-sdk
+  export MONO_GAC_PREFIX=$BREW_PREFIX
   fpath=($BREW_PREFIX/share/zsh/site-functions $fpath)
 fi
 
