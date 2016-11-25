@@ -116,9 +116,10 @@ else
   alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.0.conf'
 fi
 
-# TMUX
-if [[ -z $TMUX ]]; then
-  # Attempt to discover a detached session and attach it, else create a new session
+# Teleconsole does not preserve TMUX env variable
+if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
+  # Attempt to discover a detached session and attach it, else create a new
+  # session
   CURRENT_USER=$(whoami)
   if tmux has-session -t $CURRENT_USER 2>/dev/null; then
     tmux attach-session -t $CURRENT_USER
