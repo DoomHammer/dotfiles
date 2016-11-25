@@ -140,6 +140,8 @@ if has('nvim')
   Plug 'critiqjo/lldb.nvim', { 'do': function('UpdateRemote') }
   " Asynchronous make for neovim
   Plug 'benekastah/neomake'
+  " Popup terminal
+  Plug 'kassio/neoterm'
 endif
 
 call plug#end()
