@@ -11,9 +11,6 @@ setopt pushd_ignore_dups
 
 bindkey -e
 
-export EDITOR=vi
-export USE_EDITOR=$EDITOR
-export VISUAL=$EDITOR
 # FIXME: check first if they are available
 export LC_ALL=en_US.UTF-8
 
