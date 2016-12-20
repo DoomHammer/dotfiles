@@ -110,6 +110,10 @@ Plug 'vim-syntastic/syntastic'
 Plug 'muziqiushan/bufonly'
 " Enhanced Commentify
 Plug 'EnhCommentify.vim'
+" Magit
+Plug 'jreybert/vimagit'
+" And gitgutter
+Plug 'airblade/vim-gitgutter'
 
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -256,6 +260,10 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Show all open buffers with FZF
 nmap <leader>bl :Buffers<CR>
+
+" Default GitGutter mappings clash with buffer navigation
+map <leader>ga <Plug>GitGutterStageHunk
+map <leader>gu <Plug>GitGutterUndoHunk
 
 nmap <leader>] :Goyo<CR>
 
