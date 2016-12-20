@@ -187,16 +187,33 @@ let g:syntastic_check_on_wq = 0
 
 function! s:goyo_enter()
   if exists('$TMUX')
+    " Hide the status panel and zoom in the current pane
     silent !tmux set status off
+    " This hackery checks whether the pane is zoomed and toggles the status if
+    " not
+    silent !tmux list-panes -F '\#F'|grep -q Z || tmux resize-pane -Z
   endif
+  " All eyes on me
   Limelight
+  " Resize after zoom
+  if !exists("g:goyo_width")
+    let g:goyo_width=80
+  endif
+  if !exists("g:goyo_height")
+    let g:goyo_height='85%'
+  endif
+  execute "Goyo ".g:goyo_width."x".g:goyo_height
+  set scrolloff=999
 endfunction
 
 function! s:goyo_leave()
   if exists('$TMUX')
+    " Show the status panel and zoom out the current pane
     silent !tmux set status on
+    silent !tmux list-panes -F '\#F'|grep -q Z && tmux resize-pane -Z
   endif
   Limelight!
+  set scrolloff=5
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -206,12 +223,16 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 """ Misc definitions
 """
 
+set scrolloff=5
+
 """
 """ Colorscheme
 """
 set background=dark
 colo solarized
 let g:airline_theme='solarized'
+let g:limelight_conceal_ctermfg = 245 " Solarized Base1
+let g:limelight_conceal_guifg = '#8a8a8a' " Solarized Base1
 
 """
 """ Fun with buffers
@@ -235,6 +256,8 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " Show all open buffers with FZF
 nmap <leader>bl :Buffers<CR>
+
+nmap <leader>] :Goyo<CR>
 
 """
 """ Visually indicate long columns
