@@ -114,6 +114,8 @@ Plug 'EnhCommentify.vim'
 Plug 'jreybert/vimagit'
 " And gitgutter
 Plug 'airblade/vim-gitgutter'
+" Automatically detect indentation
+Plug 'tpope/vim-sleuth'
 
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
