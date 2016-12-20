@@ -1,0 +1,24 @@
+[ui]
+username = Piotr Gaczkowski <doomhammerng@gmail.com>
+# Nice interactive editor. Recommend!
+interface = curses
+
+[pager]
+pager = LESS="FRX" less
+
+[automv]
+similarity = 75
+
+[extensions]
+# Automatically detect moved and renamed files
+automv =
+# Have some style!
+color =
+# `git rebase -i`
+histedit =
+# Who would prefer not to use it?
+pager =
+# Proper rebase
+rebase =
+# `git stash`
+shelve =
