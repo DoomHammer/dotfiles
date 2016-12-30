@@ -173,6 +173,22 @@ let g:easytags_async=1
 let g:easytags_dynamic_files=1
 let g:easytags_suppress_ctags_warning=1
 
+" Tagbar definitions
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : 'markdown2ctags',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
+
 " Default fzf layout
 let g:fzf_layout = { 'down': '40%' }
 
@@ -226,6 +242,8 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal spell
+autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal fo+=t
+autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal fo-=l
 autocmd FileType gitcommit setlocal spell
 
 """
