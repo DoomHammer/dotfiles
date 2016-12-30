@@ -120,6 +120,9 @@ Plug 'tpope/vim-sleuth'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
+" Ansible support
+Plug 'chase/vim-ansible-yaml'
+
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -174,6 +177,14 @@ let g:easytags_dynamic_files=1
 let g:easytags_suppress_ctags_warning=1
 
 " Tagbar definitions
+let g:tagbar_type_ansible = {
+    \ 'ctagstype' : 'ansible',
+    \ 'kinds' : [
+        \ 't:tasks'
+    \ ],
+    \ 'sort' : 0
+    \ }
+
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
     \ 'ctagsbin' : 'markdown2ctags',
