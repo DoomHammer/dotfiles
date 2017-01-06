@@ -40,7 +40,6 @@ elif is_linux; then
     ln -s $BREW_PREFIX/Library/Contributions/brew_zsh_completion.zsh $BREW_PREFIX/share/zsh/site-functions/_brew
   fi
 
-  export PYTHONPATH=$BREW_PREFIX/lib/python2.7/site-packages:$PYTHONPATH
   export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
   export XML_CATALOG_FILES=$BREW_PREFIX/etc/xml/catalog
   export ANDROID_HOME=$BREW_PREFIX/opt/android-sdk
