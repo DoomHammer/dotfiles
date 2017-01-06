@@ -114,8 +114,17 @@ Plug 'EnhCommentify.vim'
 Plug 'jreybert/vimagit'
 " And gitgutter
 Plug 'airblade/vim-gitgutter'
+" Ruby goodness
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+" Run relevant RSpec cases
+Plug 'thoughtbot/vim-rspec'
 " Automatically detect indentation
 Plug 'tpope/vim-sleuth'
+
+" Task dispatcher
+Plug 'tpope/vim-dispatch'
 
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -151,6 +160,8 @@ if has('nvim')
   Plug 'benekastah/neomake'
   " Popup terminal
   Plug 'kassio/neoterm'
+  " Use Neovim Terminal with Dispatch
+  Plug 'radenling/vim-dispatch-neovim'
 endif
 
 call plug#end()
@@ -255,7 +266,32 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal spell
 autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal fo+=t
 autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal fo-=l
+
+autocmd FileType ruby call SetRubyOptions()
+function! SetRubyOptions()
+  compiler ruby
+  setlocal expandtab
+  setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  setlocal autoindent
+endfunction
+
 autocmd FileType gitcommit setlocal spell
+
+" Run rspec in tslime.vim
+"let g:rspec_command = 'call Send_to_Tmux("[ -n \"$ZSH_VERSION\" ] && unsetopt correct && unsetopt correct_all\n") | call Send_to_Tmux("bundle exec rspec {spec}\n")'
+let g:rspec_command = 'Dispatch bundle exec rspec {spec}'
+
+" Configure tslime
+" Currently you have to manually open a pane and enter its number when first
+" run. It might be a better idea to open one automatically
+let g:tslime_always_current_session = 1
+let g:tslime_always_current_window = 1
+
+" vim-rspec mappings
+map <Leader>r :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 """
 """ Misc definitions
