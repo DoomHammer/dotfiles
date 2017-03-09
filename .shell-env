@@ -1,0 +1,36 @@
+##
+## Editors
+##
+export EDITOR=vi
+export GIT_EDITOR=$EDITOR
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+export PAGER=less
+
+##
+## Pager
+##
+export PAGER=less
+# TODO: checkout http://superuser.com/questions/124846/mercurial-colour-output-piped-to-less/403748#403748
+export LESS='-iFMRSX -x4'
+
+##
+## Make
+##
+export MAKEFLAGS="-j $(nproc)"
+
+##
+## Paths
+##
+BREW_PREFIX=$HOME/.linuxbrew
+export GOPATH=$HOME/.go:$HOME
+export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
+export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:${GOPATH//://bin:}/bin:$PATH"
+
+##
+## Chruby support
+##
+if which brew >/dev/null 2>&1 && [[  `brew ls --versions chruby|wc -l` -gt 0 ]]; then
+  source $BREW_PREFIX/opt/chruby/share/chruby/chruby.sh
+  source $BREW_PREFIX/opt/chruby/share/chruby/auto.sh
+fi

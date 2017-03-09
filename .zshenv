@@ -1,24 +1,26 @@
+# Via https://tanguy.ortolo.eu/blog/article25/shrc
+#
+# Zsh always executes zshenv. Then, depending on the case:
+# - run as a login shell, it executes zprofile;
+# - run as an interactive, it executes zshrc;
+# - run as a login shell, it executes zlogin.
+#
+# At the end of a login session, it executes zlogout, but in reverse order, the
+# user-specific file first, then the system-wide one, constituting a chiasmus
+# with the zlogin files.
+
 zmodload zsh/zprof
 
 skip_global_compinit=1
 
-##
-## Editors
-##
-export EDITOR=vi
-export USE_EDITOR=$EDITOR
-export VISUAL=$EDITOR
-export PAGER=less
+# Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
+test -r ~/.shell-env && source ~/.shell-env
 
 ##
 ## Paths
 ##
-
 typeset -gU cdpath fpath mailpath manpath path
 typeset -gUT INFOPATH infopath
-
-BREW_PREFIX=$HOME/.linuxbrew
-export GOPATH=$HOME/.go:$HOME
 
 cdpath=(
   $HOME/src
@@ -47,9 +49,3 @@ path=(
   /{bin,sbin}
   $path
 )
-
-if [[ `brew ls --versions chruby|wc -l` -gt 0 ]];then
-  local brew_prefix=$(brew --prefix)
-  source $brew_prefix/opt/chruby/share/chruby/chruby.sh
-  source $brew_prefix/opt/chruby/share/chruby/auto.sh
-fi

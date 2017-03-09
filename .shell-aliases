@@ -1,0 +1,32 @@
+alias dos2unix='sed "s/$//"'
+
+if (( $( echo "$(tmux -V |cut -d ' ' -f2)>2.1" | bc -l) )); then
+  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.1.conf'
+else
+  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.0.conf'
+fi
+
+if which exa >/dev/null 2>&1; then
+  alias ls='exa'
+elif which ls++ >/dev/null 2>&1; then
+  alias ls='ls++'
+else
+  alias ls='ls --color=auto'
+fi
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+if which nvim >/dev/null 2>&1; then
+  alias vim='nvim'
+fi
+
+alias ll='\ls -l'
+alias lt='\ls --color=auto -lhFart'
+if which vim >/dev/null 2>&1; then
+  alias vi='vim'
+fi
+
+if [[ ! -z $TMUX ]]; then
+  alias fzf='fzf-tmux'
+fi

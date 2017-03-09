@@ -1,3 +1,18 @@
+# Via https://tanguy.ortolo.eu/blog/article25/shrc
+#
+# Zsh always executes zshenv. Then, depending on the case:
+# - run as a login shell, it executes zprofile;
+# - run as an interactive, it executes zshrc;
+# - run as a login shell, it executes zlogin.
+#
+# At the end of a login session, it executes zlogout, but in reverse order, the
+# user-specific file first, then the system-wide one, constituting a chiasmus
+# with the zlogin files.
+
+# Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
+test -r ~/.shell-common && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
+
 setopt appendhistory
 setopt autocd
 setopt correct_all
@@ -9,7 +24,23 @@ setopt hist_save_no_dups
 setopt interactive_comments
 setopt pushd_ignore_dups
 
+# EMACS mode
 bindkey -e
+# TODO: This might be neat: http://unix.stackexchange.com/a/47425
+# TODO: Nice list of bindings: http://zshwiki.org/home/zle/bindkeys
+# Make CTRL+Arrow skip words
+# rxvt
+bindkey "^[Od" backward-word
+bindkey "^[Oc" forward-word
+# xterm
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+# gnome-terminal
+bindkey "^[OD" backward-word
+bindkey "^[OC" forward-word
+
+# Ignore interactive commands from history
+export HISTORY_IGNORE="(ls|bg|fg|pwd|exit|cd ..)"
 
 # FIXME: check first if they are available
 export LC_ALL=en_US.UTF-8
@@ -106,11 +137,6 @@ fi
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
-if [[ `tmux -V |cut -d ' ' -f2` -ge 2.1 ]]; then
-  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.1.conf'
-else
-  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.0.conf'
-fi
 
 # Teleconsole does not preserve TMUX env variable
 if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
@@ -122,27 +148,6 @@ if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
   else
     tmux new-session -s $CURRENT_USER
   fi
-fi
-
-if which exa >/dev/null 2>&1; then
-  alias ls='exa'
-elif which ls++ >/dev/null 2>&1; then
-  alias ls='ls++'
-else
-  alias ls='ls --color=auto'
-fi
-
-if which nvim >/dev/null 2>&1; then
-  alias vim='nvim'
-fi
-
-alias ll='ls -l'
-if which vim >/dev/null 2>&1; then
-  alias vi='vim'
-fi
-
-if [[ ! -z $TMUX ]]; then
-  alias fzf='fzf-tmux'
 fi
 
 if [[ -x `which ag` ]]; then
