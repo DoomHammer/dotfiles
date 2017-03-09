@@ -20,6 +20,14 @@
   enabled = true
   autoupdate = true
 
+[rebase]
+  # Automatically stash before a rebase and unstash afterwards.
+  autoStash = true
+
+[commit]
+  # Show diff when preparing commit message
+  verbose = true
+
 [alias]
   a = add
   s = status

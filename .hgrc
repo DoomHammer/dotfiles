@@ -2,9 +2,11 @@
 username = Piotr Gaczkowski <doomhammerng@gmail.com>
 # Nice interactive editor. Recommend!
 interface = curses
+ignore = ~/.hgignore_global
 
 [pager]
-pager = LESS="FRX" less
+attend = annotate, cat, diff, export, glog, help, log, lg, qdiff, show, status, tip
+pager = less
 
 [automv]
 similarity = 75
@@ -22,3 +24,23 @@ pager =
 rebase =
 # `git stash`
 shelve =
+# `git log --graph`
+graphlog =
+#
+strip =
+
+[committemplate]
+changeset = {desc}\n\n
+    HG: {extramsg}
+    HG: user: {author}\n{ifeq(p2rev, "-1", "",
+   "HG: branch merge\n")
+   }HG: branch '{branch}'\n{if(currentbookmark,
+   "HG: bookmark '{currentbookmark}'\n")  }{subrepos %
+   "HG: subrepo {subrepo}\n"              }
+   {splitlines(diff()) % 'HG: {line}\n'}
+
+[alias]
+# formats the patch from specified commit, eg. `hg show default` shows the
+# last one on default branch, pretty similar to `git show -p`
+show = log -Cpr
+lg = log -G  --template "{label('custom.rev', rev)}\t{label('custom.phase',phase)}\t{label('custom.tag',tags)}\t{desc|firstline} {label('custom.age', date|age)} {label('custom.user', author|user)}\n"
