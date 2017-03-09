@@ -1,6 +1,61 @@
+# Heavily based on
+# https://github.com/elifarley/shellbase/blob/master/.screenrc
+
+# Disable startup message
 startup_message off
+
 term screen-256color
-#change the hardstatus settings to give an window list at the bottom of the                                                                        
-#screen, with the time and date and with the current window highlighted                                                                            
+
+# Erase background with current bg color
+defbce "on"
+
+# Allow bold colors - necessary for some reason
+attrcolor b ".I"
+
+# Tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# Enables use of shift-PgUp and shift-PgDn
+termcapinfo xterm*|xterms*|xs*|rxvt* ti@:te@
+
+# Cache 30000 lines for scroll back
+defscrollback 30000
+
+# Hide editor remains when you quit it
+altscreen on
+
+# Hide hardstatus: ctrl-a f
+bind f eval "hardstatus ignore"
+# Show hardstatus: ctrl-a F
+bind F eval "hardstatus alwayslastline"
+
+# change the hardstatus settings to give an window list at the bottom of the
+# screen, with the time and date and with the current window highlighted
+# TODO: this might be used http://aperiodic.net/screen/window_flags
 hardstatus alwayslastline
-hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]'
+hardstatus string '%{= kw}%{y}[%H]%{-} %{+b}%?%{b}%-w%{-}%?%{r}%n:%t%{-}%?%{b}%+w%{-}%?%= %{= y}%c %d-%M-%y'
+#
+# http://www.gnu.org/software/screen/manual/html_node/String-Escapes.html
+# %{= kw}  : set colors to white (w) on black (k) resetting current text styles (=)
+# %{y}     : set foreground color to yellow
+# [%H]     : [hostname]
+# %{-}     : unset foreground yellow
+# %{+b}    : add bold to current text styles
+# %?       : if escapes inside expand to non-empty string show everything until the next %?
+# %{b}     : set foreground color to blue
+# %-w      : list all windows before the current
+# %{-}     : unset foreground blue
+# %?       : end of an optional sequence
+# %{r}     : set foreground color to red
+# %n       : window number
+# %t       : window title
+# %{-}     : unset foreground red
+# %?       : if escapes inside expand to non-empty string show everything until the next %?
+# %{b}     : set foreground color to blue
+# %+w      : list all windows after the current
+# %{-}     : unset foreground blue
+# %?       : end of an optional sequence
+# %=       : pad to right
+# %{= y}   : set foreground color to yellow resetting current text styles (=)
+# %c       : current time in 24h format
+# %d-%M-%y : day of month, month name, two last digits of year
