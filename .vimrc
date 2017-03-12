@@ -1,10 +1,27 @@
 if has('nvim')
   let vimplugdir='~/.config/nvim/plugged'
+  let vimautoloaddir='~/.config/nvim/autoload'
+  " TODO: pip2 install neovim
+  " TODO: pip3 install neovim
 else
   let vimplugdir='~/.vim/plugged'
+  let vimautoloaddir='~/.vim/autoload'
 endif
 
+" TODO: make swapfiles reside in one directory
+"
+if empty(glob(vimautoloaddir . '/plug.vim'))
+  " TODO: else?
+  if executable('curl')
+    execute 'silent !curl -fLo ' . vimautoloaddir . '/plug.vim --create-dirs ' .
+          \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall
+  endif
+endif
 
+""
+"" Helper functions
+""
 function! BrewWrap(command)
   if executable('brew')
     execute "!brew sh <<<'" . a:command . "'"
@@ -37,7 +54,8 @@ function! BuildYCM(info)
       let l:cmd .= ' --clang-completer'
       let l:cmd = '(export CC=$(which clang); export CXX=$(which clang++); ' . l:cmd . ')'
     endif
-    call BrewWrap(l:cmd)
+    " FIXME: Make it return the success/failure of an installation
+    execute BrewWrap(l:cmd)
   endif
 endfunction
 
@@ -52,6 +70,7 @@ function! UpdateRemote(info)
   endif
 endfunction
 
+try
 call plug#begin(vimplugdir)
 
 Plug 'tpope/vim-sensible'
@@ -78,7 +97,15 @@ Plug 'mileszs/ack.vim'
 " Man browser for Vim
 Plug 'bruno-/vim-man'
 " Without you, I'm nothing
-Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM')}
+if (version == 704 && has('patch154')) || (version > 704) || (has('nvim'))
+  if executable('cmake') && executable('python') && executable('make') && executable('cc') && executable('c++')
+    Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM')}
+  else
+    echo 'YouCompleteMe requires: cmake, python, make, cc and c++'
+  end
+else
+  echo 'This Vim version is not supported by YouCompleteMe'
+endif
 " Local configuration for projects
 Plug 'embear/vim-localvimrc'
 " Dockerfile support
@@ -165,6 +192,10 @@ if has('nvim')
 endif
 
 call plug#end()
+" FIXME: endless loop?
+catch
+  " source ~/.vimrc
+endtry
 
 """
 """ Now configure those plugins
@@ -303,7 +334,11 @@ set scrolloff=5
 """ Colorscheme
 """
 set background=dark
-colo solarized
+try
+  colorscheme solarized
+catch
+  colorscheme desert
+endtry
 let g:airline_theme='solarized'
 let g:limelight_conceal_ctermfg = 245 " Solarized Base1
 let g:limelight_conceal_guifg = '#8a8a8a' " Solarized Base1
@@ -313,7 +348,6 @@ let g:limelight_conceal_guifg = '#8a8a8a' " Solarized Base1
 """ Based on https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
 """
 set hidden
-
 
 " To open a new empty buffer
 nmap <leader>T :enew<cr>
