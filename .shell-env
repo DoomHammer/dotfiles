@@ -22,7 +22,7 @@ export MAKEFLAGS="-j $(nproc)"
 ##
 ## Paths
 ##
-BREW_PREFIX=$HOME/.linuxbrew
+BREW_PREFIX=/home/linuxbrew/.linuxbrew
 export GOPATH=$HOME/.go:$HOME
 export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
 export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:${GOPATH//://bin:}/bin:$PATH"
