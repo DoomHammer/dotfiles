@@ -109,7 +109,7 @@ endif
 " Local configuration for projects
 Plug 'embear/vim-localvimrc'
 " Dockerfile support
-Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+Plug 'ekalinin/Dockerfile.vim'
 " Automatic generation of CTags
 Plug 'vim-misc' | Plug 'xolox/vim-easytags'
 " Nice browser for CTags
@@ -184,7 +184,7 @@ if has('nvim')
   " Great lldb interface for neovim
   Plug 'critiqjo/lldb.nvim', { 'do': function('UpdateRemote') }
   " Asynchronous make for neovim
-  Plug 'benekastah/neomake'
+  Plug 'neomake/neomake'
   " Popup terminal
   Plug 'kassio/neoterm'
   " Use Neovim Terminal with Dispatch
