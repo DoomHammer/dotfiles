@@ -374,6 +374,7 @@ nmap <leader>h :bprevious<CR>
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bQ :bp <BAR> bd! #<CR>
 
 " Show all open buffers with FZF
 nmap <leader>bl :Buffers<CR>
