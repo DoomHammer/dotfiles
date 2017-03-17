@@ -77,7 +77,9 @@ call plug#begin(vimplugdir)
 if !has('nvim')
   Plug 'tpope/vim-sensible'
 endif
-Plug 'neilagabriel/vim-geeknote'
+if has('python')
+  Plug 'neilagabriel/vim-geeknote'
+endif
 
 " Make sure you use single quotes
 Plug 'junegunn/vim-easy-align'
