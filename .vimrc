@@ -73,7 +73,10 @@ endfunction
 try
 call plug#begin(vimplugdir)
 
-Plug 'tpope/vim-sensible'
+" Neovim is sensible by default
+if !has('nvim')
+  Plug 'tpope/vim-sensible'
+endif
 Plug 'neilagabriel/vim-geeknote'
 
 " Make sure you use single quotes
@@ -293,6 +296,11 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+if has('nvim')
+  autocmd! BufReadPost,BufWritePost * Neomake
+  autocmd! VimLeave * let g:neomake_verbose = 0
+endif
 
 autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal spell
 autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal fo+=t
