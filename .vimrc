@@ -413,6 +413,8 @@ set mouse=a
 if has('nvim')
   set ttimeout
   set ttimeoutlen=0
+
+  tnoremap <Esc> <C-\><C-n>
 endif
 
 if filereadable(expand("~/.vimrc.local"))
