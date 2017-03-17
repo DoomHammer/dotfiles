@@ -164,6 +164,10 @@ Plug 'junegunn/limelight.vim'
 " Ansible support
 Plug 'chase/vim-ansible-yaml'
 
+" Auto-close scopes
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-endwise'
+
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
 " " EasyMotion
@@ -264,6 +268,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Match block delimiters for Ruby and C-like languages
+let b:delimitMate_expand_cr = 1
+execute "inoremap {<CR> {<CR>}<ESC>O"
 
 function! s:goyo_enter()
   if exists('$TMUX')
