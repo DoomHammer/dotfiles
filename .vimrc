@@ -304,9 +304,12 @@ if has('nvim')
   autocmd! VimLeave * let g:neomake_verbose = 0
 endif
 
-autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal spell
-autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal fo+=t
-autocmd BufRead,BufNewFile *.{markdown,md,mkd} setlocal fo-=l
+autocmd BufRead,BufNewFile *.{markdown,md,mkd} call SetMarkdownOptions()
+function! SetMarkdownOptions()
+  setlocal spell
+  setlocal fo+=t
+  setlocal fo-=l
+endfunction
 
 autocmd FileType ruby call SetRubyOptions()
 function! SetRubyOptions()
