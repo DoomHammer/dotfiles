@@ -20,6 +20,7 @@ alias egrep='egrep --color=auto'
 if which nvim >/dev/null 2>&1; then
   alias vim='nvim'
 fi
+alias purevim='vim -u NONE'
 
 alias ll='\ls -l'
 alias lt='\ls --color=auto -lhFart'
