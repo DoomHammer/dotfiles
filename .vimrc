@@ -317,6 +317,7 @@ function! SetMarkdownOptions()
   setlocal spell
   setlocal fo+=t
   setlocal fo-=l
+  setlocal textwidth=80
 endfunction
 
 autocmd FileType ruby call SetRubyOptions()
@@ -327,11 +328,15 @@ function! SetRubyOptions()
   setlocal autoindent
 endfunction
 
-autocmd FileType gitcommit setlocal spell
 
 " Run rspec in tslime.vim
 "let g:rspec_command = 'call Send_to_Tmux("[ -n \"$ZSH_VERSION\" ] && unsetopt correct && unsetopt correct_all\n") | call Send_to_Tmux("bundle exec rspec {spec}\n")'
 let g:rspec_command = 'Dispatch bundle exec rspec {spec}'
+autocmd FileType gitcommit call SetGitComitOptions()
+function! SetGitCommitOptions()
+  setlocal spell
+  setlocal textwidth=72
+endfunction()
 
 " Configure tslime
 " Currently you have to manually open a pane and enter its number when first
