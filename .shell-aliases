@@ -31,3 +31,10 @@ fi
 if [[ ! -z $TMUX ]]; then
   alias fzf='fzf-tmux'
 fi
+
+alias displayoff='xset -display :0.0 dpms force off'
+alias displaylockoff='xdg-screensaver lock; xset -display :0.0 dpms force off'
+alias suspiria='/usr/bin/dbus-send --system --print-reply \
+  --dest="org.freedesktop.UPower" \
+  /org/freedesktop/UPower \
+  org.freedesktop.UPower.Suspend'
