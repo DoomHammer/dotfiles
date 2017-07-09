@@ -44,6 +44,12 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   # Pull Upstream
   pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+  # Commit Amend Reuse Message HEAD
+  carmh = commit --amend --reuse-message=HEAD
+  # Push Current
+  pc = !"f() { remote=\"${1:-origin}\"; git push -u \"$remote\" $(git rev-parse --abbrev-ref HEAD); }; f"
+  # Push Current Force
+  pcf = !"f() { echo git pc \"$@\" -f; }; f"
 
 ###
 ### Git-up specific
