@@ -126,6 +126,8 @@ Plug 'embear/vim-localvimrc'
 Plug 'ekalinin/Dockerfile.vim'
 " Automatic generation of CTags
 Plug 'vim-misc' | Plug 'xolox/vim-easytags'
+" Automatic update of CTags
+Plug 'craigemery/vim-autotag'
 " Nice browser for CTags
 Plug 'majutsushi/tagbar'
 " Tmux .conf
@@ -238,8 +240,14 @@ nnoremap <Leader>a :Ack!<Space>
 "map <Leader>n <plug>NERDTreeTabsToggle<CR>
 map <Leader>n <plug>NERDTreeToggle<CR>
 
+set tags=./tags,.vimtags,~/.vim/tags;
+set conceallevel=1
+set foldmethod=syntax
+set pastetoggle=<F2>
+
 let g:easytags_async=1
-let g:easytags_dynamic_files=1
+let g:easytags_file="~/.vim/tags"
+let g:easytags_dynamic_files=2
 let g:easytags_suppress_ctags_warning=1
 
 " Tagbar definitions
@@ -283,6 +291,27 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+
+" Show docs
+let g:javascript_plugin_jsdoc = 1
+" Enable keyboard shortcuts
+let g:tern_map_keys=1
+" Show argument hints
+let g:tern_show_argument_hints='on_hold'
+" No Flow as yet (https://flowtype.org/)
+" let g:javascript_plugin_flow = 1
+
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
 
 " Match block delimiters for Ruby and C-like languages
 let b:delimitMate_expand_cr = 1
