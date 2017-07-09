@@ -394,6 +394,8 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
+autocmd filetype python set expandtab
+
 """
 """ Misc definitions
 """
@@ -452,7 +454,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 nmap <leader>t :TagbarToggle<CR>
 nmap <leader>n :NERDTreeTabsToggle<CR>
 
-set expandtab
+
 set shiftwidth=2
 set softtabstop=2
 
