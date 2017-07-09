@@ -47,15 +47,24 @@ function! BuildYCM(info)
 "    if executable('xbuild') || executable('msbuild')
 "      let l:cmd .= ' --omnisharp-completer'
 "    endif
-"    if executable('npm')
-"      let l:cmd .= ' --tern-completer'
-"    endif
+    if executable('npm') && executable('tern')
+      let l:cmd .= ' --tern-completer'
+    endif
     if executable('clang')
       let l:cmd .= ' --clang-completer'
       let l:cmd = '(export CC=$(which clang); export CXX=$(which clang++); ' . l:cmd . ')'
     endif
     " FIXME: Make it return the success/failure of an installation
     execute BrewWrap(l:cmd)
+  endif
+endfunction
+
+function! InstallTern(info)
+  if executable('brew') && !executable('npm')
+    execute "!brew install node"
+  endif
+  if executable('npm')
+    execute "!npm install"
   endif
 endfunction
 
@@ -167,6 +176,12 @@ Plug 'chase/vim-ansible-yaml'
 " Auto-close scopes
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-endwise'
+" JavaScript support
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Raimondi/delimitMate'
+Plug 'marijnh/tern_for_vim', {'do': function('InstallTern')}
 
 " " CoffeeScript support in Vim
 " Bundle 'kchmck/vim-coffee-script'
