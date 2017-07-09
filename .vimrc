@@ -467,6 +467,20 @@ set listchars=tab:▸\
 
 set clipboard=unnamed
 
+" Use ; just like :
+nnoremap ; :
+
+" Easy moves through wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" Prefer A-a as C-a is taken by Tmux/Screen
+nnoremap <A-a> <C-a>
+nnoremap <A-x> <C-x>
+
+" Hide last search highlights
+nmap <silent> <leader>/ :nohlsearch<CR>
+
 " Work with tmux mouse integration
 set mouse=a
 
