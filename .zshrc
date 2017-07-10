@@ -24,6 +24,9 @@ setopt hist_save_no_dups
 setopt interactive_comments
 setopt pushd_ignore_dups
 
+unset ZPLUG_CACHE_FILE
+unset ZPLUG_CLONE_DEPTH
+
 # EMACS mode
 bindkey -e
 # TODO: This might be neat: http://unix.stackexchange.com/a/47425
@@ -107,7 +110,7 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
   zplug "zlsun/solarized-man"
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-history-substring-search"
-  zplug "zsh-users/zsh-syntax-highlighting", nice:19
+  zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
   zplug "DoomHammer/gogh", use:"themes/solarized.dark.sh", at:"overall"
 
