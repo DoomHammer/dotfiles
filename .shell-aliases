@@ -1,6 +1,8 @@
 alias dos2unix='sed "s/$//"'
 
-if (( $( echo "$(tmux -V |cut -d ' ' -f2)>2.1" | bc -l) )); then
+if (( $( echo "$(tmux -V |cut -d ' ' -f2)>2.4" | bc -l) )); then
+  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.4.conf'
+elif (( $( echo "$(tmux -V |cut -d ' ' -f2)>2.1" | bc -l) )); then
   alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.1.conf'
 else
   alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.0.conf'
