@@ -88,7 +88,6 @@ export ZPLUG_HOME=$BREW_PREFIX/opt/zplug
 if [ -f $ZPLUG_HOME/init.zsh ]; then
   source $ZPLUG_HOME/init.zsh
 
-  zplug "plugins/command-not-found", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/extract", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/pip", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/python", from:oh-my-zsh, ignore:oh-my-zsh.sh
@@ -99,26 +98,20 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
   zplug "plugins/vagrant", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/virtualenv", from:oh-my-zsh, ignore:oh-my-zsh.sh
 
-  zplug "b4b4r07/enhancd"
-  zplug "caarlos0/zsh-mkc"
+  zplug "b4b4r07/enhancd", as:command
+  zplug "caarlos0/zsh-mkc", as:command
   zplug "joel-porquet/zsh-dircolors-solarized"
   zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
   zplug "mrowa44/emojify", as:command
   zplug "oconnor663/zsh-sensible"
-  zplug "rimraf/k"
+  zplug "rimraf/k", as:command
   zplug "sharat87/autoenv"
   zplug "zlsun/solarized-man"
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-history-substring-search"
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-  zplug "DoomHammer/gogh", use:"themes/solarized.dark.sh", at:"overall"
-
-  if [[ $(brew ls --versions fzf|wc -l) -gt 0 ]]; then
-    zplug "$(brew --prefix fzf)/shell", from:local
-  fi
-
-  zplug "miekg/lean"
+  zplug "miekg/lean", as:theme
 
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
@@ -134,6 +127,11 @@ fi
 
 if [[ ! -f $HOME/.zsh-dircolors.config ]]; then
   setupsolarized dircolors.256dark
+fi
+
+if [[ -d "$BREW_PREFIX/opt/fzf" ]]; then
+  source "$BREW_PREFIX/opt/fzf/shell/completion.zsh"
+  source "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
 fi
 
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
