@@ -2,8 +2,8 @@
 ## Editors
 ##
 export EDITOR=vi
-export GIT_EDITOR=$EDITOR
-export USE_EDITOR=$EDITOR
+export GIT_EDITOR="$EDITOR"
+export USE_EDITOR="$EDITOR"
 export VISUAL=$EDITOR
 export PAGER=less
 
@@ -23,14 +23,14 @@ export MAKEFLAGS="-j $(nproc)"
 ## Paths
 ##
 BREW_PREFIX=/home/linuxbrew/.linuxbrew
-export GOPATH=$HOME/.go:$HOME
-export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
+export GOPATH="$HOME/.go:$HOME"
+export XDG_DATA_DIRS="$BREW_PREFIX/share:$XDG_DATA_DIRS"
 export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:${GOPATH//://bin:}/bin:$PATH"
 
 ##
 ## Chruby support
 ##
-if which brew >/dev/null 2>&1 && [[  `brew ls --versions chruby|wc -l` -gt 0 ]]; then
-  source $BREW_PREFIX/opt/chruby/share/chruby/chruby.sh
-  source $BREW_PREFIX/opt/chruby/share/chruby/auto.sh
+if [[ -d "$BREW_PREFIX/opt/chruby/share/chruby" ]]; then
+  source "$BREW_PREFIX/opt/chruby/share/chruby/chruby.sh"
+  source "$BREW_PREFIX/opt/chruby/share/chruby/auto.sh"
 fi
