@@ -9,8 +9,6 @@
 # user-specific file first, then the system-wide one, constituting a chiasmus
 # with the zlogin files.
 
-zmodload zsh/zprof
-
 skip_global_compinit=1
 
 # Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
