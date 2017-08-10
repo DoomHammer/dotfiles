@@ -23,6 +23,7 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt interactive_comments
 setopt pushd_ignore_dups
+setopt promptsubst
 
 unset ZPLUG_CACHE_FILE
 unset ZPLUG_CLONE_DEPTH
@@ -81,6 +82,8 @@ elif is_linux; then
 fi
 
 PROMPT_LEAN_TMUX=""
+PROMPT_LEAN_COLOR1="242"
+PROMPT_LEAN_COLOR2="blue"
 ENHANCD_COMMAND="ecd"
 
 export ZPLUG_HOME=$BREW_PREFIX/opt/zplug
@@ -111,7 +114,7 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
   zplug "zsh-users/zsh-history-substring-search"
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-  zplug "miekg/lean", as:theme
+  zplug "miekg/lean"
 
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
