@@ -51,6 +51,16 @@
   # Push Current Force
   pcf = !"f() { echo git pc \"$@\" -f; }; f"
 
+[merge]
+  tool = vimdiff
+
+[mergetool]
+  prompt = true
+  keepBackup = false
+
+[mergetool "vimdiff"]
+  cmd = vim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
 ###
 ### Git-up specific
 ### https://github.com/aanand/git-up
