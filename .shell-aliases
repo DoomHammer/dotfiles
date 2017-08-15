@@ -1,12 +1,6 @@
 alias dos2unix='sed "s/$//"'
 
-if tmux -V | awk '{exit !($2 >= "2.4")}'; then
-  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.4.conf'
-elif tmux -V | awk '{exit !($2 >= "2.1")}'; then
-  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.1.conf'
-else
-  alias tmux='tmux -2 -f ~/.config/tmux/tmux-2.0.conf'
-fi
+alias tmux='tmux -2'
 
 if which exa >/dev/null 2>&1; then
   alias ls='exa'
