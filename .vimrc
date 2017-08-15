@@ -121,7 +121,7 @@ Plug 'embear/vim-localvimrc'
 " Dockerfile support
 Plug 'ekalinin/Dockerfile.vim'
 " Automatic generation of CTags
-Plug 'vim-misc' | Plug 'xolox/vim-easytags'
+Plug 'vim-scripts/vim-misc' | Plug 'xolox/vim-easytags'
 " Automatic update of CTags
 Plug 'craigemery/vim-autotag'
 " Nice browser for CTags
@@ -148,7 +148,7 @@ Plug 'vim-syntastic/syntastic'
 " Close all buffers but current
 Plug 'muziqiushan/bufonly'
 " Enhanced Commentify
-Plug 'EnhCommentify.vim'
+Plug 'vim-scripts/EnhCommentify.vim'
 " Magit
 Plug 'jreybert/vimagit'
 " And gitgutter
