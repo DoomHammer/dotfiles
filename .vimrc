@@ -114,11 +114,7 @@ Plug 'bruno-/vim-man'
 if (version == 704 && has('patch154')) || (version > 704) || (has('nvim'))
   if executable('cmake') && executable('python') && executable('make') && executable('cc') && executable('c++')
     Plug 'Valloric/YouCompleteMe', {'do': function('BuildYCM')}
-  else
-    echo 'YouCompleteMe requires: cmake, python, make, cc and c++'
-  end
-else
-  echo 'This Vim version is not supported by YouCompleteMe'
+  endif
 endif
 " Local configuration for projects
 Plug 'embear/vim-localvimrc'
