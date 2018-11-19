@@ -27,6 +27,7 @@
 [commit]
 	# Show diff when preparing commit message
 	verbose = true
+	template = ~/.gitmessage
 
 [alias]
 	a = add
