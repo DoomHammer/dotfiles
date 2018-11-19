@@ -51,6 +51,8 @@
 	pc = !"f() { remote=\"${1:-origin}\"; git push -u \"$remote\" $(git rev-parse --abbrev-ref HEAD); }; f"
 	# Push Current Force
 	pcf = !"f() { echo git pc \"$@\" -f; }; f"
+	# Mainly for YADM
+	untracked = !"f() { git status --porcelain=v1 -zunormal | xargs -0n1 printf \"%s\\n\" | grep -E '^\\?\\? \\.' | cut -c4-; }; f"
 
 [merge]
 	tool = vimdiff
