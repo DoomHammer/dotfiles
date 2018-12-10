@@ -365,7 +365,7 @@ endfunction
 " Run rspec in tslime.vim
 "let g:rspec_command = 'call Send_to_Tmux("[ -n \"$ZSH_VERSION\" ] && unsetopt correct && unsetopt correct_all\n") | call Send_to_Tmux("bundle exec rspec {spec}\n")'
 let g:rspec_command = 'Dispatch bundle exec rspec {spec}'
-autocmd FileType gitcommit call SetGitComitOptions()
+autocmd FileType gitcommit call SetGitCommitOptions()
 function! SetGitCommitOptions()
   setlocal spell
   setlocal textwidth=72
