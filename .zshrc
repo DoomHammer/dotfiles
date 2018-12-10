@@ -108,7 +108,6 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
   zplug "mrowa44/emojify", as:command
   zplug "oconnor663/zsh-sensible"
   zplug "rimraf/k", as:command
-  zplug "sharat87/autoenv"
   zplug "zlsun/solarized-man"
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-history-substring-search"
