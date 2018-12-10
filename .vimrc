@@ -15,7 +15,7 @@ if empty(glob(vimautoloaddir . '/plug.vim'))
   if executable('curl')
     execute 'silent !curl -fLo ' . vimautoloaddir . '/plug.vim --create-dirs ' .
           \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 endif
 
@@ -90,6 +90,7 @@ if has('python')
   Plug 'neilagabriel/vim-geeknote'
 endif
 
+Plug 'junegunn/vim-plug'
 " Make sure you use single quotes
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
