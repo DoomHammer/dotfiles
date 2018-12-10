@@ -206,6 +206,8 @@ if has('nvim')
   Plug 'kassio/neoterm'
   " Use Neovim Terminal with Dispatch
   Plug 'radenling/vim-dispatch-neovim'
+  " Nice colours for our Vim
+  Plug 'icymind/NeoSolarized'
 endif
 
 call plug#end()
@@ -418,8 +420,8 @@ endif
 if has('nvim')
   set t_8f=[38;2;%lu;%lu;%lum]
   set t_8b=[48;2;%lu;%lu;%lum]
-  colorscheme NeoSolarized
   let g:neosolarized_contrast = "high"
+  colorscheme NeoSolarized
 else
   try
     set t_Co=256
