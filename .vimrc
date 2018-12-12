@@ -202,12 +202,12 @@ if has('nvim')
   " Great lldb interface for neovim
   Plug 'critiqjo/lldb.nvim', { 'do': function('UpdateRemote') }
   " Asynchronous make for neovim
-  Plug 'neomake/neomake', { 'on': 'Neomake' })
+  Plug 'neomake/neomake'
   " Popup terminal
   Plug 'kassio/neoterm'
   " Use Neovim Terminal with Dispatch
   Plug 'radenling/vim-dispatch-neovim'
-  " Nice colours for our Vim
+  " Nice colours for our NeoVim
   Plug 'icymind/NeoSolarized'
 endif
 
