@@ -21,4 +21,5 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+export BREW_PREFIX=/home/linuxbrew/.linuxbrew
 export CHROME_REMOTE_DESKTOP_DEFAULT_DESKTOP_SIZES=1440x900
