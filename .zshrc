@@ -12,6 +12,7 @@
 # Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
 test -r ~/.shell-common && source ~/.shell-common
 test -r ~/.shell-aliases && source ~/.shell-aliases
+alias make='nocorrect make'
 
 setopt appendhistory
 setopt autocd
