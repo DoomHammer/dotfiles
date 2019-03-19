@@ -97,21 +97,14 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
 
   zplug "plugins/extract", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/pip", from:oh-my-zsh, ignore:oh-my-zsh.sh
-  zplug "plugins/python", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
   # Load after ssh-agent
   zplug "plugins/gpg-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
-  zplug "plugins/vagrant", from:oh-my-zsh, ignore:oh-my-zsh.sh
-  zplug "plugins/virtualenv", from:oh-my-zsh, ignore:oh-my-zsh.sh
 
-  zplug "b4b4r07/enhancd", as:command
-  zplug "caarlos0/zsh-mkc", as:command
   zplug "joel-porquet/zsh-dircolors-solarized"
   zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
-  zplug "mrowa44/emojify", as:command
   zplug "oconnor663/zsh-sensible"
-  zplug "rimraf/k", as:command
   zplug "zlsun/solarized-man"
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-history-substring-search"
