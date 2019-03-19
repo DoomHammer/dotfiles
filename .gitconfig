@@ -94,6 +94,9 @@
 [credential]
 	helper = "cache --timeout 86400"
 
+[pack]
+	threads = 2
+
 ###
 ### Include local overrides
 ###
