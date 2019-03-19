@@ -47,3 +47,8 @@ path=(
   /{bin,sbin}
   $path
 )
+
+# WSL cannot handle `nice`
+if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+  unsetopt BG_NICE
+fi
