@@ -117,7 +117,10 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
   zplug "zsh-users/zsh-history-substring-search"
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-  zplug "miekg/lean"
+  # Lean doesn't work great with Linux shell
+  if [[ $TERM != linux ]]; then
+    zplug "miekg/lean"
+  fi
 
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
@@ -145,7 +148,8 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
 fi
 
 # Teleconsole does not preserve TMUX env variable
-if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]]; then
+# Also: we don't want this behaviour in Linux consoles
+if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]] && [[ "$TERM" != linux ]]; then
   # Attempt to discover a detached session and attach it, else create a new
   # session
   CURRENT_USER=$(whoami)
