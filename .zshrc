@@ -44,6 +44,9 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 
+bindkey "^U" backward-kill-line
+bindkey "^Q" push-line-or-edit
+
 # Ignore interactive commands from history
 export HISTORY_IGNORE="(ls|bg|fg|pwd|exit|cd ..)"
 
