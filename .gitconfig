@@ -59,6 +59,8 @@
 	pcf = !"f() { echo git pc \"$@\" -f; }; f"
 	# Mainly for YADM
 	untracked = !"f() { git status --porcelain=v1 -zunormal | xargs -0n1 printf \"%s\\n\" | grep -E '^\\?\\? \\.' | cut -c4-; }; f"
+	# Current branch
+	current = rev-parse --abbrev-ref HEAD
 
 [merge]
 	tool = vimdiff
