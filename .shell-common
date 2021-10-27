@@ -1,7 +1,7 @@
 # make less more friendly for non-text input files, see lesspipe(1)
-test -x /usr/bin/lesspipe && eval "$(SHELL=/bin/sh lesspipe)"
+command -v lesspipe.sh >/dev/null 2>&1 && eval "$(SHELL=/bin/sh lesspipe.sh)"
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
+if command -v dircolors >/dev/null 2>&1; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi

@@ -2,9 +2,9 @@ alias dos2unix='sed "s/$//"'
 
 alias tmux='tmux -2'
 
-if which exa >/dev/null 2>&1; then
+if command -v exa >/dev/null 2>&1; then
   alias ls='exa'
-elif which ls++ >/dev/null 2>&1; then
+elif command -v ls++ >/dev/null 2>&1; then
   alias ls='ls++'
 else
   alias ls='ls --color=auto'
@@ -13,14 +13,14 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-if which nvim >/dev/null 2>&1; then
+if command -v nvim >/dev/null 2>&1; then
   alias vim='nvim'
 fi
 alias purevim='vim -u NONE'
 
 alias ll='\ls -l'
 alias lt='\ls --color=auto -lhFart'
-if which vim >/dev/null 2>&1; then
+if command -v vim >/dev/null 2>&1; then
   alias vi='vim'
 fi
 
