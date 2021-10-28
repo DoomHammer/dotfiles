@@ -1,5 +1,5 @@
 #!/bin/sh
-# vim: set ft=bash sw=2 et :
+# vim: set ft=sh sw=2 et :
 
 install_brew() {
   # Proudly borrowed from:
