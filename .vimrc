@@ -512,6 +512,9 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
+set undodir=~/.vim/undodir
+set undofile
+
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
