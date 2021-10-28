@@ -1,3 +1,4 @@
+# vim: set ft=zsh sw=2 et :
 # Via https://tanguy.ortolo.eu/blog/article25/shrc
 #
 # Zsh always executes zshenv. Then, depending on the case:
@@ -26,9 +27,6 @@ setopt interactive_comments
 setopt pushd_ignore_dups
 setopt promptsubst
 
-unset ZPLUG_CACHE_FILE
-unset ZPLUG_CLONE_DEPTH
-
 # EMACS mode
 bindkey -e
 # TODO: This might be neat: http://unix.stackexchange.com/a/47425
@@ -44,68 +42,32 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 
+# Ctrl+U to delete the current line before cursor
 bindkey "^U" backward-kill-line
+# Ctrl+Q to save the current command and switch to a new one
 bindkey "^Q" push-line-or-edit
 
 # Ignore interactive commands from history
-export HISTORY_IGNORE="(ls|bg|fg|pwd|exit|cd ..)"
+export HISTORY_IGNORE="(ls|bg|fg|pwd|exit|cd ..|cd -|pushd|popd)"
 
 # FIXME: check first if they are available
 export LC_ALL=en_US.UTF-8
 
-is_linux () {
-  [[ $('uname') == 'Linux' ]];
-}
-
-is_osx () {
-  [[ $('uname') == 'Darwin' ]]
-}
-
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
 
-if is_osx; then
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-  if [[ ! -f '/usr/local/bin/brew' ]]; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew tap homebrew/boneyard
-  fi
-elif is_linux; then
-  export PATH=$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$BREW_PREFIX/share/python:$PATH
-  if [[ ! -d $BREW_PREFIX ]]; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/linuxbrew/go/install)"
-    brew doctor
-    mkdir -p $BREW_PREFIX/share/zsh/site-functions
-    ln -s $BREW_PREFIX/Library/Contributions/brew_zsh_completion.zsh $BREW_PREFIX/share/zsh/site-functions/_brew
-  fi
-
-  export XDG_DATA_DIRS=$BREW_PREFIX/share:$XDG_DATA_DIRS
-  export XML_CATALOG_FILES=$BREW_PREFIX/etc/xml/catalog
-  export ANDROID_HOME=$BREW_PREFIX/opt/android-sdk
-  export MONO_GAC_PREFIX=$BREW_PREFIX
-  fpath=($BREW_PREFIX/share/zsh/site-functions $fpath)
-fi
 
 PROMPT_LEAN_TMUX=""
 PROMPT_LEAN_COLOR1="242"
 PROMPT_LEAN_COLOR2="blue"
-ENHANCD_COMMAND="ecd"
 
-export ZPLUG_HOME=$BREW_PREFIX/opt/zplug
+if [ -f $HOME/.nix-profile/init.zsh ]; then
+  source $HOME/.nix-profile/init.zsh
 
-if [ -f $ZPLUG_HOME/init.zsh ]; then
-  source $ZPLUG_HOME/init.zsh
-
-  zplug "plugins/extract", from:oh-my-zsh, ignore:oh-my-zsh.sh
-  zplug "plugins/pip", from:oh-my-zsh, ignore:oh-my-zsh.sh
   zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
   # Load after ssh-agent
   zplug "plugins/gpg-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
-  zplug "plugins/sudo", from:oh-my-zsh, ignore:oh-my-zsh.sh
 
-  zplug "joel-porquet/zsh-dircolors-solarized"
-  zplug "marzocchi/zsh-notify", use:"notify.plugin.zsh"
   zplug "oconnor663/zsh-sensible"
-  zplug "zlsun/solarized-man"
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-history-substring-search"
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -127,43 +89,19 @@ if [ -f $ZPLUG_HOME/init.zsh ]; then
   zplug load # --verbose
 fi
 
-if [[ ! -f $HOME/.zsh-dircolors.config ]]; then
-  setupsolarized dircolors.256dark
+if [ -d $BREW_PREFIX ]; then
+  eval "$($BREW_PREFIX/bin/brew shellenv)"
+  fpath=($BREW_PREFIX/share/zsh/site-functions $fpath)
 fi
 
-if [[ -d "$BREW_PREFIX/opt/fzf" ]]; then
-  source "$BREW_PREFIX/opt/fzf/shell/completion.zsh"
-  source "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
+if [ -d $HOME/.nix-profile ]; then
+  . $HOME/.nix-profile/etc/profile.d/nix.sh
+  fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 fi
 
-if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
 fi
 
-# Teleconsole does not preserve TMUX env variable
-# Also: we don't want this behaviour in Linux consoles
-if [[ -z "$TMUX" ]] && [[ -z "$TELEPORT_SESSION" ]] && [[ "$TERM" != linux ]]; then
-  # Attempt to discover a detached session and attach it, else create a new
-  # session
-  CURRENT_USER=$(whoami)
-  if tmux has-session -t $CURRENT_USER 2>/dev/null; then
-    tmux attach-session -t $CURRENT_USER
-  else
-    tmux new-session -s $CURRENT_USER
-  fi
-fi
-
-if [[ -x `which ag` ]]; then
-  export FZF_DEFAULT_COMMAND='ag -l -g ""'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fi
-export FZF_DEFAULT_OPTS="--extended-exact"
-
-# v - open files in ~/.viminfo and ~/.nviminfo
-v() {
-  local files
-  files=$(grep --no-filename '^>' ~/.viminfo ~/.nviminfo | cut -c3- |
-          while read line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf -d -m -q "$*" -1) && vim ${files//\~/$HOME}
-}
+eval "$(direnv hook zsh)"
