@@ -12,5 +12,6 @@ if [ -f "$HOME/.shell-common.local" ]; then
   . "$HOME/.shell-common.local"
 fi
 
-glibcLocales=$(nix-build --no-out-link "<nixpkgs>" -A glibcLocales)
-export LOCALE_ARCHIVE="${glibcLocales}/lib/locale/locale-archive"
+# TODO: How to make it conditional in a nice way?
+#glibcLocales=$(nix-build --no-out-link "<nixpkgs>" -A glibcLocales)
+#export LOCALE_ARCHIVE="${glibcLocales}/lib/locale/locale-archive"

@@ -20,4 +20,8 @@ export LESS='-iFMRSX -x4'
 ##
 export PYTHONPATH="$HOME/.nix-profile/lib/python3.8/site-packages:$PYTHONPATH"
 
+if [ -f "$HOME/.shell-env.local" ]; then
+  . "$HOME/.shell-env.local"
+fi
+
 umask 022

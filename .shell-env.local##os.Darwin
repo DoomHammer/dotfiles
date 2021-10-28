@@ -1,0 +1,6 @@
+# vim: set ft=sh sw=2 et :
+
+##
+## Paths
+##
+BREW_PREFIX=/opt/homebrew

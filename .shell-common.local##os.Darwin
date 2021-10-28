@@ -4,8 +4,3 @@
 ## Make
 ##
 export MAKEFLAGS="-j $(sysctl -n hw.ncpu)"
-
-##
-## Paths
-##
-BREW_PREFIX=/opt/homebrew

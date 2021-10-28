@@ -11,8 +11,6 @@
 # with the zlogin files.
 
 # Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
-test -r ~/.shell-common && source ~/.shell-common
-test -r ~/.shell-aliases && source ~/.shell-aliases
 alias make='nocorrect make'
 
 setopt appendhistory
@@ -98,6 +96,9 @@ if [ -d $HOME/.nix-profile ]; then
   . $HOME/.nix-profile/etc/profile.d/nix.sh
   fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 fi
+
+test -r ~/.shell-common && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
 
 if [ -n "${commands[fzf-share]}" ]; then
   source "$(fzf-share)/key-bindings.zsh"
