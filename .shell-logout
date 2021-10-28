@@ -1,3 +1,5 @@
+# vim: set ft=sh sw=2 et :
+
 # when leaving the console clear the screen to increase privacy
 
 if [ "$SHLVL" = 1 ]; then

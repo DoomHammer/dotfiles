@@ -1,3 +1,5 @@
+# vim: set ft=sh sw=2 et :
+
 ##
 ## Editors
 ##
@@ -11,28 +13,11 @@ export PAGER=less
 ## Pager
 ##
 export PAGER=less
-# TODO: checkout http://superuser.com/questions/124846/mercurial-colour-output-piped-to-less/403748#403748
 export LESS='-iFMRSX -x4'
-
-##
-## Make
-##
-export MAKEFLAGS="-j $(nproc)"
 
 ##
 ## Paths
 ##
-BREW_PREFIX=/home/linuxbrew/.linuxbrew
-export GOPATH="$HOME/.go:$HOME"
-export XDG_DATA_DIRS="$BREW_PREFIX/share:$XDG_DATA_DIRS"
-export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:${GOPATH//://bin:}/bin:$PATH"
-
-##
-## Chruby support
-##
-if [[ -d "$BREW_PREFIX/opt/chruby/share/chruby" ]]; then
-  source "$BREW_PREFIX/opt/chruby/share/chruby/chruby.sh"
-  source "$BREW_PREFIX/opt/chruby/share/chruby/auto.sh"
-fi
+export PYTHONPATH="$HOME/.nix-profile/lib/python3.8/site-packages:$PYTHONPATH"
 
 umask 022

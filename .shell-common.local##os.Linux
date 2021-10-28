@@ -1,0 +1,12 @@
+# vim: set ft=sh sw=2 et :
+
+##
+## Make
+##
+export MAKEFLAGS="-j $(nproc)"
+
+##
+## Paths
+##
+BREW_PREFIX=/home/linuxbrew/.linuxbrew
+export XDG_DATA_DIRS="$BREW_PREFIX/share:$XDG_DATA_DIRS"

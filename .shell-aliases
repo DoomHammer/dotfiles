@@ -1,11 +1,10 @@
+# vim: set ft=sh sw=2 et :
 alias dos2unix='sed "s/$//"'
 
 alias tmux='tmux -2'
 
 if command -v exa >/dev/null 2>&1; then
   alias ls='exa'
-elif command -v ls++ >/dev/null 2>&1; then
-  alias ls='ls++'
 else
   alias ls='ls --color=auto'
 fi
@@ -13,24 +12,25 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+if command -v vim >/dev/null 2>&1; then
+  alias vi='vim'
+fi
 if command -v nvim >/dev/null 2>&1; then
   alias vim='nvim'
+  alias vi='nvim'
 fi
 alias purevim='vim -u NONE'
 
 alias ll='\ls -l'
 alias lt='\ls --color=auto -lhFart'
-if command -v vim >/dev/null 2>&1; then
-  alias vi='vim'
-fi
 
-if [[ ! -z $TMUX ]]; then
+if [[ -n $TMUX ]]; then
   alias fzf='fzf-tmux'
 fi
 
 alias displayoff='xset -display :0.0 dpms force off'
 alias displaylockoff='xdg-screensaver lock; xset -display :0.0 dpms force off'
-alias suspiria='/usr/bin/dbus-send --system --print-reply \
-  --dest="org.freedesktop.UPower" \
-  /org/freedesktop/UPower \
+alias suspiria='/usr/bin/dbus-send --system --print-reply
+  --dest="org.freedesktop.UPower"
+  /org/freedesktop/UPower
   org.freedesktop.UPower.Suspend'
