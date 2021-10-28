@@ -1,4 +1,4 @@
-# vi:sw=2:sts=2:ts=2:noexpandtab
+# vim: set sw=2 sts=2 ts=2 noexpandtab :
 [color]
 	ui = auto
 	branch = auto
@@ -15,7 +15,7 @@
 	autocrlf = false
 	excludesfile = ~/.gitignore_global
 	whitespace = blank-at-eol,blank-at-eof,space-before-tab
-	pager = diff-so-fancy
+	pager = diff-so-fancy | less
 
 [push]
 	default = simple
