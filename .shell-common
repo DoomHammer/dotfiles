@@ -8,4 +8,6 @@ if command -v dircolors >/dev/null 2>&1; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-. .shell-common.local
+if [ -f "$HOME/.shell-common.local" ]; then
+  . "$HOME/.shell-common.local"
+fi

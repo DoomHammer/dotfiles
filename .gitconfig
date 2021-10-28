@@ -15,7 +15,6 @@
 	autocrlf = false
 	excludesfile = ~/.gitignore_global
 	whitespace = blank-at-eol,blank-at-eof,space-before-tab
-	pager = diff-so-fancy | less
 
 [push]
 	default = simple
