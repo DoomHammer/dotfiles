@@ -1,0 +1,30 @@
+#!/bin/sh
+# vim: set ft=bash sw=2 et :
+
+install_brew() {
+  # Proudly borrowed from:
+  # https://github.com/duckfullstop/dotfiles/blob/f734eea399a7ccd1c25b57242997e79f230abc4d/.config/yadm/bootstrap
+
+  # install Homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing Homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating Homebrew bundle"
+    brew bundle --global
+  fi
+}
+
+function install_nix() {
+  install_nix_bin() { curl -L https://nixos.org/nix/install | sh; . ~/.nix-profile/etc/profile.d/nix.sh; }
+  command -v nix 2>/dev/null || install_nix_bin
+
+  if [ -f "$HOME/.config/nix/installed_packages" ]; then
+    cat "$HOME/.config/nix/installed_packages" | xargs nix-env -i
+  fi
+}
+
+install_brew
+install_nix
