@@ -16,8 +16,6 @@ selection:
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
-  - { key: Left, mods: Control, chars: "\x1b[1;5D" }
-  - { key: Right, mods: Control, chars: "\x1b[1;5C" }
 
 # Base16 Solarized Light - alacritty color config
 # Ethan Schoonover (modified by aramisgithub)
