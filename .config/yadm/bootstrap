@@ -17,7 +17,7 @@ install_brew() {
   fi
 }
 
-function install_nix() {
+install_nix() {
   # This one courtesy of:
   # https://github.com/shadowrylander/shadowrylander/blob/35bb51822c46578d0a5da5810263fa85d464043c/.config/yadm/bootstrap#L56
   install_nix_bin() { curl -L https://nixos.org/nix/install | sh; . ~/.nix-profile/etc/profile.d/nix.sh; }
@@ -29,5 +29,19 @@ function install_nix() {
   fi
 }
 
+configure_macos() {
+  # Disable Ctrl+Arrow mapping for Mission Control as it's more useful for jumping words in a terminal
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 0; value = { parameters = (65535, 123, 8650752); type = standard;};}"
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 80 "{enabled = 0; value = { parameters = (65535, 123, 8781824); type = standard;};}"
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 0; value = { parameters = (65535, 124, 8650752); type = standard;};}"
+  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 8781824); type = standard;};}"
+}
+
+system_type=$(uname -s)
+
 install_brew
 install_nix
+
+if [ "$system_type" = "Darwin" ]; then
+  configure_macos
+fi
