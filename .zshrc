@@ -45,6 +45,9 @@ bindkey "^U" backward-kill-line
 # Ctrl+Q to save the current command and switch to a new one
 bindkey "^Q" push-line-or-edit
 
+# Mac hack around FZF's ALT-C
+bindkey "ç" fzf-cd-widget
+
 # Ignore interactive commands from history
 export HISTORY_IGNORE="(ls|bg|fg|pwd|exit|cd ..|cd -|pushd|popd)"
 
