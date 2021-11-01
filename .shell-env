@@ -15,11 +15,6 @@ export PAGER=less
 export PAGER=less
 export LESS='-iFMRSX -x4'
 
-##
-## Paths
-##
-export PYTHONPATH="$HOME/.nix-profile/lib/python3.8/site-packages:$PYTHONPATH"
-
 if [ -f "$HOME/.shell-env.local" ]; then
   . "$HOME/.shell-env.local"
 fi
