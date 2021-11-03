@@ -21,11 +21,12 @@ install_nix() {
   # This one courtesy of:
   # https://github.com/shadowrylander/shadowrylander/blob/35bb51822c46578d0a5da5810263fa85d464043c/.config/yadm/bootstrap#L56
   install_nix_bin() { curl -L https://nixos.org/nix/install | sh; . ~/.nix-profile/etc/profile.d/nix.sh; }
-  command -v nix 2>/dev/null || install_nix_bin
+  command -v nix >/dev/null 2>&1 || install_nix_bin
 
   if [ -f "$HOME/.config/nix/installed_packages" ]; then
-    # This list created with `nix-env -q > .config/nix/installed_packages`
+    # This list created with `nix-env -q > ~/.config/nix/installed_packages`
     cat "$HOME/.config/nix/installed_packages" | xargs nix-env -i
+    cat "$HOME/.config/nix/installed_packages.local" | xargs nix-env -i
   fi
 }
 
