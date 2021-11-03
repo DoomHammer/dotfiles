@@ -5,3 +5,12 @@
 ##
 BREW_PREFIX=/home/linuxbrew/.linuxbrew
 export XDG_DATA_DIRS="$BREW_PREFIX/share:$XDG_DATA_DIRS"
+
+##
+## Linux glibc locale with Nix workaround
+## `warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)`
+##
+
+# TODO: How to make it conditional in a nice way?
+glibcLocales=$(nix-build --no-out-link "<nixpkgs>" -A glibcLocales)
+export LOCALE_ARCHIVE="${glibcLocales}/lib/locale/locale-archive"
