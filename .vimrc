@@ -126,11 +126,16 @@ EOF
 
   " Configure tree-sitter with folding
   lua <<EOF
-    require('nvim-treesitter.install').compilers = { 'clang++'}
     require('nvim-treesitter.configs').setup({
       -- One of "all", "maintained" (parsers with maintainers), or a list of languages
       ensure_installed = "maintained",
       ignore_install = { "godot_resource", "teal" },
+      highlight = {
+        enable = true
+      },
+      indent = {
+        enable = true
+      },
     })
 EOF
   set foldmethod=expr
