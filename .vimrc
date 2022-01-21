@@ -1,10 +1,8 @@
 " vim: set sw=2 et :
 " Configure plug.vim
 if has('nvim')
-  let vimplugdir='~/.config/nvim/plugged'
-  let vimautoloaddir='~/.config/nvim/autoload'
+  let vimautoloaddir='~/.config/nvim/site/autoload'
 else
-  let vimplugdir='~/.vim/plugged'
   let vimautoloaddir='~/.vim/autoload'
 endif
 
@@ -18,7 +16,7 @@ if empty(glob(vimautoloaddir . '/plug.vim'))
   endif
 endif
 
-call plug#begin(vimplugdir)
+call plug#begin()
 
 " This is taking care of the plugins
 Plug 'junegunn/vim-plug'
