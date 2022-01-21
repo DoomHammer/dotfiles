@@ -70,7 +70,7 @@
 	keepBackup = false
 
 [mergetool "vimdiff"]
-	cmd = vim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 ###
 ### Git-up specific
