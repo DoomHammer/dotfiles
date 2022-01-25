@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ "$(uname -i)" = "x86_64" ]; then
+  exec /usr/bin/clang "$@"
+else
+  exec arch -arm64e /usr/bin/clang "$@"
+fi
+

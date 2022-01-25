@@ -126,6 +126,9 @@ EOF
 
   " Configure tree-sitter with folding
   lua <<EOF
+    if vim.loop.os_uname().sysname == "Darwin" then
+      require('nvim-treesitter.install').compilers = { os.getenv("HOME")..'/.local/bin/clang-wrapper' }
+    end
     require('nvim-treesitter.configs').setup({
       -- One of "all", "maintained" (parsers with maintainers), or a list of languages
       ensure_installed = "maintained",
