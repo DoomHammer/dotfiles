@@ -54,8 +54,8 @@ configure_vim() {
 
 system_type=$(uname -s)
 
-install_brew
 install_nix
+install_brew
 
 if [ "$system_type" = "Darwin" ]; then
   configure_macos
