@@ -238,5 +238,9 @@ nnoremap k gk
 " Work with tmux mouse integration
 set mouse=a
 
-set undodir=~/.vim/undodir
+if has('nvim')
+  set undodir=~/.config/nvim/undodir
+else
+  set undodir=~/.vim/undodir
+endif
 set undofile
