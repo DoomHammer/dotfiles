@@ -5,3 +5,4 @@
 ##
 BREW_PREFIX=/home/linuxbrew/.linuxbrew
 export XDG_DATA_DIRS="$BREW_PREFIX/share:$XDG_DATA_DIRS"
+eval "$($BREW_PREFIX/bin/brew shellenv)"
