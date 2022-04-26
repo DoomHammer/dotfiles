@@ -130,8 +130,8 @@ EOF
       require('nvim-treesitter.install').compilers = { os.getenv("HOME")..'/.local/bin/clang-wrapper' }
     end
     require('nvim-treesitter.configs').setup({
-      -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-      ensure_installed = "maintained",
+      -- One of "all", or a list of languages
+      ensure_installed = "all",
       ignore_install = { "godot_resource", "teal" },
       highlight = {
         enable = true
