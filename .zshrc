@@ -53,11 +53,6 @@ export LC_ALL=en_US.UTF-8
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
 
-
-PROMPT_LEAN_TMUX=""
-PROMPT_LEAN_COLOR1="242"
-PROMPT_LEAN_COLOR2="blue"
-
 if [ -f $HOME/.nix-profile/init.zsh ]; then
   source $HOME/.nix-profile/init.zsh
 
