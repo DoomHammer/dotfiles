@@ -44,36 +44,6 @@ shopt -s checkwinsize
 # Spellcheck directories
 shopt -s dirspell
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color) color_prompt=yes;;
-  screen-256color) color_prompt=yes;;
-  screen) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-  else
-    color_prompt=
-  fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -82,3 +52,19 @@ test -f /etc/bash_completion && . /etc/bash_completion
 test -f $BREW_PREFIX/etc/bash_completion && . $BREW_PREFIX/etc/bash_completion
 
 test -r ~/.bashrc.local && . ~/.bashrc.local
+
+eval "$(direnv hook bash)"
+
+function right_prompt(){
+    RIGHT_PROMPT="$(starship prompt --right)"
+    RIGHT_PROMPT_RENDERED="${RIGHT_PROMPT@P}"
+    # For some reason this one is less accurate, while the other method below
+    # gives better precision, but also throws errors. Curious!
+    #RIGHT_PROMPT_RENDERED_stripped=$(sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" <<<"$RIGHT_PROMPT_RENDERED")
+    RIGHT_PROMPT_RENDERED_stripped="$(sed -r 's:\\\[([^\\]|\\[^]])*\\\]::g' <<<$RIGHT_PROMPT_RENDERED)"
+    RIGHT_PROMPT_RENDERED_stripped="$(eval echo -e $RIGHT_PROMPT_RENDERED_stripped 2>/dev/null)"
+    printf "\033[50D\033[$((${COLUMNS:-$(tput cols)}-${#RIGHT_PROMPT_RENDERED_stripped}))C$RIGHT_PROMPT_RENDERED\n"
+}
+starship_precmd_user_func="right_prompt"
+
+eval "$(starship init bash)"
