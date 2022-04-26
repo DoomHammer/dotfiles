@@ -70,11 +70,6 @@ if [ -f $HOME/.nix-profile/init.zsh ]; then
   zplug "zsh-users/zsh-history-substring-search"
   zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-  # Lean doesn't work great with Linux shell
-  if [[ $TERM != linux ]]; then
-    zplug "miekg/lean"
-  fi
-
   # Install plugins if there are plugins that have not been installed
   if ! zplug check --verbose; then
     printf "Install zsh plugins? [y/N]: "
@@ -106,3 +101,6 @@ if [ -n "${commands[fzf-share]}" ]; then
 fi
 
 eval "$(direnv hook zsh)"
+# Lean doesn't work great with Linux shell (in an actual tty), gonna check how
+# this Starship behaves
+eval "$(starship init zsh)"

@@ -21,7 +21,7 @@ python3.10-pynvim
 ripgrep
 ruby
 silver-searcher
-terraform-ls
+starship
 tmate
 tmux
 yadm

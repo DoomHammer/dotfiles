@@ -1,0 +1,56 @@
+format = """
+$jobs\
+$character\
+"""
+
+right_format = """
+$cmd_duration\
+$directory\
+$git_branch\
+$git_status\
+$hostname\
+"""
+
+add_newline = false
+
+
+[jobs]
+format = "[\\[$number\\]]($style) "
+style = "242"
+number_threshold = 1
+symbol_threshold = 2
+
+[character]
+success_symbol = "[%%](blue)"
+error_symbol = "[%%](red)"
+vicmd_symbol = "[%%](blue)"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "150"
+
+[directory]
+style = "blue"
+truncate_to_repo = false
+truncation_length = 10
+truncation_symbol = "…/"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "242"
+
+[git_status]
+format = " [$modified]($style)"
+style = "242"
+conflicted = ""
+untracked = ""
+modified = "+"
+staged = ""
+renamed = ""
+deleted = ""
+stashed = ""
+
+[hostname]
+format = "[$hostname]($style)"
+ssh_only = true
+style = "150"
