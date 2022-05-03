@@ -1,19 +1,10 @@
 " vim: set sw=2 et :
+
 " Configure plug.vim
 if has('nvim')
   let vimautoloaddir='~/.config/nvim/site/autoload'
 else
   let vimautoloaddir='~/.vim/autoload'
-endif
-
-" Install plug.vim
-if empty(glob(vimautoloaddir . '/plug.vim'))
-  " TODO: else?
-  if executable('curl')
-    execute 'silent !curl -fLo ' . vimautoloaddir . '/plug.vim --create-dirs ' .
-          \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-  endif
 endif
 
 call plug#begin()
@@ -57,9 +48,20 @@ if has('nvim')
   " Better syntax recognition
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   " LSP config
+  Plug 'junnplus/nvim-lsp-setup'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
   " Auto completion
-  Plug 'hrsh7th/nvim-compe'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  " Snippets
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'rafamadriz/friendly-snippets'
   " Telescope for quick switching
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
@@ -102,11 +104,62 @@ if has('nvim')
     map('n', '<Leader>l', '<Plug>(cokeline-focus-next)', { silent = true })
 EOF
 
-  " Configure Terraform LSP
+  " Configure completion and LSP
+  set completeopt=menu,menuone,noselect
+  autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+
   lua <<EOF
-    require'lspconfig'.terraformls.setup{}
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'vsnip' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  require("nvim-lsp-installer").setup({
+    automatic_installation = true,
+  })
+  require('nvim-lsp-setup').setup({
+    servers = {
+      bashls = {},
+      clangd = {},
+      cmake = {},
+      cssls = {},
+      dockerls = {},
+      gopls = {},
+      grammarly = {},
+      jsonls = {},
+      html = {},
+      pylsp = {},
+      sumneko_lua = {},
+      terraformls = {},
+      tflint = {},
+      tsserver = {},
+      vimls = {},
+      yamlls = {},
+    },
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+  })
+  require'lspconfig'.terraformls.setup{}
 EOF
-  autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 
   " Configure NvimTree
   lua << EOF

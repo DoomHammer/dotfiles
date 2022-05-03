@@ -1,5 +1,6 @@
 cmake
 coreutils
+curl
 direnv
 fd
 fzf
@@ -24,6 +25,8 @@ silver-searcher
 starship
 tmate
 tmux
+unzip
+wget
 yadm
 zplug
 zsh
