@@ -158,7 +158,6 @@ EOF
     },
     capabilities = vim.lsp.protocol.make_client_capabilities(),
   })
-  require'lspconfig'.terraformls.setup{}
 EOF
 
   " Configure NvimTree
