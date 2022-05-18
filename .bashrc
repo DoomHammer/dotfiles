@@ -53,6 +53,11 @@ test -f $BREW_PREFIX/etc/bash_completion && . $BREW_PREFIX/etc/bash_completion
 
 test -r ~/.bashrc.local && . ~/.bashrc.local
 
+if command -v fzf-share >/dev/null; then
+  source "$(fzf-share)/key-bindings.bash"
+  source "$(fzf-share)/completion.bash"
+fi
+
 eval "$(direnv hook bash)"
 
 function right_prompt(){
