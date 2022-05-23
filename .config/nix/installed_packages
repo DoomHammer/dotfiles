@@ -1,6 +1,7 @@
 btop
 cmake
 coreutils
+croc
 curl
 direnv
 fd
@@ -11,6 +12,7 @@ gnumake
 go
 jq
 lesspipe
+lsd
 neovim
 nix
 nix-zsh-completions

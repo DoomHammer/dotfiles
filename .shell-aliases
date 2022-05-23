@@ -22,7 +22,13 @@ fi
 alias purevim='vim -u NONE'
 
 alias ll='\ls -l'
+alias lla='\ls -la'
 alias lt='\ls --color=auto -lhFart'
+if command -v lsd >/dev/null 2>&1; then
+  alias ls='lsd'
+  alias ll='lsd -l'
+  alias lla='lsd -la'
+fi
 
 if [[ -n $TMUX ]]; then
   alias fzf='fzf-tmux'

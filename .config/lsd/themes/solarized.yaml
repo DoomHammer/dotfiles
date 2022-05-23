@@ -1,0 +1,24 @@
+user: magenta
+group: dark_magenta
+permission:
+  read: dark_green
+  write: dark_yellow
+  exec: dark_red
+  exec-sticky: 5
+  no-access: 245
+date:
+  hour-old: 40
+  day-old: 42
+  older: 36
+size:
+  none: blue
+  small: dark_blue
+  medium: red
+  large: dark_red
+inode:
+  valid: 13
+  invalid: 245
+links:
+  valid: 13
+  invalid: 245
+tree-edge: 245
