@@ -106,7 +106,7 @@ EOF
 
   " Configure completion and LSP
   set completeopt=menu,menuone,noselect
-  autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 4000)
 
   lua <<EOF
   -- Setup nvim-cmp.
@@ -195,12 +195,6 @@ EOF
 EOF
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
-
-  " Configure Neoformat to run automatically on buffer write
-  augroup fmt
-    autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
-  augroup END
 
   " Configure feline
   lua <<EOF
