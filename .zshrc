@@ -80,6 +80,9 @@ if [ -f $HOME/.nix-profile/init.zsh ]; then
   zplug load # --verbose
 fi
 
+test -r ~/.shell-common && source ~/.shell-common
+test -r ~/.shell-aliases && source ~/.shell-aliases
+
 if [ -d $BREW_PREFIX ]; then
   eval "$($BREW_PREFIX/bin/brew shellenv)"
   fpath=($BREW_PREFIX/share/zsh/site-functions $fpath)
@@ -89,9 +92,6 @@ if [ -d $HOME/.nix-profile ]; then
   . $HOME/.nix-profile/etc/profile.d/nix.sh
   fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 fi
-
-test -r ~/.shell-common && source ~/.shell-common
-test -r ~/.shell-aliases && source ~/.shell-aliases
 
 if [ -n "${commands[fzf-share]}" ]; then
   source "$(fzf-share)/key-bindings.zsh"
