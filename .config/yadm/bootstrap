@@ -24,8 +24,8 @@ install_nix() {
   command -v nix >/dev/null 2>&1 || install_nix_bin
 
   if [ -f "$HOME/.config/nix/installed_packages" ]; then
-    # This list created with `nix-env -q > ~/.config/nix/installed_packages`
-    cat "$HOME/.config/nix/installed_packages" | xargs nix-env -i
+    # This list created with `nix-env -qaPs|grep '^I'|awk '{print $2}' > ~/.config/nix/installed_packages`
+    cat "$HOME/.config/nix/installed_packages" | xargs nix-env -iA
   fi
   if [ -f "$HOME/.config/nix/installed_packages.local" ]; then
     # Additional packages that might be needed here or there
