@@ -21,9 +21,9 @@ number_threshold = 1
 symbol_threshold = 2
 
 [character]
-success_symbol = "[%%](blue)"
-error_symbol = "[%%](red)"
-vicmd_symbol = "[%%](blue)"
+success_symbol = "[%](blue)"
+error_symbol = "[%](red)"
+vicmd_symbol = "[%](blue)"
 
 [cmd_duration]
 format = "[$duration]($style) "
