@@ -81,6 +81,7 @@ if [ -f $HOME/.nix-profile/init.zsh ]; then
 fi
 
 test -r ~/.shell-common && source ~/.shell-common
+test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-aliases && source ~/.shell-aliases
 
 if [ -d $BREW_PREFIX ]; then
