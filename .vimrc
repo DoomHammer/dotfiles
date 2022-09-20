@@ -47,10 +47,12 @@ if has('nvim')
   Plug 'noib3/nvim-cokeline'
   " Better syntax recognition
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  " Mason is now preferred over LSP Installer
+  Plug 'williamboman/mason.nvim'
   " LSP config
   Plug 'junnplus/nvim-lsp-setup'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'williamboman/mason-lspconfig.nvim'
   " Auto completion
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
@@ -70,6 +72,8 @@ if has('nvim')
   Plug 'github/copilot.vim'
   " Nice colours for our NeoVim
   Plug 'ishan9299/nvim-solarized-lua'
+  Plug 'shaunsingh/solarized.nvim'
+
   " Show indent lines
   Plug 'lukas-reineke/indent-blankline.nvim'
   " Status line
@@ -134,7 +138,7 @@ EOF
     })
   })
 
-  require("nvim-lsp-installer").setup({
+  require("mason").setup({
     automatic_installation = true,
   })
   require('nvim-lsp-setup').setup({
