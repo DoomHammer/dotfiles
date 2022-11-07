@@ -42,6 +42,11 @@ configure_macos() {
   # Disable the UI sound
   defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
 
+  # Enable Dock autohide
+  defaults write com.apple.dock autohide -bool true
+  # No app icons in the Dock
+  defaults write com.apple.dock persistent-apps -array
+
   # Disable Ctrl+Arrow mapping for Mission Control as it's more useful for jumping words in a terminal
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 0; value = { parameters = (65535, 123, 8650752); type = standard;};}"
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 80 "{enabled = 0; value = { parameters = (65535, 123, 8781824); type = standard;};}"
