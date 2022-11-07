@@ -52,6 +52,12 @@ configure_macos() {
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 80 "{enabled = 0; value = { parameters = (65535, 123, 8781824); type = standard;};}"
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 0; value = { parameters = (65535, 124, 8650752); type = standard;};}"
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 8781824); type = standard;};}"
+
+  # Configure Scroll Reverser
+  defaults write com.pilotmoon.scroll-reverser InvertScrollingOn -int 1
+  defaults write com.pilotmoon.scroll-reverser ReverseMouse -int 0
+  defaults write com.pilotmoon.scroll-reverser ReverseX -int 1
+  defaults write com.pilotmoon.scroll-reverser StartAtLogin - int 1
 }
 
 configure_zsh() {
