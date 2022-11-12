@@ -50,7 +50,6 @@ if has('nvim')
   " Mason is now preferred over LSP Installer
   Plug 'williamboman/mason.nvim'
   " LSP config
-  Plug 'junnplus/nvim-lsp-setup'
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/mason-lspconfig.nvim'
   " Auto completion
@@ -140,27 +139,6 @@ EOF
 
   require("mason").setup({
     automatic_installation = true,
-  })
-  require('nvim-lsp-setup').setup({
-    servers = {
-      bashls = {},
-      clangd = {},
-      cmake = {},
-      cssls = {},
-      dockerls = {},
-      gopls = {},
-      grammarly = {},
-      jsonls = {},
-      html = {},
-      pylsp = {},
-      sumneko_lua = {},
-      terraformls = {},
-      tflint = {},
-      tsserver = {},
-      vimls = {},
-      yamlls = {},
-    },
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
   })
 EOF
 
