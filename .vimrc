@@ -140,6 +140,7 @@ EOF
   require("mason").setup({
     automatic_installation = true,
   })
+  require("mason-lspconfig").setup()
 EOF
 
   " Configure NvimTree
