@@ -1,0 +1,29 @@
+board_manager:
+  additional_urls:
+  - https://github.com/HelTecAutomation/CubeCell-Arduino/releases/download/V1.5.0/package_CubeCell_index.json
+  - https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+  - https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+daemon:
+  port: "50051"
+directories:
+  builtin:
+    libraries: /Users/doomhammer/Library/Arduino15/libraries
+  data: /Users/doomhammer/Library/Arduino15
+  downloads: /Users/doomhammer/Library/Arduino15/staging
+  user: /Users/doomhammer/Documents/Arduino
+library:
+  enable_unsafe_install: false
+locale: en
+logging:
+  file: ""
+  format: text
+  level: info
+metrics:
+  addr: :9090
+  enabled: true
+output:
+  no_color: false
+sketch:
+  always_export_binaries: false
+updater:
+  enable_notification: true
