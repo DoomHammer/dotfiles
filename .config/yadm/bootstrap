@@ -57,7 +57,7 @@ configure_macos() {
   defaults write com.pilotmoon.scroll-reverser InvertScrollingOn -int 1
   defaults write com.pilotmoon.scroll-reverser ReverseMouse -int 0
   defaults write com.pilotmoon.scroll-reverser ReverseX -int 1
-  defaults write com.pilotmoon.scroll-reverser StartAtLogin - int 1
+  defaults write com.pilotmoon.scroll-reverser StartAtLogin -int 1
 }
 
 configure_zsh() {
