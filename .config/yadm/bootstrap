@@ -8,7 +8,7 @@ install_brew() {
   # install Homebrew if it's missing
   if ! command -v brew >/dev/null 2>&1; then
     echo "Installing Homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
 
   if [ -f "$HOME/.Brewfile" ]; then
@@ -41,11 +41,15 @@ install_nix() {
 configure_macos() {
   # Disable the UI sound
   defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
+  sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
+  sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
 
   # Enable Dock autohide
   defaults write com.apple.dock autohide -bool true
   # No app icons in the Dock
-  defaults write com.apple.dock persistent-apps -array
+  defaults delete com.apple.dock persistent-apps
+  defaults delete com.apple.dock persistent-others
+  killall Dock
 
   # Disable Ctrl+Arrow mapping for Mission Control as it's more useful for jumping words in a terminal
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 0; value = { parameters = (65535, 123, 8650752); type = standard;};}"
@@ -58,6 +62,8 @@ configure_macos() {
   defaults write com.pilotmoon.scroll-reverser ReverseMouse -int 0
   defaults write com.pilotmoon.scroll-reverser ReverseX -int 1
   defaults write com.pilotmoon.scroll-reverser StartAtLogin -int 1
+
+  sudo softwareupdate --install-rosetta
 }
 
 configure_zsh() {
@@ -82,12 +88,12 @@ configure_tmux() {
 
 system_type=$(uname -s)
 
-install_nix
-install_brew
-
 if [ "$system_type" = "Darwin" ]; then
   configure_macos
 fi
+
+install_nix
+install_brew
 
 configure_zsh
 configure_vim
