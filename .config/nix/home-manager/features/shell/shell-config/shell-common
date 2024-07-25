@@ -1,0 +1,8 @@
+# vim: set ft=sh sw=2 et :
+
+##
+## Make
+##
+export MAKEFLAGS="-j $(sysctl -n hw.ncpu)"
+
+test -r ~/.shell-common.local && source ~/.shell-common.local

@@ -1,0 +1,127 @@
+# vim: set sw=2 sts=2 ts=2 noexpandtab :
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	grep = auto
+	interactive = auto
+	status = auto
+
+[user]
+	email = DoomHammerNG@gmail.com
+	name = Piotr Gaczkowski
+
+[core]
+	autocrlf = false
+	excludesfile = ~/.gitignore_global
+	whitespace = blank-at-eol,blank-at-eof,space-before-tab
+
+[push]
+	default = current
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[rebase]
+	# Automatically stash before a rebase and unstash afterwards.
+	autoStash = true
+	autosquash = true
+
+[commit]
+	# Show diff when preparing commit message
+	verbose = true
+	template = ~/.gitmessage
+
+[alias]
+	a = add
+	s = status
+	st = status
+	ci = commit
+	b = branch
+	co = checkout
+	re = remote
+	d = diff
+	dc = diff --cached
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	ls = ls-files
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgi = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit
+	# Pull Upstream
+	pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+	# Commit Amend Reuse Message HEAD
+	carmh = commit --amend --reuse-message=HEAD
+	# Push Current
+	pc = !"f() { remote=\"${1:-origin}\"; git push -u \"$remote\" $(git rev-parse --abbrev-ref HEAD); }; f"
+	# Push Current Force
+	pcf = !"f() { echo git pc \"$@\" -f; }; f"
+	# Mainly for YADM
+	untracked = !"f() { git status --porcelain=v1 -zunormal | xargs -0n1 printf \"%s\\n\" | grep -E '^\\?\\? \\.' | cut -c4-; }; f"
+	# Current branch
+	current = rev-parse --abbrev-ref HEAD
+	cof = !git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout
+
+[diff]
+	algorithm = histogram
+	context = 10
+
+[merge]
+	tool = vimdiff
+	conflictstyle = zdiff3
+
+[mergetool]
+	prompt = false
+	keepBackup = false
+
+[mergetool "vimdiff"]
+	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+###
+### Git-up specific
+### https://github.com/aanand/git-up
+###
+[git-up "rebase"]
+	arguments = --preserve-merges
+
+###
+### Github specific
+###
+[github]
+	user = DoomHammer
+
+# read from given uri
+# push to writable one
+# http://bit.ly/g9c9Y2
+#
+[url "http://github.com/"]
+	insteadOf = "gh:"
+
+[url "git@github.com:"]
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "http://github.com/"
+	pushInsteadOf = "gh:"
+
+[credential]
+	helper = "cache --timeout 86400"
+
+[pack]
+	threads = 2
+
+[help]
+	autocorrect = 10
+
+###
+### Include local overrides
+###
+[include]
+	path = .gitconfig.local
+
+[pull]
+	rebase = true
+
+[lfs]
+	fetchexclude = *
+
+[init]
+	defaultBranch = main

@@ -1,0 +1,73 @@
+.~lock.*#
+
+# Mac stuff
+.DS_Store
+
+# vim-session
+Session.vim
+
+# Ctags
+tags
+TAGS
+tags
+.tags
+
+# Backup
+*.bak
+*.tmp
+*~
+.*.sw*
+
+# Python
+*.pyc
+
+# Archives
+*.7z
+*.jar
+*.rar
+*.zip
+*.tgz
+*.gz
+*.bzip
+*.xz
+*.lzma
+*.iso
+*.tar
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.spl
+*.synctex.gz
+*.toc
+*.vrb
+*.maf
+*.mtc
+*.mtc0
+
+.direnv

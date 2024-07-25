@@ -1,0 +1,5 @@
+return {
+	{
+		"stevearc/aerial.nvim",
+	},
+}

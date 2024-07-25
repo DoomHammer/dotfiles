@@ -1,5 +1,10 @@
 #!/bin/sh
 # vim: set ft=sh sw=2 et :
+#
+# Additional inspiration:
+# - https://gist.github.com/jmatsushita/5c50ef14b4b96cb24ae5268dab613050
+# - https://github.com/LazyVim/LazyVim/discussions/1972
+# - https://dev.jmgilman.com/environment/bootstrap/
 
 install_brew() {
   # Proudly borrowed from:
@@ -9,11 +14,6 @@ install_brew() {
   if ! command -v brew >/dev/null 2>&1; then
     echo "Installing Homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  fi
-
-  if [ -f "$HOME/.Brewfile" ]; then
-    echo "Updating Homebrew bundle"
-    brew bundle --global
   fi
 }
 
@@ -28,47 +28,8 @@ install_nix() {
   }
   command -v nix >/dev/null 2>&1 || install_nix_bin
 
-  if [ -f "$HOME/.config/nix/installed_packages" ]; then
-    # This list created with `nix-env -qaPs|grep '^I'|awk '{print $2}' > ~/.config/nix/installed_packages`
-    cat "$HOME/.config/nix/installed_packages" | xargs nix-env -iA
-  fi
-  if [ -f "$HOME/.config/nix/installed_packages.local" ]; then
-    # Additional packages that might be needed here or there
-    cat "$HOME/.config/nix/installed_packages.local" | xargs nix-env -i
-  fi
-}
-
-configure_macos() {
-  # Disable the UI sound
-  defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
-  sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
-  sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist
-
-  # Enable Dock autohide
-  defaults write com.apple.dock autohide -bool true
-  # No app icons in the Dock
-  defaults delete com.apple.dock persistent-apps
-  defaults delete com.apple.dock persistent-others
-  killall Dock
-
-  # Disable Ctrl+Arrow mapping for Mission Control as it's more useful for jumping words in a terminal
-  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 0; value = { parameters = (65535, 123, 8650752); type = standard;};}"
-  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 80 "{enabled = 0; value = { parameters = (65535, 123, 8781824); type = standard;};}"
-  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 0; value = { parameters = (65535, 124, 8650752); type = standard;};}"
-  defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 8781824); type = standard;};}"
-
-  # Configure Scroll Reverser
-  defaults write com.pilotmoon.scroll-reverser InvertScrollingOn -int 1
-  defaults write com.pilotmoon.scroll-reverser ReverseMouse -int 0
-  defaults write com.pilotmoon.scroll-reverser ReverseX -int 1
-  defaults write com.pilotmoon.scroll-reverser StartAtLogin -int 1
-
-  sudo softwareupdate --install-rosetta
-}
-
-configure_zsh() {
-  # FIXME: We deserve better
-  source $HOME/.zshrc
+  nix run nix-darwin --experimental-feature nix-command --experimental-feature flakes -- switch --flake ~/.config/nix
+  # TODO: Maybe use this: https://github.com/DeterminateSystems/nix-installer
 }
 
 configure_vim() {
@@ -76,25 +37,16 @@ configure_vim() {
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   vim +'PlugInstall --sync' +qa
-  # Install vim-plug for Neovim
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  nvim +'PlugInstall --sync' +qa
-}
-
-configure_tmux() {
-  ~/.tmux/plugins/tpm/bin/install_plugins
+  # FIXME: How to bootstrap LazyNvim?
+  # # Install vim-plug for Neovim
+  # sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+  #      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  # nvim +'PlugInstall --sync' +qa
 }
 
 system_type=$(uname -s)
 
-if [ "$system_type" = "Darwin" ]; then
-  configure_macos
-fi
-
-install_nix
 install_brew
+install_nix
 
-configure_zsh
 configure_vim
-configure_tmux

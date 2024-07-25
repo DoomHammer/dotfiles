@@ -1,0 +1,64 @@
+# vim: set ft=sh sw=2 et :
+alias dos2unix='sed "s/$//"'
+
+alias tmux='tmux -2'
+
+if command -v exa >/dev/null 2>&1; then
+	alias ls='exa'
+else
+	alias ls='ls --color=auto'
+fi
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+if command -v vim >/dev/null 2>&1; then
+	alias vi='vim'
+fi
+if command -v nvim >/dev/null 2>&1; then
+	alias vim='nvim'
+	alias vi='nvim'
+fi
+alias purevim='vim -u NONE'
+
+alias ll='\ls -l'
+alias lla='\ls -la'
+alias lt='\ls --color=auto -lhFart'
+if command -v lsd >/dev/null 2>&1; then
+	alias ls='lsd'
+	alias ll='lsd -l'
+	alias lla='lsd -la'
+fi
+
+if command -v z >/dev/null 2>&1; then
+	alias cd=z
+fi
+
+if [[ -n $TMUX ]]; then
+	alias fzf='fzf-tmux'
+fi
+
+alias displayoff='xset -display :0.0 dpms force off'
+alias displaylockoff='xdg-screensaver lock; xset -display :0.0 dpms force off'
+alias suspiria='/usr/bin/dbus-send --system --print-reply
+  --dest="org.freedesktop.UPower"
+  /org/freedesktop/UPower
+  org.freedesktop.UPower.Suspend'
+
+# Inspired by: https://codeberg.org/selfawaresoup/configurations/src/branch/main/bash_includes/functions.sh#L71
+function set_tmux_title {
+	tmux rename-window "$(basename $PWD)"
+}
+# From https://codeberg.org/selfawaresoup/configurations/src/branch/main/bash_includes/functions.sh#L81
+# creates directory and changes into it
+function mdir {
+	mkdir -p $1 && cd $1
+}
+
+# From: https://codeberg.org/selfawaresoup/configurations/src/branch/main/bash_includes/functions.sh#L86
+# creates an empty file and all the missing directories along its path
+function touchp {
+	local DIR=$(dirname $1)
+	mkdir -p $DIR
+	touch $1
+}
