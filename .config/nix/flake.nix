@@ -2,6 +2,8 @@
   # Potential inspiration:
   # - https://github.com/jwiegley/nix-config/blob/master/flake.nix
   # - https://github.com/MatthiasBenaets/nix-config/blob/master/README.org
+  # - https://github.com/Misterio77/nix-starter-configs/blob/main/minimal/flake.nix
+  # - https://github.com/gvolpe/nix-config/blob/3e27ad72fe6e3c9dbb85eb29854dc4dc29274ab9/flake.nix
   description = "My system configuration";
 
   inputs = {
@@ -18,9 +20,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Prebuilt package index - provides comma package
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, lix-module, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, lix-module, home-manager, ... }:
   let
     inherit (self) outputs;
     flakePath = config: "${config.home.homeDirectory}/.config/nix/";
