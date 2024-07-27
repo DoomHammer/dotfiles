@@ -9,7 +9,6 @@ let
 in
 {
   home.packages = with pkgs; [
-    neovim
     neovide
 
     fd
@@ -17,6 +16,35 @@ in
     lazygit
     ripgrep
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    withPython3 = true;
+    extraPackages = with pkgs; [
+      fd
+      ripgrep # used by obsidian.nvim, and other plugins
+
+      # needed to compile fzf-native for telescope-fzf-native.nvim
+      clang
+      gcc
+      gnumake
+
+      # language servers
+      deno
+      lua-language-server
+      nil # Nix LSP
+      nodePackages.bash-language-server
+      nodePackages.typescript-language-server
+      shellcheck # called by bash-language-server
+
+      # Rust support
+      lldb # debug adapter
+
+      nixpkgs-fmt # I have nil configured to call this for formatting
+    ];
+  };
+
   xdg.configFile = {
     "nvim/init.lua".source =
     config.lib.file.mkOutOfStoreSymlink "${dir}/neovim-config/nvim/init.lua";
