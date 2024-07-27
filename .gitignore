@@ -5,10 +5,19 @@
 *.orig
 *.old
 *.bkp
+.config/Autodesk
+.config/asciinema
+.config/composer
+.config/configstore
+.config/github-copilot
+.config/gtk-2.0
+.cortex-debug
+.esd_auth
 .viminfo
 .wget-hsts
 .yarnrc
 .zcompdump*
+.CFUserTextEncoding
 # Don't follow those configs
 .config/MusicBrainz/.Picard.ini.synclock
 .config/direnv/lib
