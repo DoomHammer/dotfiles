@@ -16,5 +16,13 @@ in
     lazygit
   ];
   programs.git-cliff.enable = true;
-# Migrate gitconfig to https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
+  # TODO: Migrate gitconfig to https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
+  home.file = {
+    ".gitconfig".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/git-config/gitconfig";
+    ".gitignore_global".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/git-config/gitignore_global";
+    ".gitmessage".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/git-config/gitmessage";
+  };
 }

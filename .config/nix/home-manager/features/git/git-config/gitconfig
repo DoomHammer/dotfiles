@@ -12,9 +12,10 @@
 	name = Piotr Gaczkowski
 
 [core]
-	autocrlf = false
+	autocrlf = input
 	excludesfile = ~/.gitignore_global
 	whitespace = blank-at-eol,blank-at-eof,space-before-tab
+	editor = nvim --cmd 'let g:unception_block_while_host_edits=1'
 
 [push]
 	default = current
@@ -76,13 +77,6 @@
 
 [mergetool "vimdiff"]
 	cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-
-###
-### Git-up specific
-### https://github.com/aanand/git-up
-###
-[git-up "rebase"]
-	arguments = --preserve-merges
 
 ###
 ### Github specific
