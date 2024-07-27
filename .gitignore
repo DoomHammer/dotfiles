@@ -1,3 +1,24 @@
+# Standard stuff that's not managed
+/*/
+!/.config/
+*.prev
+*.orig
+*.old
+*.bkp
+.viminfo
+.wget-hsts
+.yarnrc
+.zcompdump*
+# Don't follow those configs
+.config/MusicBrainz/.Picard.ini.synclock
+.config/direnv/lib
+.config/exercism
+.config/gcloud
+.config/nvim/undodir
+.config/packer
+.config/pulse
+.config/xbuild
+.config/zsh
 # Below managed by home-manager
 .zshrc
 .zshenv
@@ -25,6 +46,9 @@
 .config/MusicBrainz/Picard.ini
 .config/atuin/config.toml
 .config/btop
-.config/direnv/lib
 .config/htop
 .gitmessage
+.config/yazi.toml
+# History
+.*history
+.lesshst
