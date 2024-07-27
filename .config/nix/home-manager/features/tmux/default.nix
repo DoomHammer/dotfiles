@@ -1,5 +1,9 @@
-{ config, flakePath, pkgs, ... }:
-
+# Potential inspiration:
+# - https://github.com/NixOS/nixpkgs/blob/master/pkgs/misc/tmux-plugins/default.nix
+{ config, flakePath, pkgs, lib, ... }:
+let
+  plugins = pkgs.tmuxPlugins; # // pkgs.callPackage ./custom-plugins.nix { };
+in
 {
   home.packages = with pkgs; [
     tmux
@@ -77,41 +81,41 @@
     newSession = true;
     plugins = [
       {
-        plugin = pkgs.tmuxPlugins.sensible;
+        plugin = plugins.sensible;
       }
       {
-        plugin = pkgs.tmuxPlugins.resurrect;
+        plugin = plugins.resurrect;
         extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
       }
       {
-        plugin = pkgs.tmuxPlugins.continuum;
+        plugin = plugins.continuum;
         extraConfig = ''
           set -g @continuum-restore 'on'
           set -g @continuum-save-interval '5'
         '';
       }
       {
-        plugin = pkgs.tmuxPlugins.pain-control;
+        plugin = plugins.pain-control;
         extraConfig = "";
       }
       {
-        plugin = pkgs.tmuxPlugins.yank;
+        plugin = plugins.yank;
         extraConfig = "set -g @yank_selection 'primary'";
       }
       {
-        plugin = pkgs.tmuxPlugins.sessionist;
+        plugin = plugins.sessionist;
         extraConfig = "";
       }
       # {
-      #   plugin = pkgs.tmuxPlugins.gitmux;
+      #   plugin = plugins.gitmux;
       #   extraConfig = "";
       # }
       # {
-      #   plugin = pkgs.tmuxPlugins.tmux-fzf-url;
+      #   plugin = plugins.tmux-fzf-url;
       #   extraConfig = "";
       # }
       # {
-      #   plugin = pkgs.tmuxPlugins.man;
+      #   plugin = plugins.man;
       #   extraConfig = ''
       #     set -g @man-size '40%'
       #     set -g @man-orientation 'h'
@@ -119,16 +123,19 @@
       #   '';
       # }
       # {
-      #   plugin = pkgs.tmuxPlugins.newline-detector;
+      #   plugin = plugins.newline-detector;
       #   extraConfig = "";
       # }
       # {
-      #   plugin = pkgs.tmuxPlugins.which-key;
+      #   plugin = plugins.which-key;
       #   extraConfig = "";
       # }
+      # TODO: take a look at https://github.com/fcsonline/tmux-thumbs
     ];
     prefix = "C-a";
     sensibleOnTop = true;
+    # shortcut = "a";
+    # terminal = "screen-256color";
     shell = "${pkgs.zsh}/bin/zsh";
   };
 }
