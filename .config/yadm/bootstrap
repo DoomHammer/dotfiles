@@ -30,6 +30,7 @@ install_nix() {
 
   nix run nix-darwin --experimental-feature nix-command --experimental-feature flakes -- switch --flake ~/.config/nix
   # TODO: Maybe use this: https://github.com/DeterminateSystems/nix-installer
+  sudo -i nix-env --uninstall nix
 }
 
 configure_vim() {
