@@ -31,6 +31,7 @@ in
     fd
     htop
     jq
+    just
     lesspipe
     ripgrep
     silver-searcher
