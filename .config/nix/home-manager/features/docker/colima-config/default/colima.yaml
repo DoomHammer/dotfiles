@@ -9,7 +9,7 @@ disk: 60
 
 # Size of the memory in GiB to be allocated to the virtual machine.
 # Default: 2
-memory: 2
+memory: 4
 
 # Architecture of the virtual machine (x86_64, aarch64, host).
 # Default: host
