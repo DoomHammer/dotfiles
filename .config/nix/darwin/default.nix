@@ -1,8 +1,8 @@
-{pkgs, ... }: {
+{ config, flakePath, lib, inputs, outputs, pkgs, ... }:
+{
   services.nix-daemon.enable = true;
 
   nix = {
-    package = pkgs.nix;
     gc.automatic = true;
     optimise.automatic = true;
     settings = {
@@ -11,12 +11,23 @@
     };
   };
 
+  nixpkgs = {
+    hostPlatform = "aarch64-darwin";
+    # You can add overlays here
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   # system.configurationRevision = self.rev or self.dirtyRev or null;
 
   system.stateVersion = 4;
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
-  # nixpkgs.config.allowUnfree = true;
 
   users.users.doomhammer = {
     name = "doomhammer";
@@ -27,22 +38,18 @@
   # Enable bash completion for all interactive bash shells.
   #
   # NOTE. This doesn’t work with bash 3.2, which is the default on macOS.
-  # programs.bash.enableCompletion;
+  programs.bash.enableCompletion = true;
   programs.zsh.enable = true;
   programs.zsh.enableBashCompletion = true;
-  programs.zsh.enableCompletion = true;
+  programs.zsh.enableCompletion = false;  # we are using home-manager zsh, so do not enable!
   programs.zsh.enableFzfCompletion = true;
   programs.zsh.enableFzfGit = true;
   programs.zsh.enableSyntaxHighlighting = true;
-  programs.zsh.shellInit = ''
-    skip_global_compinit=1
-  '';
   programs.gnupg.agent.enable = true;
   programs.gnupg.agent.enableSSHSupport = true;
 
   environment.systemPackages = [
     pkgs.alacritty
-    pkgs.alt-tab-macos
     pkgs.android-file-transfer
     pkgs.audacity
     pkgs.fritzing
@@ -52,6 +59,7 @@
     pkgs.inkscape
     pkgs.kitty
     pkgs.openscad
+    pkgs.pngpaste
     pkgs.prusa-slicer
     pkgs.jetbrains.pycharm-community
     pkgs.utm
@@ -67,19 +75,21 @@
     enable = true;
 
     onActivation = {
-      autoUpdate = true;
+      # autoUpdate = true;
       cleanup = "zap";
-      upgrade = true;
+      # upgrade = true;
     };
 
+    caskArgs.no_quarantine = true;
+
+    # taps = builtins.attrNames config.nix-homebrew.taps;
     taps = [
       "homebrew/cask"
-      "homebrew/cask-drivers"
       "homebrew/cask-fonts"
       "homebrew/core"
       "netbirdio/tap"
     ];
-    brews = [ "conan" ];
+    brews = [ "conan" "conan@1" ];
     casks = [
       "ableton-live-standard"
       "arduino-ide"
@@ -89,7 +99,7 @@
       "balenaetcher"
       "beeper"
       # TODO: Add Camtasia
-      "creality-slicer"
+      "creality-print"
       # TODO: Add Cricut
       # TODO: Add DaVinci Resolve
       "firefox"

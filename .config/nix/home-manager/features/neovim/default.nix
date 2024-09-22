@@ -1,7 +1,6 @@
 { config, flakePath, pkgs, ... }:
 
 let
-  flakePath = config: "${config.home.homeDirectory}/.config/nix";
   # Out-of-store symlinks require absolute paths when using a flake config. This
   # is because relative paths are expanded after the flake source is copied to
   # a store path which would get us read-only store paths.
@@ -10,20 +9,19 @@ in
 {
   home.packages = with pkgs; [
     neovide
-
-    fd
-    git
-    lazygit
-    ripgrep
   ];
 
   programs.neovim = {
+    package = pkgs.unstable.neovim-unwrapped;
     enable = true;
     defaultEditor = true;
     withPython3 = true;
     extraPackages = with pkgs; [
       fd
       ripgrep # used by obsidian.nvim, and other plugins
+
+      git
+      lazygit
 
       # needed to compile fzf-native for telescope-fzf-native.nvim
       clang
@@ -41,7 +39,11 @@ in
       # Rust support
       lldb # debug adapter
 
-      nixpkgs-fmt # I have nil configured to call this for formatting
+      # Nix support
+      nixfmt-rfc-style
+      nixpkgs-fmt
+      statix
+      deadnix
     ];
   };
 

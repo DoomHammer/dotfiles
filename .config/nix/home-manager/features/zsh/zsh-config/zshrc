@@ -50,10 +50,6 @@ export LC_ALL=en_US.UTF-8
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
 
-zplug "plugins/ssh-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
-# Load after ssh-agent
-zplug "plugins/gpg-agent", from:oh-my-zsh, ignore:oh-my-zsh.sh
-
 zplug "oconnor663/zsh-sensible"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, flakePath, lib, inputs, outputs, pkgs, ... }:
 {
   imports = [
     ./features/basics
@@ -49,7 +49,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # pkgs.sops
+    pkgs.sops
     pkgs.yadm
 
     # # Adds the 'hello' command to your environment. It prints a friendly

@@ -61,3 +61,4 @@
 # History
 .*history
 .lesshst
+.config/home-manager/home.nix
