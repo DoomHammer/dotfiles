@@ -9,5 +9,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
   };
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } { imports = [ ./.config/nix/parts/templates ]; };
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } { imports = [ ./.config/nix/parts/templates ]; };
 }
