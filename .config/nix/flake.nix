@@ -23,40 +23,45 @@
     };
     # Prebuilt package index - provides comma package
     nix-index-database = {
-      url = "github:Mic92/nix-index-database";
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # a tree-wide formatter
+    treefmt-nix = {
+      type = "github";
+      owner = "numtide";
+      repo = "treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable, lix-module, home-manager, nix-index-database, ... }:
-  let
-    inherit (self) outputs;
-    flakePath = config: "${config.home.homeDirectory}/.config/nix/";
-  in
-  {
-    overlays = import ./overlays {inherit inputs;};
-    darwinConfigurations."Piotrs-MacBook-Air" = nix-darwin.lib.darwinSystem {
-      specialArgs = {
-        inherit
-          inputs
-          outputs
-          ;
+  outputs =
+    inputs@{ self, nixpkgs, ... }:
+    let
+      inherit (self) outputs;
+      stateVersion = "24.05";
+      helper = import ./parts/lib { inherit inputs outputs stateVersion; };
+    in
+    {
+      # home-manager switch -b backup --flake $HOME/.config/nix
+      # nix run nixpkgs#home-manager -- switch -b backup --flake "${HOME}/.config/nix"
+      homeConfigurations = {
+        "doomhammer@Piotrs-MacBook-Air" = helper.mkHome {
+          hostname = "Piotrs-MacBook-Air";
+          platform = "aarch64-darwin";
+          desktop = "aqua";
+        };
       };
-      modules = [
-        ./darwin
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "orig";
-          home-manager.extraSpecialArgs = { inherit flakePath inputs outputs; };
-          home-manager.users.doomhammer = import ./home-manager/home.nix;
-        }
-        lix-module.nixosModules.default
-        nix-index-database.darwinModules.nix-index
-        { programs.nix-index-database.comma.enable = true; }
-      ];
-
+      #nix run nix-darwin -- switch --flake ~/.config/nix
+      #nix build .#darwinConfigurations.{hostname}.config.system.build.toplevel
+      darwinConfigurations = {
+        "Piotrs-MacBook-Air" = helper.mkDarwin { hostname = "Piotrs-MacBook-Air"; };
+      };
+      # Custom packages and modifications, exported as overlays
+      overlays = import ./parts/overlays { inherit inputs; };
+      # Custom packages; acessible via 'nix build', 'nix shell', etc
+      packages = helper.forAllSystems (system: import ./parts/pkgs nixpkgs.legacyPackages.${system});
+      # Formatter for .nix files, available via 'nix fmt'
+      formatter = helper.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
     };
-  };
 }
