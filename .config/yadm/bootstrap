@@ -28,7 +28,9 @@ install_nix() {
   }
   command -v nix >/dev/null 2>&1 || install_nix_bin
 
-  nix run nix-darwin --experimental-feature nix-command --experimental-feature flakes -- switch --flake ~/.config/nix
+  sudo xcodebuild -license accept
+  nix run nix-darwin --experimental-feature nix-command --experimental-feature flakes -- switch --flake "$HOME}/.config/nix"
+  nix run 'nixpkgs#home-manager' -- switch -b orig --flake "${HOME}/.config/nix"
   # TODO: Maybe use this: https://github.com/DeterminateSystems/nix-installer
   sudo -i nix-env --uninstall nix
 }
