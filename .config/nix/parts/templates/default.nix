@@ -1,5 +1,5 @@
 {
-  flake = {
+  flake = rec {
     # Usage: nix flake new -t github:doomhammer/dotfiles .
     # Usage: nix flake new -t 'github:doomhammer/dotfiles#terraform-gcp' .
     templates = {
@@ -32,7 +32,7 @@
       #   description = "A basic Terraform with GCP configuration";
       # };
     };
-    # defaultTemplate = self.templates.simple;
+    defaultTemplate = templates.simple;
   };
 
 }
