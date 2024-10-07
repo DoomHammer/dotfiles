@@ -3,36 +3,36 @@
     # Usage: nix flake new -t github:doomhammer/dotfiles .
     # Usage: nix flake new -t 'github:doomhammer/dotfiles#terraform-gcp' .
     templates = {
-      c = {
-        path = ./templates/c;
-        description = "A basic C/C++ configuration";
-      };
+      # c = {
+      #   path = ./c;
+      #   description = "A basic C/C++ configuration";
+      # };
       hugo = {
-        path = ./templates/hugo;
+        path = ./hugo;
         description = "A basic Hugo configuration";
       };
-      platformio-rp2040 = {
-        path = ./templates/platformio-rp2040;
-        description = "A basic Platform.io configuration for RP2040";
-      };
+      # platformio-rp2040 = {
+      #   path = ./platformio-rp2040;
+      #   description = "A basic Platform.io configuration for RP2040";
+      # };
       platformio-esp32 = {
-        path = ./templates/platformio-esp32;
+        path = ./platformio-esp32;
         description = "A basic Platform.io configuration for ESP32";
       };
       simple = {
-        path = ./templates/simple;
+        path = ./simple;
         description = "";
       };
-      terraform-aws = {
-        path = ./templates/terraform-aws;
-        description = "A basic Terraform with AWS configuration";
-      };
-      terraform-gcp = {
-        path = ./templates/terraform-gcp;
-        description = "A basic Terraform with GCP configuration";
-      };
+      # terraform-aws = {
+      #   path = ./terraform-aws;
+      #   description = "A basic Terraform with AWS configuration";
+      # };
+      # terraform-gcp = {
+      #   path = ./terraform-gcp;
+      #   description = "A basic Terraform with GCP configuration";
+      # };
     };
-    defaultTemplate = self.templates.simple;
+    # defaultTemplate = self.templates.simple;
   };
 
 }
