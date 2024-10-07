@@ -63,5 +63,7 @@
       packages = helper.forAllSystems (system: import ./parts/pkgs nixpkgs.legacyPackages.${system});
       # Formatter for .nix files, available via 'nix fmt'
       formatter = helper.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+
+      imports = [ ./parts/templates ];
     };
 }
