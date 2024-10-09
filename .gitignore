@@ -45,6 +45,7 @@
 .bash_logout
 .config/starship.toml
 .config/tmux/tmux.conf
+.config/tmux/plugins/tmux-which-key/config.yaml
 .config/nvim/init.lua
 .config/nvim/lua
 .config/nvim/lazyvim.json
@@ -62,3 +63,4 @@
 .*history
 .lesshst
 .config/home-manager/home.nix
+.config/ripgrep
