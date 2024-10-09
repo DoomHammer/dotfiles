@@ -12,7 +12,7 @@ let
   dir = "${flakePath config}/home-manager/_mixins/features/neovim";
 in
 {
-  home.packages = with pkgs; [ neovide ];
+  home.packages = with pkgs; [ pkgs.unstable.neovide ];
 
   programs.neovim = {
     package = pkgs.unstable.neovim-unwrapped;
