@@ -5,7 +5,10 @@ let
   plugins = pkgs.tmuxPlugins // pkgs.callPackage ./custom-plugins.nix { };
 in
 {
-  home.packages = with pkgs; [ tmux gitmux ];
+  home.packages = with pkgs; [
+    tmux
+    gitmux
+  ];
   # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.tmux.enable
   programs.tmux = {
     enable = true;
