@@ -2,10 +2,10 @@
 # - https://github.com/NixOS/nixpkgs/blob/master/pkgs/misc/tmux-plugins/default.nix
 { pkgs, ... }:
 let
-  plugins = pkgs.tmuxPlugins; # // pkgs.callPackage ./custom-plugins.nix { };
+  plugins = pkgs.tmuxPlugins // pkgs.callPackage ./custom-plugins.nix { };
 in
 {
-  home.packages = with pkgs; [ tmux ];
+  home.packages = with pkgs; [ tmux gitmux ];
   # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.tmux.enable
   programs.tmux = {
     enable = true;
@@ -25,6 +25,9 @@ in
 
       ## A bit more space in right status bar
       set -g status-right-length 50
+
+      ## Add gitmux integration
+      set -g status-right '#(gitmux "#{pane_current_path}")'
 
       ## Rename windows to fit current application
       setw -g automatic-rename on
@@ -102,31 +105,35 @@ in
         plugin = plugins.sessionist;
         extraConfig = "";
       }
-      # {
-      #   plugin = plugins.gitmux;
-      #   extraConfig = "";
-      # }
-      # {
-      #   plugin = plugins.tmux-fzf-url;
-      #   extraConfig = "";
-      # }
-      # {
-      #   plugin = plugins.man;
-      #   extraConfig = ''
-      #     set -g @man-size '40%'
-      #     set -g @man-orientation 'h'
-      #     set -g @man-shell-interactive 'off'
-      #   '';
-      # }
-      # {
-      #   plugin = plugins.newline-detector;
-      #   extraConfig = "";
-      # }
-      # {
-      #   plugin = plugins.which-key;
-      #   extraConfig = "";
-      # }
+      # <Prefix>u to select URL
+      {
+        plugin = plugins.fzf-tmux-url;
+        extraConfig = "";
+      }
+      {
+        plugin = plugins.man;
+        extraConfig = ''
+          set -g @man-size '40%'
+          set -g @man-orientation 'h'
+          set -g @man-shell-interactive 'off'
+        '';
+      }
+      {
+        plugin = plugins.newline-detector;
+        extraConfig = "";
+      }
+      {
+        plugin = plugins.which-key;
+        extraConfig = ''
+          set -g @tmux-which-key-xdg-enable 1;
+          set -g @tmux-which-key-disable-autobuild 1
+        '';
+      }
       # TODO: take a look at https://github.com/fcsonline/tmux-thumbs
+      # TODO: take a look at https://github.com/omerxx/tmux-floax
+      # TODO: take a look at https://github.com/rafi/tmux-pass
+      # TODO: take a look at https://github.com/roosta/tmux-fuzzback
+      # TODO: take a look at https://github.com/laktak/extrakto
     ];
     prefix = "C-a";
     sensibleOnTop = true;
