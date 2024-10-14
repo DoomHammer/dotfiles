@@ -26,3 +26,5 @@ jobs:
 
       - name: Check Flake
         run: nix flake check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
