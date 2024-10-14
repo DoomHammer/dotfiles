@@ -19,6 +19,7 @@ in
     enable = true;
     defaultEditor = true;
     withPython3 = true;
+    withNodeJs = true;
     extraPackages = with pkgs; [
       fd
       ripgrep # used by obsidian.nvim, and other plugins
@@ -30,6 +31,13 @@ in
       clang
       gcc
       gnumake
+
+      # needed to compile some Language Servers
+      nodejs
+      python310
+
+      # Lua support
+      stylua
 
       # language servers
       deno
