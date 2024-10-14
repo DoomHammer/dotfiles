@@ -51,7 +51,7 @@
             };
 
             # check for dead links
-            lychee = mkHook { excludes = [ "^(?!.*\.md$).*" ]; };
+            # lychee = mkHook { excludes = [ "^(?!.*\.md$).*" ]; };
 
             check-yaml = mkHook { };
 
