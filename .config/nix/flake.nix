@@ -26,13 +26,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # a tree-wide formatter
-    treefmt-nix = {
-      type = "github";
-      owner = "numtide";
-      repo = "treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -59,11 +52,14 @@
       };
       # Custom packages and modifications, exported as overlays
       overlays = import ./parts/overlays { inherit inputs; };
-      # Custom packages; acessible via 'nix build', 'nix shell', etc
+      # Custom packages; accessible via 'nix build', 'nix shell', etc
       packages = helper.forAllSystems (system: import ./parts/pkgs nixpkgs.legacyPackages.${system});
       # Formatter for .nix files, available via 'nix fmt'
       formatter = helper.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
-      imports = [ ./parts/templates ];
+      imports = [
+        ./parts/templates
+        ./parts/programs
+      ];
     };
 }

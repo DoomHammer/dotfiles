@@ -1,6 +1,7 @@
 # Standard stuff that's not managed
 /*/
 !/.config/
+!/.github/
 *.prev
 *.orig
 *.old
@@ -64,3 +65,4 @@
 .lesshst
 .config/home-manager/home.nix
 .config/ripgrep
+.pre-commit-config.yaml

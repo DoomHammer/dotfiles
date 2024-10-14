@@ -1,9 +1,4 @@
-{
-  config,
-  flakePath,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [ gnupg ];
