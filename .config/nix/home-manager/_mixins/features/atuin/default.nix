@@ -26,8 +26,8 @@
         "^pushd\w*$"
         "^popd\w*$"
         "^dirs\w*$"
-        "^.*AWS_.*KEY.*$"
-        "^.*AWS_.*TOKEN.*$"
+        "^.*AWS_.*KEY.*"
+        "^.*AWS_.*TOKEN.*"
       ];
       secrets_filter = true;
     };
