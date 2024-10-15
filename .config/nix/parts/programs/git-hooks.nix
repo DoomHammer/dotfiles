@@ -51,7 +51,12 @@
             };
 
             # check for dead links
-            # lychee = mkHook { excludes = [ "^(?!.*\.md$).*" ]; };
+            lychee = mkHook {
+              excludes = [ "^(?!.*\.md$).*" ];
+              settings = {
+                flags = "--exclude github.com";
+              };
+            };
 
             check-yaml = mkHook { };
 
