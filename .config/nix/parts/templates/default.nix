@@ -31,8 +31,8 @@
       #   path = ./terraform-gcp;
       #   description = "A basic Terraform with GCP configuration";
       # };
+      default = templates.simple;
     };
-    defaultTemplate = templates.simple;
   };
 
 }

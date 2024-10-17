@@ -1,5 +1,5 @@
 return {
-	{
-		"stevearc/aerial.nvim",
-	},
+  {
+    "stevearc/aerial.nvim",
+  },
 }

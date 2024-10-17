@@ -1,4 +1,4 @@
-local wezterm = require "wezterm"
+local wezterm = require("wezterm")
 
 local module = {}
 
@@ -13,7 +13,7 @@ function get_appearance()
 end
 
 function scheme_for_appearance(appearance)
-  if appearance:find "Light" then
+  if appearance:find("Light") then
     return "Canonical Solarized Light"
   else
     return "Canonical Solarized Dark"

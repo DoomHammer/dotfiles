@@ -23,13 +23,18 @@ install_nix() {
   install_nix_bin() {
     curl -L https://nixos.org/nix/install | sh
     if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      # shellcheck source=/dev/null
       . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
     fi
   }
   command -v nix >/dev/null 2>&1 || install_nix_bin
 
-  sudo xcodebuild -license accept
-  nix run nix-darwin --experimental-feature nix-command --experimental-feature flakes -- switch --flake "$HOME}/.config/nix"
+  system_type=$(uname -s)
+
+  if [ "$system_type" = "Darwin" ]; then
+    sudo xcodebuild -license accept
+    nix run nix-darwin --experimental-feature nix-command --experimental-feature flakes -- switch --flake "$HOME}/.config/nix"
+  fi
   nix run 'nixpkgs#home-manager' -- switch -b orig --flake "${HOME}/.config/nix"
   # TODO: Maybe use this: https://github.com/DeterminateSystems/nix-installer
   sudo -i nix-env --uninstall nix
@@ -46,8 +51,6 @@ configure_vim() {
   #      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   # nvim +'PlugInstall --sync' +qa
 }
-
-system_type=$(uname -s)
 
 install_brew
 install_nix
