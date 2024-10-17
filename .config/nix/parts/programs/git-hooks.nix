@@ -3,7 +3,12 @@
   imports = [ inputs.git-hooks.flakeModule ];
 
   perSystem =
-    { lib, config, ... }:
+    {
+      lib,
+      config,
+      system,
+      ...
+    }:
     let
       # don't format these
       excludes = [
@@ -34,17 +39,15 @@
             # make sure our nix code is of good quality before we commit
             statix = mkHook { };
             deadnix = mkHook { };
-            # flake-checker = mkHook { };
+            flake-checker = mkHook { package = inputs.flake-checker.packages.${system}.flake-checker; };
 
             actionlint = mkHook { files = "^.github/workflows/"; };
 
             shellcheck = mkHook { };
 
             # ensure we have nice formatting
-            nixfmt-rfc-style = mkHook { };
             treefmt = mkHook { package = config.treefmt.build.wrapper; };
             # luacheck = mkHook { };
-            stylua = mkHook { };
             editorconfig-checker = mkHook {
               enable = lib.modules.mkForce false;
               always_run = true;

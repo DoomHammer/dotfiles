@@ -29,6 +29,12 @@
       };
     };
 
+    flake-checker = {
+      type = "github";
+      owner = "DeterminateSystems";
+      repo = "flake-checker";
+    };
+
     # a tree-wide formatter
     treefmt-nix = {
       type = "github";
