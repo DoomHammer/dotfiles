@@ -1,5 +1,3 @@
-local wezterm = require("wezterm")
-
 local module = {}
 
 -- Define the colors just once

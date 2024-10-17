@@ -63,7 +63,7 @@ return {
 			use_advanced_uri = true,
 		})
 		-- Borrowed from https://github.com/hallettj/home.nix
-		-- https://github.com/hallettj/home.nix/blob/c24e02ebf0ed745b3370b99c135ad4231daf1183/home-manager/features/neovim/nvim-config/lua/plugins/obsidian.lua
+		-- /blob/c24e02ebf0ed745b3370b99c135ad4231daf1183/home-manager/features/neovim/nvim-config/lua/plugins/obsidian.lua
 
 		local obsidian_completer = function(callback)
 			local client = require("obsidian").get_client()

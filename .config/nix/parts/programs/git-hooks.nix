@@ -47,7 +47,7 @@
 
             # ensure we have nice formatting
             treefmt = mkHook { package = config.treefmt.build.wrapper; };
-            # luacheck = mkHook { };
+            luacheck = mkHook { };
             editorconfig-checker = mkHook {
               enable = lib.modules.mkForce false;
               always_run = true;
