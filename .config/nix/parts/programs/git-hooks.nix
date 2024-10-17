@@ -69,6 +69,16 @@
                 write = true;
               };
             };
+
+            # Git police
+            check-merge-conflicts = mkHook { };
+            commitizen = mkHook { };
+
+            # Various Artists
+            check-added-large-files = mkHook { };
+            check-case-conflicts = mkHook { };
+            detect-aws-credentials = mkHook { };
+            detect-private-keys = mkHook { };
           };
         };
       };
