@@ -33,7 +33,7 @@
     let
       inherit (self) outputs;
       stateVersion = "24.05";
-      helper = import ./parts/lib { inherit inputs outputs stateVersion; };
+      helper = import ./parts/lib/helpers.nix { inherit inputs outputs stateVersion; };
     in
     {
       # home-manager switch -b backup --flake $HOME/.config/nix
@@ -57,9 +57,6 @@
       # Formatter for .nix files, available via 'nix fmt'
       formatter = helper.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
-      imports = [
-        ./parts/templates
-        ./parts/programs
-      ];
+      imports = [ ./parts ];
     };
 }
