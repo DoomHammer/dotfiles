@@ -7,7 +7,7 @@
   description = "My system configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -26,6 +26,47 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # we can use this to provide overridable systems
+    systems = {
+      type = "github";
+      owner = "nix-systems";
+      repo = "default";
+    };
+
+    flake-parts = {
+      type = "github";
+      owner = "hercules-ci";
+      repo = "flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    # this adds pre commit hooks via nix to our repo
+    git-hooks = {
+      type = "github";
+      owner = "cachix";
+      repo = "git-hooks.nix";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "";
+        flake-compat.follows = "";
+      };
+    };
+
+    flake-checker = {
+      type = "github";
+      owner = "DeterminateSystems";
+      repo = "flake-checker";
+    };
+
+    # a tree-wide formatter
+    treefmt-nix = {
+      type = "github";
+      owner = "numtide";
+      repo = "treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -35,27 +76,27 @@
       stateVersion = "24.05";
       helper = import ./parts/lib/helpers.nix { inherit inputs outputs stateVersion; };
     in
-    {
-      # home-manager switch -b backup --flake $HOME/.config/nix
-      # nix run nixpkgs#home-manager -- switch -b backup --flake "${HOME}/.config/nix"
-      homeConfigurations = {
-        "doomhammer@Piotrs-MacBook-Air" = helper.mkHome {
-          hostname = "Piotrs-MacBook-Air";
-          platform = "aarch64-darwin";
-          desktop = "aqua";
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      flake = {
+        # home-manager switch -b backup --flake $HOME/.config/nix
+        # nix run nixpkgs#home-manager -- switch -b backup --flake "${HOME}/.config/nix"
+        homeConfigurations = {
+          "doomhammer@Piotrs-MacBook-Air" = helper.mkHome {
+            hostname = "Piotrs-MacBook-Air";
+            platform = "aarch64-darwin";
+            desktop = "aqua";
+          };
         };
+        #nix run nix-darwin -- switch --flake ~/.config/nix
+        #nix build .#darwinConfigurations.{hostname}.config.system.build.toplevel
+        darwinConfigurations = {
+          "Piotrs-MacBook-Air" = helper.mkDarwin { hostname = "Piotrs-MacBook-Air"; };
+        };
+        # Custom packages and modifications, exported as overlays
+        overlays = import ./parts/overlays { inherit inputs; };
+        # Custom packages; accessible via 'nix build', 'nix shell', etc
+        packages = helper.forAllSystems (system: import ./parts/pkgs nixpkgs.legacyPackages.${system});
       };
-      #nix run nix-darwin -- switch --flake ~/.config/nix
-      #nix build .#darwinConfigurations.{hostname}.config.system.build.toplevel
-      darwinConfigurations = {
-        "Piotrs-MacBook-Air" = helper.mkDarwin { hostname = "Piotrs-MacBook-Air"; };
-      };
-      # Custom packages and modifications, exported as overlays
-      overlays = import ./parts/overlays { inherit inputs; };
-      # Custom packages; accessible via 'nix build', 'nix shell', etc
-      packages = helper.forAllSystems (system: import ./parts/pkgs nixpkgs.legacyPackages.${system});
-      # Formatter for .nix files, available via 'nix fmt'
-      formatter = helper.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       imports = [ ./parts ];
     };

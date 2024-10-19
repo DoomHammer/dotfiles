@@ -12,26 +12,6 @@ let
   dir = "${flakePath config}/home-manager/_mixins/features/basics";
 in
 {
-  programs.btop = {
-    enable = true;
-    settings = {
-      color_theme = "solarized_light";
-      # color_theme = TTY
-      # Theme background = true
-      # force_TTY = true
-    };
-  };
-  programs.eza = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    extraOptions = [
-      "--group-directories-first"
-      "--header"
-    ];
-    git = true;
-    icons = true;
-  };
   home.packages = with pkgs; [
     btop
     curl
@@ -48,33 +28,57 @@ in
     wget
     zstd
   ];
-  programs.fd.enable = true;
-  programs.htop.enable = true;
-  programs.lesspipe.enable = true;
-  programs.man.enable = true;
-  programs.ripgrep.enable = true;
-  programs.ripgrep.arguments = [
-    # Don't let ripgrep vomit really long lines to my terminal, and show a preview.
-    "--max-columns=150"
-    "--max-columns-preview"
+  programs = {
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "solarized_light";
+        # color_theme = TTY
+        # Theme background = true
+        # force_TTY = true
+      };
+    };
+    eza = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      extraOptions = [
+        "--group-directories-first"
+        "--header"
+      ];
+      git = true;
+      icons = true;
+    };
+    fd.enable = true;
+    htop.enable = true;
+    lesspipe.enable = true;
+    man.enable = true;
+    ripgrep = {
+      enable = true;
+      arguments = [
+        # Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+        "--max-columns=150"
+        "--max-columns-preview"
 
-    # Search hidden files / directories (e.g. dotfiles) by default
-    "--hidden"
+        # Search hidden files / directories (e.g. dotfiles) by default
+        "--hidden"
 
-    # Using glob patterns to include/exclude files or folders
-    "--glob=!.git/*"
+        # Using glob patterns to include/exclude files or folders
+        "--glob=!.git/*"
 
-    # Set the colors.
-    "--colors=line:none"
-    "--colors=line:style:bold"
+        # Set the colors.
+        "--colors=line:none"
+        "--colors=line:style:bold"
 
-    # Because who cares about case!?
-    "--smart-case"
-  ];
-  programs.zoxide = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
+        # Because who cares about case!?
+        "--smart-case"
+      ];
+    };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
   };
   xdg.configFile."htop/htoprc".source = config.lib.file.mkOutOfStoreSymlink "${dir}/htop-config/htoprc";
   xdg.configFile."btop/themes/solarized_light.theme".source = config.lib.file.mkOutOfStoreSymlink "${dir}/btop-config/btop/themes/solarized_light.theme";

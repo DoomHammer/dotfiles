@@ -26,3 +26,6 @@ jobs:
 
       - name: Check Flake
         run: nix flake check
+
+      - name: Check the other Flake
+        run: cd .config/nix && nix flake check

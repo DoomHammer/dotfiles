@@ -135,18 +135,20 @@ in
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
 
-  programs.nix-index-database.comma.enable = true;
-  programs.nix-index = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-  programs.ssh = {
-    enable = true;
-    addKeysToAgent = "yes";
-    forwardAgent = true;
+    nix-index-database.comma.enable = true;
+    nix-index = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+    ssh = {
+      enable = true;
+      addKeysToAgent = "yes";
+      forwardAgent = true;
+    };
   };
 }
 # TODO:

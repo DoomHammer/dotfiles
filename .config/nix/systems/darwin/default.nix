@@ -17,10 +17,12 @@
   ];
 
   # Only install the docs I use
-  documentation.enable = true;
-  documentation.doc.enable = false;
-  documentation.info.enable = false;
-  documentation.man.enable = true;
+  documentation = {
+    enable = true;
+    doc.enable = false;
+    info.enable = false;
+    man.enable = true;
+  };
 
   environment = {
     systemPackages = with pkgs; [
@@ -166,12 +168,14 @@
     #
     # NOTE. This doesn’t work with bash 3.2, which is the default on macOS.
     bash.enableCompletion = true;
-    zsh.enable = true;
-    zsh.enableBashCompletion = true;
-    zsh.enableCompletion = false; # we are using home-manager zsh, so do not enable!
-    zsh.enableFzfCompletion = true;
-    zsh.enableFzfGit = true;
-    zsh.enableSyntaxHighlighting = true;
+    zsh = {
+      enable = true;
+      enableBashCompletion = true;
+      enableCompletion = false; # we are using home-manager zsh, so do not enable!
+      enableFzfCompletion = true;
+      enableFzfGit = true;
+      enableSyntaxHighlighting = true;
+    };
   };
 
   # Enable TouchID for sudo authentication
