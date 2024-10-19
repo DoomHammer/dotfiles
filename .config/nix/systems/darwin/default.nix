@@ -163,11 +163,13 @@
     };
     info.enable = false;
     nix-index-database.comma.enable = true;
-    bash.enable = true;
-    # Enable bash completion for all interactive bash shells.
-    #
-    # NOTE. This doesn’t work with bash 3.2, which is the default on macOS.
-    bash.enableCompletion = true;
+    bash = {
+      enable = true;
+      # Enable bash completion for all interactive bash shells.
+      #
+      # NOTE. This doesn’t work with bash 3.2, which is the default on macOS.
+      completion.enable = true;
+    };
     zsh = {
       enable = true;
       enableBashCompletion = true;
@@ -188,6 +190,7 @@
   };
 
   system = {
+    stateVersion = 5;
     # activationScripts run every time you boot the system or execute `darwin-rebuild`
     activationScripts = {
       diff = {
