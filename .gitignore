@@ -63,6 +63,7 @@
 # History
 .*history
 .lesshst
+.nix-profile
 .config/home-manager/home.nix
 .config/ripgrep
 .pre-commit-config.yaml
