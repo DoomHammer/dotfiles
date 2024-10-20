@@ -3,6 +3,7 @@
   inputs,
   outputs,
   pkgs,
+  lib,
   stateVersion,
   username,
   ...
@@ -54,6 +55,12 @@ in
     inherit stateVersion;
     inherit username;
     homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
+  };
+
+  home.activation = {
+    refreshGitHooks = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      run cd $HOME/.config/nix && ${pkgs.yadm}/bin/yadm enter nix develop -c true
+    '';
   };
 
   nixpkgs = {
