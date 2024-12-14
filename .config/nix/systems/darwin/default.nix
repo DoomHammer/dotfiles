@@ -65,6 +65,9 @@
       ];
       warn-dirty = false;
     };
+    extraOptions = ''
+      trusted-users = root doomhammer
+    '';
   };
 
   networking.hostName = hostname;
