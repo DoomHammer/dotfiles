@@ -26,5 +26,6 @@ in
     enableZshIntegration = true;
   };
 
-  xdg.configFile."yazi.toml".source = config.lib.file.mkOutOfStoreSymlink "${dir}/yazi-config/yazi.toml";
+  xdg.configFile."yazi.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/yazi-config/yazi.toml";
 }

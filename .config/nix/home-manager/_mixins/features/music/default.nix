@@ -15,5 +15,6 @@ in
   home.packages = with pkgs; [
     # picard
   ];
-  xdg.configFile."MusicBrainz/Picard.ini".source = config.lib.file.mkOutOfStoreSymlink "${dir}/picard-config/Picard.ini";
+  xdg.configFile."MusicBrainz/Picard.ini".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/picard-config/Picard.ini";
 }

@@ -16,7 +16,8 @@ in
     colima
     docker
   ];
-  home.file.".colima/default/colima.yaml".source = config.lib.file.mkOutOfStoreSymlink "${dir}/colima-config/default/colima.yaml";
+  home.file.".colima/default/colima.yaml".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/colima-config/default/colima.yaml";
   programs.ssh.extraConfig = ''
     Include /Users/doomhammer/.colima/ssh_config
   '';

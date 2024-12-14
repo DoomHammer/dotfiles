@@ -1,7 +1,7 @@
 {
   description = "DoomHammer's repository of flake templates";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     flake-parts = {
       type = "github";
       owner = "hercules-ci";
@@ -24,7 +24,7 @@
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "";
+        nixpkgs-stable.follows = "nixpkgs";
         flake-compat.follows = "";
       };
     };

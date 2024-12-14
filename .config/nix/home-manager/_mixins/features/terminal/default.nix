@@ -17,7 +17,8 @@ in
     wezterm
   ];
   # Migrate ~/.config/alacritty/alacritty.yml to programs.alacritty.settings
-  xdg.configFile."alacritty/alacritty.yml".source = config.lib.file.mkOutOfStoreSymlink "${dir}/alacritty-config/alacritty.yml";
+  xdg.configFile."alacritty/alacritty.yml".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/alacritty-config/alacritty.yml";
   # programs.wezterm = {
   #     enable = true;
   #     enableBashIntegration = true;

@@ -46,7 +46,8 @@ in
       options = [ "--cmd cd" ];
     };
   };
-  xdg.configFile."starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dir}/starship-config/starship.toml";
+  xdg.configFile."starship.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/starship-config/starship.toml";
   home.file = {
     ".shell-aliases".source = config.lib.file.mkOutOfStoreSymlink "${dir}/shell-config/shell-aliases";
     ".shell-common".source = config.lib.file.mkOutOfStoreSymlink "${dir}/shell-config/shell-common";
