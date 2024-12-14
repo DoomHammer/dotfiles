@@ -5,7 +5,7 @@
     ./features
   ];
 
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [ neovide ];
 
   homebrew = {
     # taps = builtins.attrNames config.nix-homebrew.taps;

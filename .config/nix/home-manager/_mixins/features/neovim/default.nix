@@ -12,10 +12,8 @@ let
   dir = "${flakePath config}/home-manager/_mixins/features/neovim";
 in
 {
-  home.packages = with pkgs; [ pkgs.unstable.neovide ];
-
   programs.neovim = {
-    package = pkgs.unstable.neovim-unwrapped;
+    package = pkgs.neovim-unwrapped;
     enable = true;
     defaultEditor = true;
     withPython3 = true;
@@ -60,8 +58,10 @@ in
 
   xdg.configFile = {
     "nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${dir}/neovim-config/nvim/init.lua";
-    "nvim/lazyvim.json".source = config.lib.file.mkOutOfStoreSymlink "${dir}/neovim-config/nvim/lazyvim.json";
-    "nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${dir}/neovim-config/nvim/lazy-lock.json";
+    "nvim/lazyvim.json".source =
+      config.lib.file.mkOutOfStoreSymlink "${dir}/neovim-config/nvim/lazyvim.json";
+    "nvim/lazy-lock.json".source =
+      config.lib.file.mkOutOfStoreSymlink "${dir}/neovim-config/nvim/lazy-lock.json";
     "nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "${dir}/neovim-config/nvim/lua";
   };
 }
