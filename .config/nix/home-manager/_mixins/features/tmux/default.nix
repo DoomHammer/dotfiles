@@ -26,9 +26,6 @@ in
       ## A bit more space in right status bar
       set -g status-right-length 50
 
-      ## Add gitmux integration
-      set -g status-right '#(gitmux "#{pane_current_path}")'
-
       ## Rename windows to fit current application
       setw -g automatic-rename on
 
