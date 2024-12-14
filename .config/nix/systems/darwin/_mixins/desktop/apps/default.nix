@@ -52,13 +52,11 @@ _: {
       "creality-print"
       # TODO: Add Cricut
       # TODO: Add DaVinci Resolve
-      "firefox"
       "focusrite-control"
       "font-chivo-mono"
       "font-iosevka"
       "font-iosevka-nerd-font"
       "font-monofett"
-      "google-chrome"
       # "logi-options-plus"
       "logitech-unifying"
       "kicad"
@@ -70,6 +68,7 @@ _: {
       "notion-calendar"
       "obs"
       "obsidian"
+      "orcaslicer"
       "plex"
       "raspberry-pi-imager"
       "sequential"
@@ -77,7 +76,6 @@ _: {
       "scroll-reverser"
       "signal"
       "syncthing"
-      "squirreldisk"
       "tailscale"
       "the-unarchiver"
       "thonny"
@@ -86,6 +84,7 @@ _: {
       "visual-studio-code"
       "vlc"
       "wezterm"
+      "windows-app"
     ];
     masApps = {
       "Brother P-touch Editor" = 1453365242;
