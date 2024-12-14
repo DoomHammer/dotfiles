@@ -237,6 +237,10 @@
         NSNavPanelExpandedStateForSaveMode = true;
         NSNavPanelExpandedStateForSaveMode2 = true;
         "com.apple.sound.beep.feedback" = 0;
+        "com.apple.mouse.tapBehavior" = 1; # Tap to click
+        # Jump to the spot that's clicked on the scroll bar
+        AppleScrollerPagingBehavior = true;
+        AppleShowScrollBars = "Always";
       };
       SoftwareUpdate = {
         AutomaticallyInstallMacOSUpdates = false;
