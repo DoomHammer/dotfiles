@@ -1,5 +1,5 @@
 _: {
   homebrew = {
-    casks = [ "google-chrome" ];
+    casks = [ "firefox" ];
   };
 }

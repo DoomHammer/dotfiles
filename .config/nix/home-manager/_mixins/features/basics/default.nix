@@ -47,7 +47,7 @@ in
         "--header"
       ];
       git = true;
-      icons = true;
+      icons = "auto";
     };
     fd.enable = true;
     htop.enable = true;
@@ -80,6 +80,8 @@ in
       enableZshIntegration = true;
     };
   };
-  xdg.configFile."htop/htoprc".source = config.lib.file.mkOutOfStoreSymlink "${dir}/htop-config/htoprc";
-  xdg.configFile."btop/themes/solarized_light.theme".source = config.lib.file.mkOutOfStoreSymlink "${dir}/btop-config/btop/themes/solarized_light.theme";
+  xdg.configFile."htop/htoprc".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/htop-config/htoprc";
+  xdg.configFile."btop/themes/solarized_light.theme".source =
+    config.lib.file.mkOutOfStoreSymlink "${dir}/btop-config/btop/themes/solarized_light.theme";
 }
