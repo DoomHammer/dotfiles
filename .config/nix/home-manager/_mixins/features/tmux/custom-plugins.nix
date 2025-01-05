@@ -22,6 +22,15 @@ in
     };
     rtpFilePath = "newline-detector.tmux";
   };
+  floax = buildTmuxPlugin {
+    pluginName = "floax";
+    version = "v0.0.1+61c7f466b9a4ceed56f99d403250164170d586cd";
+    src = fetchTarball {
+      url = "https://github.com/omerxx/tmux-floax/archive/61c7f466b9a4ceed56f99d403250164170d586cd.tar.gz";
+      sha256 = "0dcbhci5ig2rfaaa3i5nz7v7hlnhahk07517c9wvzz10f7njgv0c";
+    };
+    rtpFilePath = "floax.tmux";
+  };
   which-key = buildTmuxPlugin {
     pluginName = "which-key";
     version = "v0.0.1+1f419775caf136a60aac8e3a269b51ad10b51eb6";

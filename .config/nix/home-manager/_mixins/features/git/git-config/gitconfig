@@ -105,12 +105,6 @@
 [help]
 	autocorrect = 10
 
-###
-### Include local overrides
-###
-[include]
-	path = .gitconfig.local
-
 [pull]
 	rebase = true
 
@@ -119,3 +113,12 @@
 
 [init]
 	defaultBranch = main
+
+[ghq]
+  root = ~/src
+
+###
+### Include local overrides
+###
+[include]
+	path = .gitconfig.local

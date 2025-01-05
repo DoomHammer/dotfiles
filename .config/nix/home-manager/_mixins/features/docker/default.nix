@@ -16,9 +16,15 @@ in
     colima
     docker
   ];
-  home.file.".colima/default/colima.yaml".source =
+
+  home.sessionVariables = {
+    COLIMA_HOME = "$HOME/.config/colima";
+  };
+
+  xdg.configFile."colima/default/colima.yaml".source =
     config.lib.file.mkOutOfStoreSymlink "${dir}/colima-config/default/colima.yaml";
+  # FIXME: This home directory should be computed (home.homeDirectory?)
   programs.ssh.extraConfig = ''
-    Include /Users/doomhammer/.colima/ssh_config
+    Include /Users/doomhammer/.config/colima/ssh_config
   '';
 }

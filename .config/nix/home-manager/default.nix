@@ -76,6 +76,21 @@ in
     };
   };
 
+  home.activation = {
+    # This should be removed once
+    # https://github.com/nix-community/home-manager/issues/1341 is closed.
+    aliasApplications = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      apps_source="$HOME/Applications/Home Manager Apps"
+      moniker="Nix Trampolines"
+      app_target_base="$HOME/Applications"
+      app_target="$app_target_base/$moniker"
+      if [ -d "$apps_source" ]; then
+        mkdir -p "$app_target"
+        ${pkgs.rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
+      fi
+    '';
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [

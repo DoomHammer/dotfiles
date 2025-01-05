@@ -15,6 +15,7 @@ in
   home.packages = with pkgs; [
     diff-so-fancy
     difftastic
+    ghq
     git
     git-lfs
     lazygit

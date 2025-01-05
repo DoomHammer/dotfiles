@@ -33,12 +33,10 @@ install_nix() {
   system_type=$(uname -s)
 
   if [ "$system_type" = "Darwin" ]; then
-    sudo xcodebuild -license accept
     nix run nix-darwin -- switch --flake "${HOME}/.config/nix"
+    sudo xcodebuild -license accept
   fi
   nix run 'nixpkgs#home-manager' -- switch -b orig --flake "${HOME}/.config/nix"
-  # TODO: Maybe use this: https://github.com/DeterminateSystems/nix-installer
-  sudo -i nix-env --uninstall nix
 
   # Install pre-commit checks for yadm
   cd "$HOME/.config/nix" || exit

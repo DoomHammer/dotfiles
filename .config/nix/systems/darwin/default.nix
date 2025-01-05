@@ -11,6 +11,12 @@
 {
   imports = [
     inputs.nix-index-database.darwinModules.nix-index
+    # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
+    # If one isn't already available: comment out the `nix-rosetta-builder` module below,
+    # uncomment the `linux-builder` module below, and run `darwin-rebuild switch`:
+    # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
+    # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
+    inputs.nix-rosetta-builder.darwinModules.default
     ./${hostname}
     ./_mixins/scripts
   ];
@@ -64,10 +70,27 @@
         "flakes"
       ];
       warn-dirty = false;
+      trusted-users = [ "@admin" ];
+      build-users-group = "nixbld";
+      extra-platforms = [ "aarch64-linux" ];
     };
     extraOptions = ''
       trusted-users = root doomhammer
     '';
+    # linux-builder = {
+    #   enable = true;
+    #   #   ephemeral = true;
+    #   #   maxJobs = 4;
+    #   #   config = {
+    #   #     virtualisation = {
+    #   #       darwin-builder = {
+    #   #         diskSize = 40 * 1024;
+    #   #         memorySize = 8 * 1024;
+    #   #       };
+    #   #       cores = 6;
+    #   #     };
+    #   #   };
+    # };
   };
 
   networking.hostName = hostname;
@@ -114,15 +137,33 @@
           ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
         '';
       };
-      # reload the settings and apply them without the need to logout/login
+      postActivation.text = lib.mkBefore ''
+        # Install Rosetta
+        if ! pgrep -q oahd; then
+          echo installing rosetta... >&2
+          sudo /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+        fi
+      '';
       postUserActivation.text = ''
+        # reload the settings and apply them without the need to logout/login
         /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+        killall SystemUIServer
+        sudo killall Finder
+
+        # Make apps indexable
+        apps_source="${config.system.build.applications}/Applications"
+        moniker="Nix Trampolines"
+        app_target_base="$HOME/Applications"
+        app_target="$app_target_base/$moniker"
+        mkdir -p "$app_target"
+        ${pkgs.rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
       '';
     };
     checks = {
       verifyNixChannels = false;
     };
     defaults = {
+      LaunchServices.LSQuarantine = false;
       CustomUserPreferences = {
         "com.apple.AdLib" = {
           allowApplePersonalizedAdvertising = false;
@@ -149,6 +190,7 @@
           location = "~/Documents/Screenshots";
           type = "png";
         };
+        loginwindow.LoginwindowText = "Meraki";
         "com.apple.SoftwareUpdate" = {
           AutomaticCheckEnabled = true;
           # Check for software updates daily, not just once per week
@@ -215,7 +257,8 @@
         "com.apple.commerce".AutoUpdate = true;
         "com.pilotmoon.scroll-reverser" = {
           InvertScrollingOn = 1;
-          ReverseMouse = 0;
+          ReverseMouse = 1;
+          ReverseTrackpad = 0;
           ReverseX = 1;
           StartAtLogin = 1;
         };
@@ -237,6 +280,7 @@
         NSNavPanelExpandedStateForSaveMode = true;
         NSNavPanelExpandedStateForSaveMode2 = true;
         "com.apple.sound.beep.feedback" = 0;
+        "com.apple.sound.beep.volume" = 0.0;
         "com.apple.mouse.tapBehavior" = 1; # Tap to click
         # Jump to the spot that's clicked on the scroll bar
         AppleScrollerPagingBehavior = true;
@@ -259,7 +303,7 @@
         wvous-tr-corner = 1;
       };
       finder = {
-        _FXShowPosixPathInTitle = true;
+        _FXShowPosixPathInTitle = false;
         FXEnableExtensionChangeWarning = false;
         FXPreferredViewStyle = "Nlsv";
         AppleShowAllExtensions = true;

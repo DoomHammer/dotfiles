@@ -2,6 +2,7 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 -- Show linters for the current buffer's file type
+
 -- luacheck: push ignore 113
 vim.api.nvim_create_user_command("LintInfo", function()
 	local filetype = vim.bo.filetype

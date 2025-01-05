@@ -4,6 +4,6 @@
 if command -v nh-home &>/dev/null; then
   nh-home switch
 else
-  nix run nixpkgs#home-manager -- switch --backup-extension orig --flake "$HOME/.config/nix" -L
+  nix run nixpkgs#home-manager -- switch -b hm-orig --flake "$HOME/.config/nix" -L
 fi
 switch-host

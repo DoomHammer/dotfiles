@@ -12,15 +12,15 @@ let
   dir = "${flakePath config}/home-manager/_mixins/features/shell";
 in
 {
-  # Enable dircolors?
   home.packages = with pkgs; [
     fzf
     shellcheck
     starship
   ];
   # targets.genericLinux.enable = true;
-  # Migrate ~/.shell-aliases to home.shellAliases
+  # TODO: Migrate ~/.shell-aliases to home.shellAliases
   programs = {
+    dircolors.enable = true;
     fzf = {
       # CTRL-T to open file widget
       # ALT-C to open change dir widget
@@ -28,9 +28,26 @@ in
       enableBashIntegration = true;
       enableZshIntegration = true;
       changeDirWidgetCommand = "fd --type d";
-      # https://github.com/junegunn/fzf/wiki/Color-schemes#solarized-light
-      # colors
+      colors = {
+        "fg" = "240";
+        "bg" = "230";
+        "hl" = "33";
+        "fg+" = "241";
+        "bg+" = "221";
+        "hl+" = "33";
+        "info" = "33";
+        "prompt" = "33";
+        "pointer" = "166";
+        "marker" = "166";
+        "spinner" = "33";
+      };
       tmux.enableShellIntegration = true;
+    };
+    skim = {
+      defaultOptions = [
+        "--color fg:240,bg:230,hl:33,fg+:241,bg+:221,hl+:33"
+        "--color info:33,prompt:33,pointer:166,marker:166,spinner:33"
+      ];
     };
     starship = {
       enable = true;

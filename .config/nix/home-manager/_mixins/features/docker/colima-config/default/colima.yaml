@@ -1,21 +1,26 @@
 # Number of CPUs to be allocated to the virtual machine.
 # Default: 2
-cpu: 2
+cpu: 4
 
 # Size of the disk in GiB to be allocated to the virtual machine.
-# NOTE: changing this has no effect after the virtual machine has been created.
+# NOTE: value can only be increased after virtual machine has been created.
+#
 # Default: 60
-disk: 60
+disk: 120
 
 # Size of the memory in GiB to be allocated to the virtual machine.
 # Default: 2
 memory: 4
 
 # Architecture of the virtual machine (x86_64, aarch64, host).
+#
+# NOTE: value cannot be changed after virtual machine is created.
 # Default: host
-arch: aarch64
+arch: host
 
 # Container runtime to be used (docker, containerd).
+#
+# NOTE: value cannot be changed after virtual machine is created.
 # Default: docker
 runtime: docker
 
@@ -29,12 +34,12 @@ kubernetes:
   # Enable kubernetes.
   # Default: false
   enabled: false
-  
+
   # Kubernetes version to use.
   # This needs to exactly match a k3s version https://github.com/k3s-io/k3s/releases
   # Default: latest stable release
   version: v1.30.0+k3s1
-  
+
   # Additional args to pass to k3s https://docs.k3s.io/cli/server
   # Default: traefik is disabled
   k3sArgs:
@@ -53,7 +58,7 @@ network:
   # NOTE: this is currently macOS only and ignored on Linux.
   # Default: false
   address: false
-  
+
   # Custom DNS resolvers for the virtual machine.
   #
   # EXAMPLE
@@ -61,7 +66,7 @@ network:
   #
   # Default: []
   dns: []
-  
+
   # DNS hostnames to resolve to custom targets using the internal resolver.
   # This setting has no effect if a custom DNS resolver list is supplied above.
   # It does not configure the /etc/hosts files of any machine or container.
@@ -71,6 +76,14 @@ network:
   # dnsHosts:
   #   example.com: 1.2.3.4
   dnsHosts: {}
+
+  # Replicate host IP addresses in the VM. This enables port forwarding to specific
+  # host IP addresses.
+  #   e.g. `docker run --port 10.0.1.2:8080:8080 alpine` would only forward to the
+  #   specified IP address.
+  #
+  # Default: false
+  hostAddresses: false
 
 # ===================================================================== #
 # ADVANCED CONFIGURATION
@@ -104,12 +117,17 @@ docker: {}
 #
 # vz is macOS virtualization framework and requires macOS 13
 #
+# NOTE: value cannot be changed after virtual machine is created.
 # Default: qemu
-vmType: qemu
+vmType: vz
 
 # Utilise rosetta for amd64 emulation (requires m1 mac and vmType `vz`)
 # Default: false
-rosetta: false
+rosetta: true
+
+# Enable nested virtualization for the virtual machine (requires m3 mac and vmType `vz`)
+# Default: false
+nestedVirtualization: false
 
 # Volume mount driver for the virtual machine (virtiofs, 9p, sshfs).
 #
@@ -120,8 +138,9 @@ rosetta: false
 # sshfs is faster than 9p but the least reliable of the options (when there are lots
 # of concurrent reads or writes).
 #
+# NOTE: value cannot be changed after virtual machine is created.
 # Default: virtiofs (for vz), sshfs (for qemu)
-mountType: sshfs
+mountType: virtiofs
 
 # Propagate inotify file events to the VM.
 # NOTE: this is experimental.
@@ -153,9 +172,15 @@ cpuType: ""
 provision: []
 
 # Modify ~/.ssh/config automatically to include a SSH config for the virtual machine.
-# SSH config will still be generated in ~/.colima/ssh_config regardless.
+# SSH config will still be generated in $COLIMA_HOME/ssh_config regardless.
 # Default: true
 sshConfig: true
+
+# The port number for the SSH server for the virtual machine.
+# When set to 0, a random available port is used.
+#
+# Default: 0
+sshPort: 0
 
 # Configure volume mounts for the virtual machine.
 # Colima mounts user's home directory by default to provide a familiar

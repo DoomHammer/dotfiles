@@ -1,7 +1,9 @@
-_: {
+{ pkgs, ... }:
+{
   imports = [
     ./obs-studio
     ./utilities
+    ./web-browsers
   ];
 
   environment = {
@@ -10,17 +12,20 @@ _: {
       alacritty
       android-file-transfer
       audacity
+      backblaze-downloader
+      # TODO: Add Camtasia
+      # camtasia2019
+      cricut-design-space
       fritzing
       gcc-arm-embedded-13
       gimp
-      grandperspective
       inkscape
       kitty
       openscad
       pngpaste
-      prusa-slicer
       jetbrains.pycharm-community
-      utm
+      signal
+      # TODO: Add Konfig somehow
     ];
   };
 
@@ -38,59 +43,40 @@ _: {
     taps = [ "netbirdio/tap" ];
     brews = [
       "conan"
-      "conan@1"
     ];
     casks = [
       "ableton-live-standard"
       "arduino-ide"
       "autodesk-fusion"
-      "backblaze"
-      "backblaze-downloader"
       "balenaetcher"
-      "beeper"
-      # TODO: Add Camtasia
       "creality-print"
-      # TODO: Add Cricut
-      # TODO: Add DaVinci Resolve
       "focusrite-control"
-      "font-chivo-mono"
-      "font-iosevka"
-      "font-iosevka-nerd-font"
-      "font-monofett"
-      # "logi-options-plus"
-      "logitech-unifying"
-      "kicad"
+      "freecad"
+      "logi-options+"
       "microsoft-office"
       "mqtt-explorer"
       "mu-editor"
       "musicbrainz-picard"
-      "netbird-ui"
-      "notion-calendar"
+      "nheko"
       "obs"
-      "obsidian"
       "orcaslicer"
       "plex"
+      "prusaslicer"
       "raspberry-pi-imager"
       "sequential"
       # Possible alternative: https://github.com/ther0n/UnnaturalScrollWheels
-      "scroll-reverser"
-      "signal"
       "syncthing"
-      "tailscale"
-      "the-unarchiver"
       "thonny"
       "unetbootin"
-      # See also: https://github.com/nix-community/nix-vscode-extensions/blob/master/flake.nix
-      "visual-studio-code"
-      "vlc"
-      "wezterm"
       "windows-app"
+      # See also: https://github.com/nix-community/nix-vscode-extensions/blob/master/flake.nix
     ];
     masApps = {
       "Brother P-touch Editor" = 1453365242;
+      "DaVinci Resolve" = 571213070;
       "Keynote" = 409183694;
+      # "Linn" = 1292218680; # Sadly, this does not work
       "Linn Kazoo" = 848937349;
-      # TODO: Add Konfig somoehow
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Xcode" = 497799835;

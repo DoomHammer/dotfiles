@@ -54,6 +54,8 @@ zplug "oconnor663/zsh-sensible"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
+# Thanks to l0v3g00d for showing me this
+zplug "marlonrichert/zsh-autocomplete"
 
 # Interactive Git
 zplug 'wfxr/forgit'
@@ -69,5 +71,24 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load # --verbose
 
+## zsh-autocomplete
+
+# Make Tab and ShiftTab go to the menu
+bindkey              '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
+
+# Make Tab and ShiftTab change the selection in the menu
+bindkey -M menuselect              '^I'         menu-complete
+bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
+
+# Use LS_COLORS
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+
+# Use zoxide for recent directories
++autocomplete:recent-directories() {
+  reply=( ${(f)"$( zoxide query --list $1 2> /dev/null )"} )
+}
+
+# Load shell-agnostic files
 test -r ~/.shell-env && source ~/.shell-env
 test -r ~/.shell-aliases && source ~/.shell-aliases

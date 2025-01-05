@@ -5,7 +5,10 @@ let
   plugins = pkgs.tmuxPlugins // pkgs.callPackage ./custom-plugins.nix { };
 in
 {
-  home.packages = with pkgs; [ tmux ];
+  home.packages = with pkgs; [
+    tmux
+    zsh
+  ];
   # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.tmux.enable
   programs.tmux = {
     enable = true;
@@ -78,7 +81,10 @@ in
     mouse = true;
     newSession = true;
     plugins = [
-      { plugin = plugins.sensible; }
+      {
+        plugin = plugins.sensible;
+        extraConfig = "bind R source-file '~/.config/tmux/tmux.conf'";
+      }
       {
         plugin = plugins.resurrect;
         extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
@@ -102,7 +108,7 @@ in
         plugin = plugins.sessionist;
         extraConfig = "";
       }
-      # <Prefix>u to select URL
+      # <Prefix>+u to select URL
       {
         plugin = plugins.fzf-tmux-url;
         extraConfig = "";
@@ -120,6 +126,17 @@ in
         extraConfig = "";
       }
       {
+        plugin = plugins.floax;
+        extraConfig = ''
+          # M- means "hold Meta/Alt"
+          set -g @floax-bind '-n M-p'
+
+          # The default width and height of the floating pane
+          set -g @floax-width '90%'
+          set -g @floax-height '90%'
+        '';
+      }
+      {
         plugin = plugins.which-key;
         extraConfig = ''
           set -g @tmux-which-key-xdg-enable 1;
@@ -127,10 +144,8 @@ in
         '';
       }
       # TODO: take a look at https://github.com/fcsonline/tmux-thumbs
-      # TODO: take a look at https://github.com/omerxx/tmux-floax
       # TODO: take a look at https://github.com/rafi/tmux-pass
       # TODO: take a look at https://github.com/roosta/tmux-fuzzback
-      # TODO: take a look at https://github.com/laktak/extrakto
     ];
     prefix = "C-a";
     sensibleOnTop = true;

@@ -21,7 +21,7 @@ in
   # Read more: https://home-manager-options.extranix.com/?query=zsh&release=master
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false; # Cause autocomplete
     enableVteIntegration = true;
     zplug = {
       enable = true;
@@ -53,6 +53,7 @@ in
     '';
     autocd = true;
     # autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       tree = "${pkgs.eza}/bin/eza --tree";
     };

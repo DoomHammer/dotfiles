@@ -13,6 +13,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-rosetta-builder = {
+      url = "github:cpick/nix-rosetta-builder";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -91,12 +95,18 @@
             platform = "aarch64-darwin";
             desktop = "aqua";
           };
+          "doomhammer@eos" = helper.mkHome {
+            hostname = "eos";
+            platform = "aarch64-darwin";
+            desktop = "aqua";
+          };
         };
         #nix run nix-darwin -- switch --flake ~/.config/nix
         #nix build .#darwinConfigurations.{hostname}.config.system.build.toplevel
         darwinConfigurations = {
           "Piotrs-MacBook-Air" = helper.mkDarwin { hostname = "Piotrs-MacBook-Air"; };
           "helios" = helper.mkDarwin { hostname = "helios"; };
+          "eos" = helper.mkDarwin { hostname = "eos"; };
         };
         # Custom packages and modifications, exported as overlays
         overlays = import ./parts/overlays { inherit inputs; };

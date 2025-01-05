@@ -251,6 +251,64 @@
         "type": "github"
       }
     },
+    "nix-rosetta-builder": {
+      "inputs": {
+        "nixos-generators": "nixos-generators",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735003913,
+        "narHash": "sha256-mGxomAgK7L2D9yqJEKUylH2XLhgGo7/51FybEjkrb7o=",
+        "owner": "cpick",
+        "repo": "nix-rosetta-builder",
+        "rev": "1d7b9c4376807f74aefac227f3b29e719bef853d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cpick",
+        "repo": "nix-rosetta-builder",
+        "type": "github"
+      }
+    },
+    "nixlib": {
+      "locked": {
+        "lastModified": 1733620091,
+        "narHash": "sha256-5WoMeCkaXqTZwwCNLRzyLxEJn8ISwjx4cNqLgqKwg9s=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "f4dc9a6c02e5e14d91d158522f69f6ab4194eb5b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixos-generators": {
+      "inputs": {
+        "nixlib": "nixlib",
+        "nixpkgs": [
+          "nix-rosetta-builder",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733706547,
+        "narHash": "sha256-BdFW7TMgES7q8I5FGX5hlz+0Xp4WyfAP3tHDwEupSWU=",
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "rev": "f5a0197ccfef7388885fc9455e74d6dd39e0c5e8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1733064805,
@@ -320,6 +378,7 @@
         "lix-module": "lix-module",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
+        "nix-rosetta-builder": "nix-rosetta-builder",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "systems": "systems_2",
