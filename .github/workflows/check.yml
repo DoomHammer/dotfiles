@@ -24,8 +24,12 @@ jobs:
       - name: Nix Magic Cache
         uses: DeterminateSystems/magic-nix-cache-action@main
 
-      - name: Check Flake
+      - name: Check root Flake
         run: nix flake check
 
       - name: Check the other Flake
-        run: cd .config/nix && nix flake check
+        run: |
+          cd .config/nix
+          export NIXPKGS_ALLOW_UNFREE=1
+          export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
+          nix flake check --impure
