@@ -77,24 +77,16 @@ in
       # Navi integration
       bind-key -T prefix C-g split-window \
         "$SHELL --login -i -c 'navi --print | head -n 1 | tmux load-buffer -b tmp - ; tmux paste-buffer -p -t {last} -b tmp -d'"
+
+      set -gu default-command
+      set -g default-shell "${pkgs.zsh}/bin/zsh"
     '';
     mouse = true;
     newSession = true;
     plugins = [
       {
         plugin = plugins.sensible;
-        extraConfig = "bind R source-file '~/.config/tmux/tmux.conf'";
-      }
-      {
-        plugin = plugins.resurrect;
-        extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
-      }
-      {
-        plugin = plugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5'
-        '';
+        extraConfig = "bind R source-file $HOME/.config/tmux/tmux.conf";
       }
       {
         plugin = plugins.pain-control;
@@ -143,12 +135,23 @@ in
           set -g @tmux-which-key-disable-autobuild 1
         '';
       }
+      {
+        plugin = plugins.resurrect;
+        extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
+      }
+      {
+        plugin = plugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '5'
+        '';
+      }
       # TODO: take a look at https://github.com/fcsonline/tmux-thumbs
       # TODO: take a look at https://github.com/rafi/tmux-pass
       # TODO: take a look at https://github.com/roosta/tmux-fuzzback
     ];
     prefix = "C-a";
-    sensibleOnTop = true;
+    sensibleOnTop = false; # See: https://github.com/nix-community/home-manager/issues/5952
     # shortcut = "a";
     # terminal = "screen-256color";
     shell = "${pkgs.zsh}/bin/zsh";
