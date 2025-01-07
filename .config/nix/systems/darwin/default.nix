@@ -19,6 +19,7 @@
     inputs.nix-rosetta-builder.darwinModules.default
     ./${hostname}
     ./_mixins/scripts
+    ./_mixins/touchid
   ];
 
   # Only install the docs I use
@@ -122,6 +123,8 @@
 
   # Enable TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
+  # Also for tmux
+  security.pam.enableSudoTouchId = true;
 
   services = {
     nix-daemon.enable = true;
