@@ -54,16 +54,23 @@
 .gitconfig
 .gitignore_global
 .config/alacritty/alacritty.yml
+.config/alacritty/alacritty.toml
 .config/MusicBrainz/Picard.ini
 .config/atuin/config.toml
 .config/btop
 .config/htop
 .gitmessage
 .config/yazi.toml
+.config/navi/config.yaml
+.config/home-manager/home.nix
+.config/ripgrep
+*.shell*.local
 # History
 .*history
 .lesshst
 .nix-profile
-.config/home-manager/home.nix
-.config/ripgrep
 .pre-commit-config.yaml
+.config/inkscape
+.config/colima
+.config/nix/tmpstore
+result
