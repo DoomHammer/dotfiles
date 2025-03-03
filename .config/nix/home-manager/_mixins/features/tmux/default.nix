@@ -6,6 +6,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    thumbs
     tmux
     zsh
   ];
@@ -77,16 +78,13 @@ in
       # Navi integration
       bind-key -T prefix C-g split-window \
         "$SHELL --login -i -c 'navi --print | head -n 1 | tmux load-buffer -b tmp - ; tmux paste-buffer -p -t {last} -b tmp -d'"
-
-      set -gu default-command
-      set -g default-shell "${pkgs.zsh}/bin/zsh"
     '';
     mouse = true;
     newSession = true;
     plugins = [
       {
-        plugin = plugins.sensible;
-        extraConfig = "bind R source-file $HOME/.config/tmux/tmux.conf";
+        plugin = plugins.irrational;
+        extraConfig = "";
       }
       {
         plugin = plugins.pain-control;
@@ -137,7 +135,17 @@ in
       }
       {
         plugin = plugins.resurrect;
-        extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
+        extraConfig = ''
+          resurrect_dir="~/.local/share/tmux/resurrect"
+
+          set -g @resurrect-strategy-vim 'session'
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-processes 'vi vim nvim nvim-ruby cat less more tail watch'
+          set -g @resurrect-dir $resurrect_dir
+          set -g @resurrect-capture-pane-contents 'on'
+          # Borrowed from: https://github.com/tmux-plugins/tmux-resurrect/issues/247#issuecomment-2387643976
+          set -g @resurrect-hook-post-save-all "sed -i 's| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/nix/store/.*/bin/||g' $(readlink -f $resurrect_dir/last)"
+        '';
       }
       {
         plugin = plugins.continuum;
@@ -146,9 +154,23 @@ in
           set -g @continuum-save-interval '5'
         '';
       }
-      # TODO: take a look at https://github.com/fcsonline/tmux-thumbs
+      # To use tmux-fuzzback, start it in a tmux session by typing prefix + ?.
+      # Now you can start fuzzy searching in your scrollback buffer using fzf.
+      {
+        plugin = plugins.fuzzback;
+        extraConfig = ''
+          set -g @fuzzback-finder 'sk'
+          set -g @fuzzback-popup 1
+          set -g @fuzzback-popup-size '90%'
+        '';
+      }
+      {
+        plugin = plugins.tmux-thumbs;
+        extraConfig = ''
+          set -g @thumbs-key F
+        '';
+      }
       # TODO: take a look at https://github.com/rafi/tmux-pass
-      # TODO: take a look at https://github.com/roosta/tmux-fuzzback
     ];
     prefix = "C-a";
     sensibleOnTop = false; # See: https://github.com/nix-community/home-manager/issues/5952

@@ -40,4 +40,13 @@ in
     };
     rtpFilePath = "plugin.sh.tmux";
   };
+  irrational = buildTmuxPlugin {
+    pluginName = "irrational";
+    version = "v0.0.1+fcd8d4e498f95b9373bccb57e7bf7094432fbf67";
+    src = fetchTarball {
+      url = "https://github.com/DoomHammer/tmux-irrational/archive/fcd8d4e498f95b9373bccb57e7bf7094432fbf67.tar.gz";
+      sha256 = "08n03h32x5i14407j7s21bk43mr35q5mxhr6h6mg82m17y6q3fss";
+    };
+    rtpFilePath = "sensible.tmux";
+  };
 }
