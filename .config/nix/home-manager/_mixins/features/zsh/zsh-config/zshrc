@@ -50,27 +50,6 @@ export LC_ALL=en_US.UTF-8
 
 fpath=(/usr/share/zsh/vendor-completions/ $fpath)
 
-zplug "oconnor663/zsh-sensible"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-# Thanks to l0v3g00d for showing me this
-zplug "marlonrichert/zsh-autocomplete"
-
-# Interactive Git
-zplug 'wfxr/forgit'
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install zsh plugins? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load # --verbose
-
 ## zsh-autocomplete
 
 # Make Tab and ShiftTab go to the menu

@@ -10,12 +10,12 @@ let
   # is because relative paths are expanded after the flake source is copied to
   # a store path which would get us read-only store paths.
   dir = "${flakePath config}/home-manager/_mixins/features/zsh";
+  plugins = pkgs.callPackage ./custom-plugins.nix { };
 in
 {
   home.packages = with pkgs; [
     fzf
     nix-zsh-completions
-    zplug
     zsh
   ];
   # Read more: https://home-manager-options.extranix.com/?query=zsh&release=master
@@ -23,9 +23,49 @@ in
     enable = true;
     enableCompletion = false; # Cause autocomplete
     enableVteIntegration = true;
-    zplug = {
-      enable = true;
-    };
+    plugins = [
+      {
+        # Must be before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
+        name = "zsh-fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+      {
+        name = "fast-syntax-highlighting";
+        src = pkgs.zsh-fast-syntax-highlighting;
+        file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
+      }
+      {
+        name = "zsh-completions";
+        src = pkgs.zsh-completions;
+        file = "share/zsh-completions/zsh-completions.zsh";
+      }
+      {
+        name = "zsh-autocomplete";
+        src = pkgs.zsh-autocomplete;
+        file = "share/zsh-autocomplete/zsh-autocomplete.plugin.zsh";
+      }
+      {
+        name = "zsh-forgit";
+        src = pkgs.zsh-forgit;
+        file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
+      }
+      {
+        name = "zsh-you-should-use";
+        src = pkgs.zsh-you-should-use;
+        file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
+      }
+      {
+        name = "zsh-nix-shell";
+        src = pkgs.zsh-nix-shell;
+        file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
+      }
+      {
+        name = "zsh-sensible";
+        src = plugins.zsh-sensible;
+        file = "share/zsh-sensible/zsh-sensible.plugin.zsh";
+      }
+    ];
     initExtraFirst = ''
       # Via https://tanguy.ortolo.eu/blog/article25/shrc
       #
@@ -47,9 +87,12 @@ in
       if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
         unsetopt BG_NICE
       fi
+
     '';
     initExtra = ''
       . $HOME/.zshrc.prev
+
+      export NIX_BUILD_SHELL=${pkgs.zsh}/bin/zsh
     '';
     autocd = true;
     # autosuggestions.enable = true;
