@@ -16,7 +16,7 @@ in
     '';
   };
 
-  config = lib.mkIf (cfg.enableSudoTouchId) {
+  config = lib.mkIf cfg.enableSudoTouchId {
     environment.etc."pam.d/sudo_local" = {
       text = ''
         auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
