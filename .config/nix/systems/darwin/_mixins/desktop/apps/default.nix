@@ -15,14 +15,18 @@
       backblaze-downloader
       # TODO: Add Camtasia
       # camtasia2019
-      cricut-design-space
+      # cricut-design-space
       fritzing
       gcc-arm-embedded-13
       gimp
       inkscape
       kitty
+      lima
       openscad
       pngpaste
+      rpiboot
+      talosctl
+      tpi
       jetbrains.pycharm-community
       signal
       # TODO: Add Konfig somehow
@@ -33,7 +37,7 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      # upgrade = true;
+      upgrade = true;
       cleanup = "zap";
     };
 
@@ -49,6 +53,7 @@
       "arduino-ide"
       "autodesk-fusion"
       "balenaetcher"
+      "backblaze"
       "creality-print"
       "focusrite-control"
       "freecad"
@@ -62,6 +67,7 @@
       "orcaslicer"
       "plex"
       "prusaslicer"
+      "qdirstat"
       "raspberry-pi-imager"
       "sequential"
       # Possible alternative: https://github.com/ther0n/UnnaturalScrollWheels
