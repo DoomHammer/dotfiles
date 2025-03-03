@@ -6,4 +6,5 @@ pkgs: {
   camtasia2019 = pkgs.callPackage ./camtasia2019 { };
   cricut-design-space = pkgs.callPackage ./cricut-design-space { };
   signal = pkgs.callPackage ./signal { };
+  zen-browser = pkgs.callPackage ./zen-browser { };
 }
