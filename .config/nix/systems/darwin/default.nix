@@ -91,7 +91,17 @@
     #   #       cores = 6;
     #   #     };
     #   #   };
-    # };
+    # }
+  };
+
+  nix-rosetta-builder = {
+    enable = true;
+
+    cores = 6;
+    memory = "12GiB";
+    diskSize = "120GiB";
+
+    onDemand = true;
   };
 
   networking.hostName = hostname;
