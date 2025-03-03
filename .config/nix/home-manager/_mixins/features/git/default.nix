@@ -19,6 +19,7 @@ in
     git
     git-lfs
     lazygit
+    zsh-forgit
   ];
   programs.git-cliff.enable = true;
   programs.git = {
