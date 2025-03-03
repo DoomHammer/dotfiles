@@ -28,19 +28,21 @@ in
       enableBashIntegration = true;
       enableZshIntegration = true;
       changeDirWidgetCommand = "fd --type d";
-      colors = {
-        "fg" = "240";
-        "bg" = "230";
-        "hl" = "33";
-        "fg+" = "241";
-        "bg+" = "221";
-        "hl+" = "33";
-        "info" = "33";
-        "prompt" = "33";
-        "pointer" = "166";
-        "marker" = "166";
-        "spinner" = "33";
-      };
+      # TODO: For some reason this doesn't work. Why?
+      # colors = {
+      #   "fg" = "-1";
+      #   "bg" = "-1";
+      #   "hl" = "#268bd2";
+      #   "fg+" = "#eee8d5";
+      #   "bg+" = "#073642";
+      #   "hl+" = "#268bd2";
+      #   # "header" = "#586e75";
+      #   "info" = "#b58900";
+      #   "prompt" = "#b58900";
+      #   "pointer" = "#fdf6e3";
+      #   "marker" = "#fdf6e3";
+      #   "spinner" = "#b58900";
+      # };
       tmux.enableShellIntegration = true;
     };
     skim = {
