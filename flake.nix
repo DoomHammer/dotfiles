@@ -24,7 +24,6 @@
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "nixpkgs";
         flake-compat.follows = "";
       };
     };
@@ -44,5 +43,8 @@
     };
   };
   outputs =
-    inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } { imports = [ ./.config/nix/parts ]; };
+    inputs@{ ... }:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ ./.config/nix/parts ];
+    };
 }
