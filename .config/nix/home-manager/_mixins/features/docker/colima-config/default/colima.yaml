@@ -34,12 +34,12 @@ kubernetes:
   # Enable kubernetes.
   # Default: false
   enabled: false
-
+  
   # Kubernetes version to use.
   # This needs to exactly match a k3s version https://github.com/k3s-io/k3s/releases
   # Default: latest stable release
   version: v1.30.0+k3s1
-
+  
   # Additional args to pass to k3s https://docs.k3s.io/cli/server
   # Default: traefik is disabled
   k3sArgs:
@@ -58,7 +58,7 @@ network:
   # NOTE: this is currently macOS only and ignored on Linux.
   # Default: false
   address: false
-
+  
   # Custom DNS resolvers for the virtual machine.
   #
   # EXAMPLE
@@ -66,7 +66,7 @@ network:
   #
   # Default: []
   dns: []
-
+  
   # DNS hostnames to resolve to custom targets using the internal resolver.
   # This setting has no effect if a custom DNS resolver list is supplied above.
   # It does not configure the /etc/hosts files of any machine or container.
@@ -76,7 +76,7 @@ network:
   # dnsHosts:
   #   example.com: 1.2.3.4
   dnsHosts: {}
-
+  
   # Replicate host IP addresses in the VM. This enables port forwarding to specific
   # host IP addresses.
   #   e.g. `docker run --port 10.0.1.2:8080:8080 alpine` would only forward to the
