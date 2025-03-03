@@ -10,7 +10,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-rosetta-builder = {
@@ -53,7 +53,6 @@
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "";
         flake-compat.follows = "";
       };
     };
@@ -62,6 +61,7 @@
       type = "github";
       owner = "DeterminateSystems";
       repo = "flake-checker";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # a tree-wide formatter
