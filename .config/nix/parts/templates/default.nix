@@ -11,6 +11,10 @@
         path = ./hugo;
         description = "A basic Hugo configuration";
       };
+      nix-darwin = {
+        path = ./nix-darwin;
+        description = "nix-darwin starter kit";
+      };
       # platformio-rp2040 = {
       #   path = ./platformio-rp2040;
       #   description = "A basic Platform.io configuration for RP2040";
