@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     grandperspective
-    utm
+    unstable.utm
   ];
 
   homebrew = {
