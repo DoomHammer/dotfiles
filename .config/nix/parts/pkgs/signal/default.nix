@@ -28,7 +28,7 @@ stdenvNoCC.mkDerivation rec {
   meta = {
     description = "Signal";
     homepage = "https://signalusers.org";
-    license = lib.licenses.unfree;
+    # license = lib.licenses.unfree;
     platforms = lib.platforms.darwin;
   };
 }

@@ -12,9 +12,9 @@
 }:
 
 let
-  myZenVersion = "1.7.6b";
-  x86_64-darwin-hash = "sha256-tO9yioBP3HBgskMzQ3fKhcjAK/XpZ5Affr2Kr69GxzE=";
-  aarch64-darwin-hash = "sha256-tO9yioBP3HBgskMzQ3fKhcjAK/XpZ5Affr2Kr69GxzE=";
+  myZenVersion = "1.13.2b";
+  x86_64-darwin-hash = "";
+  aarch64-darwin-hash = "sha256-6u6vGta8cvnC0oKd8Aq6scAyHGRqi39cKBDzpifBOa8=";
   x86_64-linux-hash = "";
   sources = {
     x86_64-darwin = fetchurl {
@@ -56,12 +56,15 @@ stdenv.mkDerivation (finalAttrs: {
   buildInputs = [ makeWrapper ] ++ lib.optionals stdenv.isDarwin [ undmg ];
 
   buildPhase =
+    let
+      app_name = "Zen";
+    in
     if stdenv.isDarwin then
       ''
         undmg ${finalAttrs.src}
         mkdir -p $out/bin
-        cp -r "Zen Browser.app" $out
-        makeWrapper "$out/Zen Browser.app/Contents/MacOS/zen" "$out/bin/zen"
+        cp -r "${app_name}.app" $out
+        makeWrapper "$out/${app_name}.app/Contents/MacOS/zen" "$out/bin/zen"
       ''
     else
       ''

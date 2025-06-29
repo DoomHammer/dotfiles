@@ -36,9 +36,9 @@
     '';
   };
 
-  # FIXME: This home directory should be computed (home.homeDirectory?)
+  # FIXME: This should be modified for Linux hosts
   xdg.configFile."navi/config.yaml".source =
-    config.lib.file.mkOutOfStoreSymlink "/Users/doomhammer/Library/Application Support/navi/config.yaml";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Library/Application Support/navi/config.yaml";
 
   programs.navi = {
     enable = true;

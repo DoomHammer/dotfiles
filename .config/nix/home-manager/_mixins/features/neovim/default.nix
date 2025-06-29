@@ -31,11 +31,15 @@ in
       gnumake
 
       # needed to compile some Language Servers
+      cargo
       nodejs
       python310
 
       # Lua support
       stylua
+
+      # Ctags
+      universal-ctags
 
       # language servers
       deno
@@ -53,6 +57,10 @@ in
       nixpkgs-fmt
       statix
       deadnix
+
+      # Images in terminal and NeoVim
+      timg
+      viu
     ];
   };
 

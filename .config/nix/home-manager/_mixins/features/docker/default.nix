@@ -23,8 +23,7 @@ in
 
   xdg.configFile."colima/default/colima.yaml".source =
     config.lib.file.mkOutOfStoreSymlink "${dir}/colima-config/default/colima.yaml";
-  # FIXME: This home directory should be computed (home.homeDirectory?)
   programs.ssh.extraConfig = ''
-    Include /Users/doomhammer/.config/colima/ssh_config
+    Include ${config.home.homeDirectory}/.config/colima/ssh_config
   '';
 }

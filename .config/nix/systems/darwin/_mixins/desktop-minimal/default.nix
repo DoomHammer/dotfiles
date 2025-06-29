@@ -6,13 +6,14 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    darwin.lsusb
     ext4fuse
     neovide
+    netbird-ui
   ];
 
   homebrew = {
     # taps = builtins.attrNames config.nix-homebrew.taps;
-    taps = [ "netbirdio/tap" ];
     casks = [
       "1password"
       "backblaze"
@@ -23,7 +24,6 @@
       "font-monofett"
       "kicad"
       "macfuse"
-      "netbird-ui"
       "notion-calendar"
       "obsidian"
       # Possible alternative: https://github.com/ther0n/UnnaturalScrollWheels

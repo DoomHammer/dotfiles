@@ -6,6 +6,7 @@
   outputs,
   pkgs,
   platform,
+  username,
   ...
 }:
 {
@@ -40,7 +41,7 @@
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = true;
+      # autoUpdate = true;
       # upgrade = true;
       cleanup = "zap";
     };
@@ -76,7 +77,7 @@
       extra-platforms = [ "aarch64-linux" ];
     };
     extraOptions = ''
-      trusted-users = root doomhammer
+      trusted-users = root ${username}
     '';
     # linux-builder = {
     #   enable = true;
@@ -91,7 +92,7 @@
     #   #       cores = 6;
     #   #     };
     #   #   };
-    # }
+    # };
   };
 
   nix-rosetta-builder = {
@@ -132,13 +133,9 @@
   };
 
   # Enable TouchID for sudo authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   # Also for tmux
   security.pam.enableSudoTouchId = true;
-
-  services = {
-    nix-daemon.enable = true;
-  };
 
   system = {
     stateVersion = 5;
@@ -157,24 +154,24 @@
           sudo /usr/sbin/softwareupdate --install-rosetta --agree-to-license
         fi
       '';
-      postUserActivation.text = ''
-        # reload the settings and apply them without the need to logout/login
-        /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-        killall SystemUIServer
-        sudo killall Finder
+      # postUserActivation.text = ''
+      #   # reload the settings and apply them without the need to logout/login
+      #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+      #   killall SystemUIServer
+      #   sudo killall Finder
+      #
+      #   # Make apps indexable
+      #   apps_source="${config.system.build.applications}/Applications"
+      #   moniker="Nix Trampolines"
+      #   app_target_base="$HOME/Applications"
+      #   app_target="$app_target_base/$moniker"
+      #   mkdir -p "$app_target"
+      #   ${pkgs.rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
+      # '';
+    };
 
-        # Make apps indexable
-        apps_source="${config.system.build.applications}/Applications"
-        moniker="Nix Trampolines"
-        app_target_base="$HOME/Applications"
-        app_target="$app_target_base/$moniker"
-        mkdir -p "$app_target"
-        ${pkgs.rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
-      '';
-    };
-    checks = {
-      verifyNixChannels = false;
-    };
+    primaryUser = username;
+
     defaults = {
       LaunchServices.LSQuarantine = false;
       CustomUserPreferences = {

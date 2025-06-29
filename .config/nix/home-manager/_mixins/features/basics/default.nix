@@ -13,8 +13,10 @@ let
 in
 {
   home.packages = with pkgs; [
+    p7zip
     btop
     curl
+    dogdns
     du-dust
     eza
     fd
@@ -22,10 +24,13 @@ in
     jq
     just
     lesspipe
+    nodejs # yuck
     ripgrep
     silver-searcher
+    tre
     unzip
     wget
+    wtfutil
     zstd
   ];
   programs = {

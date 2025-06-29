@@ -16,3 +16,13 @@ chmod a+x ~/.local/bin/yadm
 ~/.local/bin/yadm bootstrap
 rm -rf ~/.local/bin/yadm
 ```
+
+To set hostname on Mac:
+
+```
+export HOSTNAME=
+sudo scutil --set HostName "$HOSTNAME"
+sudo scutil --set LocalHostName "$HOSTNAME"
+sudo scutil --set ComputerName "$HOSTNAME"
+dscacheutil -flushcache
+```

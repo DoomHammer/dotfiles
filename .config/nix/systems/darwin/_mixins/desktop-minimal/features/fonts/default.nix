@@ -2,17 +2,12 @@
 {
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "Inconsolata"
-          "Iosevka"
-          "IosevkaTerm"
-          "NerdFontsSymbolsOnly"
-        ];
-      })
+      nerd-fonts.fira-code
+      nerd-fonts.inconsolata
+      nerd-fonts.iosevka
+      nerd-fonts.iosevka-term
+      nerd-fonts.symbols-only
       inconsolata
-      inconsolata-nerdfont
       iosevka
       font-awesome
       noto-fonts-emoji

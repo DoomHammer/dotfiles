@@ -31,7 +31,7 @@ stdenvNoCC.mkDerivation rec {
   meta = {
     description = "Camtasia 2019";
     homepage = "https://www.techsmith.com/camtasia/";
-    license = lib.licenses.unfree;
+    # license = lib.licenses.unfree;
     platforms = lib.platforms.darwin;
   };
 }

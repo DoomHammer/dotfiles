@@ -31,7 +31,7 @@ stdenvNoCC.mkDerivation rec {
   meta = {
     description = "Cricut Design Space";
     homepage = "https://design.cricut.com/";
-    license = lib.licenses.unfree;
+    # license = lib.licenses.unfree;
     platforms = lib.platforms.darwin;
   };
 }

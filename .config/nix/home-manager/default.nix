@@ -10,6 +10,7 @@
 }:
 let
   inherit (pkgs.stdenv) isDarwin;
+  homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
 in
 {
   imports = [
@@ -54,7 +55,7 @@ in
   home = {
     inherit stateVersion;
     inherit username;
-    homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
+    inherit homeDirectory;
   };
 
   home.activation = {

@@ -16,6 +16,13 @@
 	excludesfile = ~/.gitignore_global
 	whitespace = blank-at-eol,blank-at-eof,space-before-tab
 	editor = nvim --cmd 'let g:unception_block_while_host_edits=1'
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
 
 [push]
 	default = current
@@ -62,6 +69,16 @@
 	# Current branch
 	current = rev-parse --abbrev-ref HEAD
 	cof = !git for-each-ref --format='%(refname:short)' refs/heads | fzf | xargs git checkout
+	# Difftastic aliases, so `git dlog` is `git log` with difftastic and so on.
+	dlog = -c diff.external=difft log --ext-diff
+	dshow = -c diff.external=difft show --ext-diff
+	ddiff = -c diff.external=difft diff
+	# `git log` with patches shown with difftastic.
+	dl = -c diff.external=difft log -p --ext-diff
+	# Show the most recent commit with difftastic.
+	ds = -c diff.external=difft show --ext-diff
+	# `git diff` with difftastic.
+	dft = -c diff.external=difft diff
 
 [diff]
 	algorithm = histogram

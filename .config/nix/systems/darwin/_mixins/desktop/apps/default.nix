@@ -1,4 +1,10 @@
 { pkgs, ... }:
+let
+  mkGreedy = caskName: {
+    name = caskName;
+    greedy = true;
+  };
+in
 {
   imports = [
     ./obs-studio
@@ -30,13 +36,13 @@
       jellyfin-media-player
       kitty
       lima
-      # netbird-ui
+      netbird-ui
       openscad
       pngpaste
+      jetbrains.pycharm-community
       rpiboot
       talosctl
       tpi
-      jetbrains.pycharm-community
       signal
       # TODO: Add Konfig somehow
     ];
@@ -45,29 +51,25 @@
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = true;
-      upgrade = true;
+      # autoUpdate = true;
+      # upgrade = true;
       cleanup = "zap";
     };
 
     caskArgs.no_quarantine = true;
 
     # taps = builtins.attrNames config.nix-homebrew.taps;
-    taps = [
-      "netbirdio/tap"
-    ];
     brews = [
       "conan"
       "sdl2"
     ];
-    casks = [
+    casks = map mkGreedy [
       "ableton-live-standard"
       "arduino-ide"
       "autodesk-fusion"
       "balenaetcher"
-      "backblaze"
       "beeper"
-      "creality-print"
+      # "creality-print"
       "focusrite-control"
       "freecad"
       "logi-options+"
@@ -75,11 +77,11 @@
       "mqtt-explorer"
       "mu-editor"
       "musicbrainz-picard"
-      "netbird-ui"
       "nheko"
       "obs"
       "orcaslicer"
       "plex"
+      "postman"
       "prusaslicer"
       "qdirstat"
       "raspberry-pi-imager"
@@ -92,6 +94,7 @@
       # See also: https://github.com/nix-community/nix-vscode-extensions/blob/master/flake.nix
     ];
     masApps = {
+      "Backblaze" = 628638330;
       "Brother P-touch Editor" = 1453365242;
       "DaVinci Resolve" = 571213070;
       "Keynote" = 409183694;
@@ -106,5 +109,6 @@
 
   services = {
     tailscale.enable = true;
+    netbird.enable = true;
   };
 }

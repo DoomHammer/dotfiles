@@ -13,7 +13,8 @@ stdenvNoCC.mkDerivation rec {
   src = fetchzip {
     url = "https://secure.backblaze.com/mac_restore_downloader";
     extension = "zip";
-    hash = "sha256-dP4DZmXInJO6vHN3KdPWEpo4Q4G+YyENDKF6xhnOELU=";
+    # This one changes often
+    hash = "sha256-X1p70yZ0Wic9YCFkLEMgwctDZTt0+g/QpsBnQbs1NCg=";
     stripRoot = false;
   };
 
@@ -33,7 +34,7 @@ stdenvNoCC.mkDerivation rec {
   meta = {
     description = "Backblaze downloader";
     homepage = "https://www.backblaze.com/";
-    license = lib.licenses.unfree;
+    # license = lib.licenses.unfree;
     platforms = lib.platforms.darwin;
   };
 }

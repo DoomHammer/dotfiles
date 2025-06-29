@@ -13,6 +13,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    delta
     diff-so-fancy
     difftastic
     ghq
@@ -21,6 +22,12 @@ in
     lazygit
     zsh-forgit
   ];
+  programs.gh = {
+    enable = true;
+    extensions = with pkgs; [
+      gh-notify
+    ];
+  };
   programs.git-cliff.enable = true;
   programs.git = {
     difftastic = {
