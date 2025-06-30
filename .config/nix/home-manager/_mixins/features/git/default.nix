@@ -22,17 +22,19 @@ in
     lazygit
     zsh-forgit
   ];
-  programs.gh = {
-    enable = true;
-    extensions = with pkgs; [
-      gh-notify
-    ];
-  };
-  programs.git-cliff.enable = true;
-  programs.git = {
-    difftastic = {
-      display = "side-by-side-show-both";
+  programs = {
+    gh = {
       enable = true;
+      extensions = with pkgs; [
+        gh-notify
+      ];
+    };
+    git-cliff.enable = true;
+    git = {
+      difftastic = {
+        display = "side-by-side-show-both";
+        enable = true;
+      };
     };
   };
   # TODO: Migrate gitconfig to https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
