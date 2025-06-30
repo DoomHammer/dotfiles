@@ -1,4 +1,4 @@
-name: Evaluate Home Manager configurations
+name: Evaluate configurations
 
 on:
   workflow_dispatch:
@@ -30,4 +30,11 @@ jobs:
         uses: DeterminateSystems/flakehub-cache-action@main
 
       - name: Evaluate Home Manager configurations
-        run: nix build -f .config/nix/parts/programs/ciHomeManagerConfigurations.nix
+        run: nix build -f .config/nix/parts/programs/ciHomeManagerConfigurations.nix --print-build-logs
+
+      - name: Build Home Manager configurations
+        run: nix run nixpkgs#home-manager -- build --flake "$HOME/.config/nix" -L --print-build-logs
+
+      - if: matrix.os == 'macos-latest'
+        name: Build Nix Darwin configurations
+        run: nix run nix-darwin -- build --flake ".config/nix" -L --print-build-logs
