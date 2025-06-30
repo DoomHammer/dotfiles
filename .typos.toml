@@ -1,2 +1,2 @@
-[default.extend-ignore-identifiers]
+[default.extend-words]
 tre = "tre"
