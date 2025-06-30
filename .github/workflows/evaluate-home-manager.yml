@@ -33,7 +33,7 @@ jobs:
       #   run: nix build -f .config/nix/parts/programs/ciHomeManagerConfigurations.nix --print-build-logs
 
       - name: Build Home Manager configurations
-        run: nix run nixpkgs#home-manager -- build --flake "$HOME/.config/nix" -L --print-build-logs
+        run: nix run nixpkgs#home-manager -- build --flake ".config/nix" -L --print-build-logs
 
       - if: matrix.os == 'macos-latest'
         name: Build Nix Darwin configurations
