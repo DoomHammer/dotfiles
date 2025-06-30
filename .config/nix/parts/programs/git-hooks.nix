@@ -67,6 +67,10 @@
             typos = mkHook {
               settings = {
                 write = true;
+                configuration = ''
+                  [default.extend-words]
+                  tre = "tre"
+                '';
               };
             };
 
