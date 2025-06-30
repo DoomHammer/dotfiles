@@ -1,6 +1,7 @@
 {
   config,
   flakePath,
+  lib,
   pkgs,
   ...
 }:
@@ -66,34 +67,35 @@ in
         file = "share/zsh-sensible/zsh-sensible.plugin.zsh";
       }
     ];
-    initExtraFirst = ''
-      # Via https://tanguy.ortolo.eu/blog/article25/shrc
-      #
-      # Zsh always executes zshenv. Then, depending on the case:
-      # - run as a login shell, it executes zprofile;
-      # - run as an interactive, it executes zshrc;
-      # - run as a login shell, it executes zlogin.
-      #
-      # At the end of a login session, it executes zlogout, but in reverse order, the
-      # user-specific file first, then the system-wide one, constituting a chiasmus
-      # with the zlogin files.
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        # Via https://tanguy.ortolo.eu/blog/article25/shrc
+        #
+        # Zsh always executes zshenv. Then, depending on the case:
+        # - run as a login shell, it executes zprofile;
+        # - run as an interactive, it executes zshrc;
+        # - run as a login shell, it executes zlogin.
+        #
+        # At the end of a login session, it executes zlogout, but in reverse order, the
+        # user-specific file first, then the system-wide one, constituting a chiasmus
+        # with the zlogin files.
 
-      skip_global_compinit=1
+        skip_global_compinit=1
 
-      # Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
-      test -r ~/.shell-env && source ~/.shell-env
+        # Thanks to https://github.com/elifarley/shellbase/blob/master/.zshrc
+        test -r ~/.shell-env && source ~/.shell-env
 
-      # WSL cannot handle `nice`
-      if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
-        unsetopt BG_NICE
-      fi
+        # WSL cannot handle `nice`
+        if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+          unsetopt BG_NICE
+        fi
+      '')
+      (lib.mkAfter ''
+        . $HOME/.zshrc.prev
 
-    '';
-    initExtra = ''
-      . $HOME/.zshrc.prev
-
-      export NIX_BUILD_SHELL=${pkgs.zsh}/bin/zsh
-    '';
+          export NIX_BUILD_SHELL=${pkgs.zsh}/bin/zsh
+      '')
+    ];
     autocd = true;
     # autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
