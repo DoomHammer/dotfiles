@@ -14,7 +14,7 @@ stdenvNoCC.mkDerivation rec {
     url = "https://secure.backblaze.com/mac_restore_downloader";
     extension = "zip";
     # This one changes often
-    hash = "sha256-X1p70yZ0Wic9YCFkLEMgwctDZTt0+g/QpsBnQbs1NCg=";
+    hash = "sha256-oy17NIo2Dd3jAFszO2IdVJMOz2ll8VVDGsONVKe4fOc=";
     stripRoot = false;
   };
 

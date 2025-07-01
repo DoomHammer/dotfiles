@@ -1,4 +1,4 @@
-name: Evaluate Home Manager configurations
+name: Evaluate configurations
 
 on:
   workflow_dispatch:
@@ -30,4 +30,15 @@ jobs:
         uses: DeterminateSystems/flakehub-cache-action@main
 
       - name: Evaluate Home Manager configurations
-        run: nix build -f .config/nix/parts/programs/ciHomeManagerConfigurations.nix
+        run: nix build -f .config/nix/parts/programs/ciHomeManagerConfigurations.nix --print-build-logs
+
+      # - if: matrix.os == 'macos-latest'
+      #   name: Check Nix Darwin configurations
+      #   run: |
+      #     export HOSTNAME=eos
+      #     sudo scutil --set HostName "$HOSTNAME"
+      #     sudo scutil --set LocalHostName "$HOSTNAME"
+      #     sudo scutil --set ComputerName "$HOSTNAME"
+      #     dscacheutil -flushcache
+      #     # FIXME: This currently fails to build linux-builder, gonna figure something out
+      #     sudo "$(which nix)" run nix-darwin -- check --flake ".config/nix" -L --print-build-logs

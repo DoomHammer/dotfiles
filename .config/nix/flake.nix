@@ -62,6 +62,7 @@
       type = "github";
       owner = "DeterminateSystems";
       repo = "flake-checker";
+      ref = "refs/tags/v0.2.7";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
