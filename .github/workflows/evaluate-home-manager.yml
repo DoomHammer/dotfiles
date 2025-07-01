@@ -32,10 +32,10 @@ jobs:
       - name: Evaluate Home Manager configurations
         run: nix build -f .config/nix/parts/programs/ciHomeManagerConfigurations.nix --print-build-logs
 
-      - name: Check Home Manager configurations
+      - name: Build Home Manager configurations
         run: |
           export USERNAME=doomhammer
-          nix run nixpkgs#home-manager -- check --flake ".config/nix" -L --print-build-logs
+          nix run nixpkgs#home-manager -- build --flake ".config/nix" -L --print-build-logs
 
       - if: matrix.os == 'macos-latest'
         name: Check Nix Darwin configurations
