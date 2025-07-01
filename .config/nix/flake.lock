@@ -47,15 +47,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1746364433,
-        "narHash": "sha256-JE6q/Wen2mkHxne+em4o8artOG8FxljaLktISkteN+Q=",
+        "lastModified": 1748447721,
+        "narHash": "sha256-RwkyyrWm0QRNOn7Bb9jKOyJ049B6pPmhbrx8tXpUf4w=",
         "owner": "DeterminateSystems",
         "repo": "flake-checker",
-        "rev": "4fcae041e942962808ae9240cf5093539a597f22",
+        "rev": "fc0d03efe300c1e923158831fd6d0a84d3ef75d3",
         "type": "github"
       },
       "original": {
         "owner": "DeterminateSystems",
+        "ref": "refs/tags/v0.2.7",
         "repo": "flake-checker",
         "type": "github"
       }
