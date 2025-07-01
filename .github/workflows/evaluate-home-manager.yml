@@ -40,4 +40,4 @@ jobs:
           sudo scutil --set LocalHostName "$HOSTNAME"
           sudo scutil --set ComputerName "$HOSTNAME"
           dscacheutil -flushcache
-          nix run nix-darwin -- check --flake ".config/nix" -L --print-build-logs
+          sudo "$(which nix)" run nix-darwin -- check --flake ".config/nix" -L --print-build-logs
