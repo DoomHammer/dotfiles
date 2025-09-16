@@ -5,7 +5,7 @@ cpu: 4
 # Size of the disk in GiB to be allocated to the virtual machine.
 # NOTE: value can only be increased after virtual machine has been created.
 #
-# Default: 60
+# Default: 100
 disk: 120
 
 # Size of the memory in GiB to be allocated to the virtual machine.
@@ -196,6 +196,14 @@ sshPort: 0
 # Colima default behaviour: $HOME and /tmp/colima are mounted as writable.
 # Default: []
 mounts: []
+
+# Specify a custom disk image for the virtual machine.
+# When not specified, Colima downloads an appropriate disk image from Github at
+# https://github.com/abiosoft/colima-core/releases.
+# The file path to a custom disk image can be specified to override the behaviour.
+#
+# Default: ""
+diskImage: ""
 
 # Environment variables for the virtual machine.
 #

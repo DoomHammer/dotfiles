@@ -1,5 +1,6 @@
-_: {
-  homebrew = {
-    casks = [ "google-chrome" ];
-  };
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    google-chrome
+  ];
 }

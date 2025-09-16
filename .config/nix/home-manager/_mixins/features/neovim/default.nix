@@ -51,6 +51,7 @@ in
 
       # Rust support
       lldb # debug adapter
+      rust-analyzer
 
       # Nix support
       nixfmt-rfc-style

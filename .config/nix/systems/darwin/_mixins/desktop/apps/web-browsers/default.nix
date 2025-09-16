@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    zen-browser
+    firefox
+    # FIXME: This shouldn't be hardcoded
+    inputs.zen-browser.packages.aarch64-darwin.default
   ];
-
-  homebrew = {
-    casks = [ "firefox" ];
-  };
 }

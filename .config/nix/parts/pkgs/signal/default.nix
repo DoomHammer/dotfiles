@@ -7,11 +7,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "signal";
-  version = "7.39.0";
+  version = "7.63.0";
 
   src = fetchurl {
-    url = "https://updates.signal.org/desktop/signal-desktop-adhoc-20241213-a970d647c-mac-universal-7.39.0-adhoc.20241213.15-a970d647c.dmg";
-    hash = "sha256-tvJdcBJBPLQTsdJo1/aRfU6bMuZt8/99fo3RHzfG5pk=";
+    url = "https://updates.signal.org/desktop/signal-desktop-mac-universal-7.63.0.dmg";
+    hash = "sha256-OKJPCXw8Gv9cpzQsA3R3jTblUVTcXa4a/wVHXrEdCVM=";
   };
 
   nativeBuildInputs = [

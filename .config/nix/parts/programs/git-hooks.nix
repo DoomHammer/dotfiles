@@ -67,10 +67,12 @@
             typos = mkHook {
               settings = {
                 write = true;
-                configuration = ''
-                  [default.extend-words]
-                  tre = "tre"
-                '';
+                config = {
+                  default.extend-ignore-re = [
+                    "(?Rm)^.*(#|//)\\s*spellchecker:disable-line$"
+                    "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on"
+                  ];
+                };
               };
             };
 

@@ -2,6 +2,7 @@
 {
   fonts = {
     packages = with pkgs; [
+      google-fonts
       nerd-fonts.fira-code
       nerd-fonts.inconsolata
       nerd-fonts.iosevka
