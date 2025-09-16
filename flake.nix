@@ -1,7 +1,7 @@
 {
   description = "DoomHammer's repository of flake templates";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-parts = {
       type = "github";
       owner = "hercules-ci";

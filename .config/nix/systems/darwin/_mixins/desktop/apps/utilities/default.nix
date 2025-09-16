@@ -4,8 +4,4 @@
     grandperspective
     unstable.utm
   ];
-
-  homebrew = {
-    casks = [ "balenaetcher" ];
-  };
 }

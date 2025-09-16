@@ -13,8 +13,12 @@
       url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin-unstable = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nix-rosetta-builder = {
-      url = "github:cpick/nix-rosetta-builder";
+      url = "github:cpick/nix-rosetta-builder/5cf6aa1f3f2fbb70443d33b5ef7779b7c7063392";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lix-module = {
@@ -25,6 +29,10 @@
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     # Prebuilt package index - provides comma package
     nix-index-database = {
@@ -84,6 +92,24 @@
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
+    };
+    # For slipshow
+    wegank-nur = {
+      url = "github:wegank/nur-packages";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # For zen-browser Home Manager module
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    # For PaperWM.spoon
+    doomhammer-nur = {
+      url = "github:doomhammer/nur-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

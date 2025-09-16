@@ -13,8 +13,16 @@ let
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
 in
 {
+  # TODO: Remove when 25.11 is released
+  disabledModules = [
+    "programs/vdirsyncer.nix"
+  ];
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
+    inputs.zen-browser.homeModules.default
+
+    (inputs.home-manager-unstable + "/modules/programs/vdirsyncer/default.nix")
+
     ./_mixins/scripts
 
     ./_mixins/features/basics

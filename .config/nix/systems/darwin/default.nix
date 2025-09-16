@@ -10,15 +10,24 @@
   ...
 }:
 {
+  # TODO: Remove when 25.11 released
+  disabledModules = [ "system/applications.nix" ];
   imports = [
     inputs.nix-index-database.darwinModules.nix-index
+
+    (inputs.nix-darwin-unstable + "/modules/system/applications.nix")
+
     # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
     # If one isn't already available: comment out the `nix-rosetta-builder` module below,
     # uncomment the `linux-builder` module below, and run `darwin-rebuild switch`:
     # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
     # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
+
     inputs.nix-rosetta-builder.darwinModules.default
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+
     ./${hostname}
+
     ./_mixins/scripts
     ./_mixins/touchid
   ];
@@ -41,12 +50,21 @@
   homebrew = {
     enable = true;
     onActivation = {
-      # autoUpdate = true;
-      # upgrade = true;
+      autoUpdate = false;
       cleanup = "zap";
+      upgrade = false;
     };
 
     caskArgs.no_quarantine = true;
+  };
+  nix-homebrew = {
+    enable = true;
+    user = username;
+
+    taps = {
+      "homebrew/core" = inputs.homebrew-core;
+      "homebrew/cask" = inputs.homebrew-cask;
+    };
   };
 
   nixpkgs = {
@@ -60,6 +78,7 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
       # Add overlays exported from other flakes:
+      inputs.doomhammer-nur.overlays.default
     ];
   };
 
@@ -153,21 +172,20 @@
           echo installing rosetta... >&2
           sudo /usr/sbin/softwareupdate --install-rosetta --agree-to-license
         fi
+
+        # reload the settings and apply them without the need to logout/login
+        /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+        killall SystemUIServer
+        sudo killall Finder
+        #
+        # # Make apps indexable
+        # apps_source="${config.system.build.applications}/Applications"
+        # moniker="Nix Trampolines"
+        # app_target_base="$HOME/Applications"
+        # app_target="$app_target_base/$moniker"
+        # mkdir -p "$app_target"
+        # ${pkgs.rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
       '';
-      # postUserActivation.text = ''
-      #   # reload the settings and apply them without the need to logout/login
-      #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-      #   killall SystemUIServer
-      #   sudo killall Finder
-      #
-      #   # Make apps indexable
-      #   apps_source="${config.system.build.applications}/Applications"
-      #   moniker="Nix Trampolines"
-      #   app_target_base="$HOME/Applications"
-      #   app_target="$app_target_base/$moniker"
-      #   mkdir -p "$app_target"
-      #   ${pkgs.rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
-      # '';
     };
 
     primaryUser = username;
@@ -333,7 +351,6 @@
         askForPassword = true;
         askForPasswordDelay = 300;
       };
-      smb.NetBIOSName = hostname;
       trackpad = {
         Clicking = true;
         TrackpadRightClick = true; # enable two finger right click

@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 let
   # Out-of-store symlinks require absolute paths when using a flake config. This
   # is because relative paths are expanded after the flake source is copied to

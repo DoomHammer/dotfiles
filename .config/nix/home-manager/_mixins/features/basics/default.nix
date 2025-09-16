@@ -27,7 +27,7 @@ in
     nodejs # yuck
     ripgrep
     silver-searcher
-    tre
+    tre # spellchecker:disable-line
     unzip
     wget
     wtfutil
