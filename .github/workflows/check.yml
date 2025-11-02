@@ -16,10 +16,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Lix
+      - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
         with:
-          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
           logger: pretty
 
       - name: Nix Magic Cache

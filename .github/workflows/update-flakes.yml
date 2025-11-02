@@ -21,10 +21,9 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
           persist-credentials: false
-      - name: Install Lix
+      - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
         with:
-          source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux
           logger: pretty
       - name: Make changes to pull request
         run: |
