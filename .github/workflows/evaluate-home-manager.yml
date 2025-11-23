@@ -20,13 +20,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-        with:
-          logger: pretty
 
-      - name: Nix Magic Cache
-        uses: DeterminateSystems/flakehub-cache-action@main
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          enable_kvm: true
+          extra_nix_config: |
+            keep-outputs = true
+            keep-failed = true
 
       - name: Evaluate Home Manager configurations
         run: nix build -f .config/nix/parts/programs/ciHomeManagerConfigurations.nix --print-build-logs
