@@ -3,24 +3,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     flake-parts = {
-      type = "github";
-      owner = "hercules-ci";
-      repo = "flake-parts";
+      url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     # we can use this to provide overridable systems
-    systems = {
-      type = "github";
-      owner = "nix-systems";
-      repo = "default";
-    };
+    systems.url = "github:nix-systems/default";
 
     # this adds pre commit hooks via nix to our repo
     git-hooks = {
-      type = "github";
-      owner = "cachix";
-      repo = "git-hooks.nix";
+      url = "github:cachix/git-hooks.nix";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -29,16 +21,13 @@
     };
 
     flake-checker = {
-      type = "github";
-      owner = "DeterminateSystems";
-      repo = "flake-checker";
+      url = "github:DeterminateSystems/flake-checker";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # a tree-wide formatter
     treefmt-nix = {
-      type = "github";
-      owner = "numtide";
-      repo = "treefmt-nix";
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
