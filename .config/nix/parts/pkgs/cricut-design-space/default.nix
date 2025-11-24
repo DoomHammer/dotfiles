@@ -1,32 +1,63 @@
 {
   lib,
-  fetchurl,
+  requireFile,
   stdenvNoCC,
-  undmg,
   ...
 }:
+let
+  appname = "Cricut Design Space";
+  version = "9.43.60";
+in
 stdenvNoCC.mkDerivation rec {
   pname = "cricut-design-space";
-  version = "8.60.67";
+  inherit version;
 
-  src = fetchurl {
-    url = "https://staticcontent.cricut.com/a/software/osx-native/CricutDesignSpace-Install-v8.60.67.dmg?Expires=1735396184&Signature=aA8j9xqNhHOgfc4F80c--RPlR2tvAbGLTprYDe1H~rNxfIvqQ6qnxlWX0~ZDNmF~h88XcIH-WFlveZYhflkTE8O1P-1JNOl-Ban2IZLaBeYRKPH9KArteJ-YXm9p1m91R9nFNMECMbIs1ETS7kHBRaa2x5JKMduoXCuKhzAMNquC~BcqoKl0Gjmjyl54S8LlQh3vmYOev3x~Vn3umiU2L3M687q~MwdgtQLn7z0e9ktlDNV5oUW8mZNT~oABAVOiSvtmLwLi1EjGc-Bpago6ztEIbsuX-7~HgUOZ4XJm7wA5HPO66D~wJUAb8TrQIbZlniqg2gBur9jHhpCMQniDVg__&Key-Pair-Id=K2W1AJ47IQWIOI";
-    hash = "sha256-rin0AjxCNQuhSIZ/FkM1yQW6KPIWFAFQx/y1e9dSn2c=";
+  src = requireFile {
+    name = "CricutDesignSpace-Install-v${version}.dmg";
+    url = "https://design.cricut.com/";
+    sha256 = "0wchn8jg93vahf0gd8i1i75r4bv4wiv06p2gfv0qmg77lgb1mfsf";
   };
 
-  nativeBuildInputs = [
-    undmg
+  unpackCmd = ''
+    echo "File to unpack: $curSrc"
+    if ! [[ "$curSrc" =~ \.dmg$ ]]; then return 1; fi
+    mnt=$(mktemp -d -t ci-XXXXXXXXXX)
+
+    function finish {
+      echo "Detaching $mnt"
+      /usr/bin/hdiutil detach $mnt -force
+      rm -rf $mnt
+    }
+
+    trap finish EXIT
+
+    echo "Attaching $mnt"
+
+    /usr/bin/hdiutil attach -nobrowse -readonly $src -mountpoint $mnt
+
+    echo "What's in the mount dir"?
+    ls -la $mnt/
+
+    echo "Copying contents"
+    shopt -s extglob
+    DEST="$PWD"
+    (cd "$mnt"; cp -a !(Applications) "$DEST/")
+
+    echo "What's in the dest dir"?
+    ls -la $DEST/
+  '';
+  phases = [
+    "unpackPhase"
+    "installPhase"
   ];
 
-  sourceRoot = ".";
-  unpackPhase = ''
-    undmg $src
-  '';
+  sourceRoot = "${appname}.app";
 
   installPhase = ''
-    mkdir -p $out/Applications
-    mv *.app $out/Applications/
-  '';
+    mkdir -p "$out/Applications/${appname}.app"
+    cp -a ./. "$out/Applications/${appname}.app/"
+  ''; # '';
+  dontFixup = true;
 
   meta = {
     description = "Cricut Design Space";
