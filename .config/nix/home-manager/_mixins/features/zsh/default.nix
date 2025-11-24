@@ -92,8 +92,6 @@ in
       '')
       (lib.mkAfter ''
         . $HOME/.zshrc.prev
-
-          export NIX_BUILD_SHELL=${pkgs.zsh}/bin/zsh
       '')
     ];
     autocd = true;

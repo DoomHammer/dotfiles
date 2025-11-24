@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   lib,
   ...
 }:
@@ -35,10 +34,6 @@
       done
     '';
   };
-
-  # FIXME: This should be modified for Linux hosts
-  xdg.configFile."navi/config.yaml".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Library/Application Support/navi/config.yaml";
 
   programs.navi = {
     enable = true;
