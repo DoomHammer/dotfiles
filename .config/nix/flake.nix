@@ -17,14 +17,9 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nix-rosetta-builder = {
-      url = "github:cpick/nix-rosetta-builder/5cf6aa1f3f2fbb70443d33b5ef7779b7c7063392";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.inputs.systems.follows = "systems";
+    virby = {
+      url = "github:quinneden/virby-nix-darwin";
+      # inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";

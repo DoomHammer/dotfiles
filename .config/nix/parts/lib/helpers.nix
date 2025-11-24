@@ -115,7 +115,6 @@
       };
       modules = [
         ../../systems/darwin
-        inputs.lix-module.nixosModules.default
       ];
     };
 

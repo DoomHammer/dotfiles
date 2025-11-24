@@ -182,6 +182,8 @@ in
       forwardAgent = true;
     };
   };
+  xdg.enable = true;
+  launchd.enable = true;
 }
 # TODO:
 #

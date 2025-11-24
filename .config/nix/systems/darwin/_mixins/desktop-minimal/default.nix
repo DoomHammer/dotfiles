@@ -28,7 +28,7 @@
       "beeper"
       "macfuse"
       "notion-calendar"
-      "tailscale"
+      "tailscale-app"
       # See also: https://github.com/nix-community/nix-vscode-extensions/blob/master/flake.nix
       "visual-studio-code"
       "vlc"

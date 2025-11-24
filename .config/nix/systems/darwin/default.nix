@@ -17,13 +17,15 @@
 
     (inputs.nix-darwin-unstable + "/modules/system/applications.nix")
 
-    # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
-    # If one isn't already available: comment out the `nix-rosetta-builder` module below,
-    # uncomment the `linux-builder` module below, and run `darwin-rebuild switch`:
-    # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
-    # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
+    # # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
+    # # If one isn't already available: comment out the `nix-rosetta-builder` module below,
+    # # uncomment the `linux-builder` module below, and run `darwin-rebuild switch`:
+    # # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
+    # # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
+    #
+    # inputs.nix-rosetta-builder.darwinModules.default
 
-    inputs.nix-rosetta-builder.darwinModules.default
+    inputs.virby.darwinModules.default
     inputs.nix-homebrew.darwinModules.nix-homebrew
 
     ./${hostname}
@@ -114,14 +116,21 @@
     # };
   };
 
-  nix-rosetta-builder = {
+  # nix-rosetta-builder = {
+  #   enable = true;
+  #
+  #   cores = 6;
+  #   memory = "24GiB";
+  #   diskSize = "320GiB";
+  #
+  #   onDemand = true;
+  # };
+
+  services.virby = {
     enable = true;
-
-    cores = 6;
-    memory = "12GiB";
-    diskSize = "120GiB";
-
-    onDemand = true;
+    onDemand.enable = true;
+    onDemand.ttl = 30; # Idle timeout in minutes
+    rosetta = true;
   };
 
   networking.hostName = hostname;
