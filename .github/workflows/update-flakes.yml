@@ -34,9 +34,9 @@ jobs:
 
       - name: Make changes to pull request
         run: |
-          nix flake update
+          nix flake update nixpkgs
           cd .config/nix
-          nix flake update
+          nix flake update nixpkgs
 
       - name: Create Pull Request
         id: cpr
