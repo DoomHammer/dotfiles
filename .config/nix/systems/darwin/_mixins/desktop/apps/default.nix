@@ -12,21 +12,24 @@
   environment = {
     systemPackages = with pkgs; [
       alacritty
-      android-file-transfer
+      # FIXME: fuse unsupported
+      # android-file-transfer
       # FIXME: Package ‘arduino-ide-2.3.6’ in /nix/store/i7ykaggappvy548qa4m5aw9msj5cz2vf-source/pkgs/by-name/ar/arduino-ide/package.nix:30 is not available on the requested hostPlatform:
       # arduino-ide
       audacity
       # backblaze-downloader
       camtasia2019
-      cricut-design-space
+      # FIXME: nix-prefetch-sth
+      # cricut-design-space
       darwin.lsusb
       # FIXME: Package ‘freecad-1.0.1’ in /nix/store/j95fcik6rzsydwips4m89dmlvfj9hg9y-source/pkgs/by-name/fr/freecad/package.nix:232 is not available on the requested hostPlatform:
       # freecad
       fritzing
       gcc-arm-embedded-13
-      gimp
+      # FIXME: not availabnle on darwin
+      # gimp
       # Failing to launch
-      # inkscape
+      inkscape
       # FIXME: Package ‘kicad-9.0.2’ in /nix/store/i7ykaggappvy548qa4m5aw9msj5cz2vf-source/pkgs/applications/science/electronics/kicad/default.nix:313 is marked as broken, refusing to evaluate.
       # kicad
       kitty
@@ -41,7 +44,8 @@
       # orca-slicer
       # FIXME: Package ‘qtwayland-5.15.16’ in /nix/store/j95fcik6rzsydwips4m89dmlvfj9hg9y-source/pkgs/development/libraries/qt-5/qtModule.nix:114 is not available on the requested hostPlatform:
       # picard
-      plex-media-player
+      # FIXME: container-init problems
+      # plex-desktop
       pngpaste
       postman
       # FIXME: Package ‘webkitgtk-2.48.3+abi=4.1’ in /nix/store/j95fcik6rzsydwips4m89dmlvfj9hg9y-source/pkgs/development/libraries/webkitgtk/default.nix:254 is marked as broken, refusing to evaluate.
@@ -106,7 +110,7 @@
       "unetbootin"
     ];
     masApps = {
-      # "AdGuard for Safari" = 1440147259;
+      # FIXME: No app found with ID. WTF?
       # "Backblaze" = 628638330;
       "Brother P-touch Editor" = 1453365242;
       "DaVinci Resolve" = 571213070;

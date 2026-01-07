@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   outputs,
   pkgs,
@@ -13,15 +12,9 @@ let
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
 in
 {
-  # TODO: Remove when 25.11 is released
-  disabledModules = [
-    "programs/vdirsyncer.nix"
-  ];
   imports = [
     inputs.nix-index-database.homeModules.nix-index
     inputs.zen-browser.homeModules.default
-
-    (inputs.home-manager-unstable + "/modules/programs/vdirsyncer/default.nix")
 
     ./_mixins/scripts
 
@@ -78,6 +71,7 @@ in
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      inputs.glide-browser.overlays.default
     ];
     # Configure your nixpkgs instance
     config = {
@@ -177,9 +171,20 @@ in
       enableZshIntegration = true;
     };
     ssh = {
-      enable = true;
-      addKeysToAgent = "yes";
-      forwardAgent = true;
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+        enable = true;
+        addKeysToAgent = "yes";
+        forwardAgent = true;
+      };
     };
   };
   xdg.enable = true;

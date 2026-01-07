@@ -17,7 +17,7 @@ in
     btop
     curl
     dogdns
-    du-dust
+    dust
     eza
     fd
     htop

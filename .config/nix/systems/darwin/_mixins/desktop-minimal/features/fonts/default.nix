@@ -11,9 +11,9 @@
       inconsolata
       iosevka
       font-awesome
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-monochrome-emoji
-      ubuntu_font_family
+      ubuntu-classic
     ];
   };
 }

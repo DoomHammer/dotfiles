@@ -168,6 +168,10 @@ in
           set -g @thumbs-key F
         '';
       }
+      # {
+      #   plugin = plugins.colortag;
+      #   extraConfig = '''';
+      # }
       # TODO: take a look at https://github.com/rafi/tmux-pass
     ];
     prefix = "C-a";

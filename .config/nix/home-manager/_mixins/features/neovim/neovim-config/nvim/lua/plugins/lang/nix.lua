@@ -14,11 +14,12 @@ return {
 			formatters_by_ft = {
 				nix = { "nix_fmt", "nixfmt", stop_after_first = true },
 			},
-			formatters = {
-				nix_fmt = {
-					command = "nix fmt",
-				},
-			},
+			-- formatters = {
+			-- 	nix_fmt = {
+			-- 		command = "nix",
+			-- 		args = "fmt",
+			-- 	},
+			-- },
 		},
 	},
 }

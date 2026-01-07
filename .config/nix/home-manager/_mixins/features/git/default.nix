@@ -23,6 +23,7 @@ in
     zsh-forgit
   ];
   programs = {
+    # difftastic.git.enable = true;
     gh = {
       enable = true;
       extensions = with pkgs; [
@@ -30,12 +31,12 @@ in
       ];
     };
     git-cliff.enable = true;
-    git = {
-      difftastic = {
-        display = "side-by-side-show-both";
-        enable = true;
-      };
-    };
+    # git = {
+    #   difftastic = {
+    #     display = "side-by-side-show-both";
+    #     enable = true;
+    #   };
+    # };
   };
   # TODO: Migrate gitconfig to https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
   home.file = {

@@ -10,22 +10,18 @@
   ...
 }:
 {
-  # TODO: Remove when 25.11 released
-  disabledModules = [ "system/applications.nix" ];
   imports = [
     inputs.nix-index-database.darwinModules.nix-index
 
-    (inputs.nix-darwin-unstable + "/modules/system/applications.nix")
+    # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
+    # If one isn't already available: comment out the `nix-rosetta-builder` module below,
+    # uncomment the `linux-builder` module below, and run `darwin-rebuild switch`:
+    # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
+    # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
 
-    # # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
-    # # If one isn't already available: comment out the `nix-rosetta-builder` module below,
-    # # uncomment the `linux-builder` module below, and run `darwin-rebuild switch`:
-    # # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
-    # # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
-    #
-    # inputs.nix-rosetta-builder.darwinModules.default
+    inputs.nix-rosetta-builder.darwinModules.default
 
-    inputs.virby.darwinModules.default
+    # inputs.virby.darwinModules.default
     inputs.nix-homebrew.darwinModules.nix-homebrew
 
     ./${hostname}
@@ -71,7 +67,13 @@
 
   nixpkgs = {
     # Configure your nixpkgs instance
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "lima-1.0.7"
+      ];
+    };
+
     hostPlatform = lib.mkDefault "${platform}";
     # You can add overlays here
     overlays = [
@@ -100,38 +102,38 @@
     extraOptions = ''
       trusted-users = root ${username}
     '';
-    # linux-builder = {
-    #   enable = true;
-    #   #   ephemeral = true;
-    #   #   maxJobs = 4;
-    #   #   config = {
-    #   #     virtualisation = {
-    #   #       darwin-builder = {
-    #   #         diskSize = 40 * 1024;
-    #   #         memorySize = 8 * 1024;
-    #   #       };
-    #   #       cores = 6;
-    #   #     };
-    #   #   };
-    # };
+    linux-builder = {
+      enable = true;
+      #   ephemeral = true;
+      #   maxJobs = 4;
+      #   config = {
+      #     virtualisation = {
+      #       darwin-builder = {
+      #         diskSize = 40 * 1024;
+      #         memorySize = 8 * 1024;
+      #       };
+      #       cores = 6;
+      #     };
+      #   };
+    };
   };
 
-  # nix-rosetta-builder = {
-  #   enable = true;
-  #
-  #   cores = 6;
-  #   memory = "24GiB";
-  #   diskSize = "320GiB";
-  #
-  #   onDemand = true;
-  # };
-
-  services.virby = {
+  nix-rosetta-builder = {
     enable = true;
-    onDemand.enable = true;
-    onDemand.ttl = 30; # Idle timeout in minutes
-    rosetta = true;
+
+    cores = 6;
+    memory = "24GiB";
+    diskSize = "320GiB";
+
+    onDemand = true;
   };
+
+  # services.virby = {
+  #   enable = true;
+  #   onDemand.enable = true;
+  #   onDemand.ttl = 30; # Idle timeout in minutes
+  #   rosetta = true;
+  # };
 
   networking.hostName = hostname;
   networking.computerName = hostname;
