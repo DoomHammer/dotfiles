@@ -10,11 +10,14 @@
 let
   inherit (pkgs.stdenv) isDarwin;
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
+  nix-colors = import inputs.nix-colors { };
 in
 {
   imports = [
     inputs.nix-index-database.homeModules.nix-index
     inputs.zen-browser.homeModules.default
+    inputs.doomhammer-nur.homeModules.default
+    nix-colors.homeManagerModules.default
 
     ./_mixins/scripts
 
@@ -35,6 +38,7 @@ in
     ./_mixins/features/image
     ./_mixins/features/k8s
     ./_mixins/features/lldb
+    ./_mixins/features/mailsync
     ./_mixins/features/mosh
     ./_mixins/features/music
     ./_mixins/features/navi
@@ -49,6 +53,12 @@ in
     ./_mixins/features/vscode
     ./_mixins/features/yazi
     ./_mixins/features/zsh
+  ]
+  # ++ lib.optionals isDarwin [
+  ++ [
+    # ./_mixins/features/jankyborders
+    # ./_mixins/features/hammerspoon
+    # ./_mixins/features/sketchybar
   ];
   # ] ++ lib.optionals isLinux [
   #   ./features/gdb
@@ -58,6 +68,11 @@ in
     inherit username;
     inherit homeDirectory;
   };
+
+  home.preferXdgDirectories = true;
+
+  colorScheme = nix-colors.colorSchemes.solarized-light;
+  # base16.enable = true;
 
   home.activation = {
     refreshGitHooks = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -71,12 +86,19 @@ in
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+
       inputs.glide-browser.overlays.default
+      inputs.doomhammer-nur.overlays.default
     ];
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "lima-full-1.2.2"
+        "lima-additional-guestagents-1.2.2"
+      ];
     };
+
   };
 
   home.activation = {
@@ -98,11 +120,13 @@ in
   # environment.
   home.packages = [
     pkgs.cachix
+    pkgs.mermaid-rs-renderer
     pkgs.sops
     pkgs.yadm
 
+    pkgs.slipshow
+
     # pkgs.cyme
-    # pkgs.dogdns
     # pkgs.dua
     # pkgs.duf
     # pkgs.lastpass-cli

@@ -24,6 +24,7 @@ in
 
       git
       lazygit
+      pkgs.unstable.tree-sitter
 
       # needed to compile fzf-native for telescope-fzf-native.nvim
       clang
@@ -33,7 +34,7 @@ in
       # needed to compile some Language Servers
       cargo
       nodejs
-      python310
+      python3
 
       # Lua support
       stylua
@@ -42,19 +43,19 @@ in
       universal-ctags
 
       # language servers
+      bash-language-server
       deno
       lua-language-server
       nil # Nix LSP
-      nodePackages.bash-language-server
-      nodePackages.typescript-language-server
       shellcheck # called by bash-language-server
+      typescript-language-server
 
       # Rust support
       lldb # debug adapter
       rust-analyzer
 
       # Nix support
-      nixfmt-rfc-style
+      nixfmt
       nixpkgs-fmt
       statix
       deadnix

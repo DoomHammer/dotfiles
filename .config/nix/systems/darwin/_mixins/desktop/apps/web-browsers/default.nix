@@ -2,9 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     firefox
-    # glide-browser
-    inputs.glide-browser.packages.aarch64-darwin.glide-browser
-    # FIXME: This shouldn't be hardcoded
-    inputs.zen-browser.packages.aarch64-darwin.default
+    inputs.glide-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

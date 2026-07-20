@@ -14,7 +14,7 @@ in
 {
   home.packages = with pkgs; [
     colima
-    docker
+    unstable.docker
   ];
 
   home.sessionVariables = {

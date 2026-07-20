@@ -24,6 +24,9 @@ in
     enable = true;
     enableCompletion = false; # Cause autocomplete
     enableVteIntegration = true;
+
+    dotDir = "${config.xdg.configHome}/zsh";
+
     plugins = [
       {
         # Must be before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting

@@ -16,7 +16,7 @@ in
     p7zip
     btop
     curl
-    dogdns
+    doggo
     dust
     eza
     fd

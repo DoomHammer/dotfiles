@@ -45,6 +45,12 @@ in
       # };
       tmux.enableShellIntegration = true;
     };
+    readline = {
+      enable = true;
+      variables = {
+        completion-ignore-case = true;
+      };
+    };
     skim = {
       defaultOptions = [
         "--color fg:240,bg:230,hl:33,fg+:241,bg+:221,hl+:33"

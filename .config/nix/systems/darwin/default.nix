@@ -12,17 +12,8 @@
 {
   imports = [
     inputs.nix-index-database.darwinModules.nix-index
-
-    # An existing Linux builder is needed to initially bootstrap `nix-rosetta-builder`.
-    # If one isn't already available: comment out the `nix-rosetta-builder` module below,
-    # uncomment the `linux-builder` module below, and run `darwin-rebuild switch`:
-    # Then: uncomment `nix-rosetta-builder`, remove `linux-builder`, and `darwin-rebuild switch`
-    # a second time. Subsequently, `nix-rosetta-builder` can rebuild itself.
-
-    inputs.nix-rosetta-builder.darwinModules.default
-
-    # inputs.virby.darwinModules.default
     inputs.nix-homebrew.darwinModules.nix-homebrew
+    inputs.virby.darwinModules.default
 
     ./${hostname}
 
@@ -52,16 +43,16 @@
       cleanup = "zap";
       upgrade = false;
     };
-
-    caskArgs.no_quarantine = true;
+    greedyCasks = true;
   };
   nix-homebrew = {
     enable = true;
     user = username;
 
     taps = {
-      "homebrew/core" = inputs.homebrew-core;
-      "homebrew/cask" = inputs.homebrew-cask;
+      # "homebrew/core" = inputs.homebrew-core;
+      # "homebrew/cask" = inputs.homebrew-cask;
+      "BarutSRB/homebrew-tap" = inputs.omniwm;
     };
   };
 
@@ -70,7 +61,8 @@
     config = {
       allowUnfree = true;
       permittedInsecurePackages = [
-        "lima-1.0.7"
+        # "lima-1.2.2"
+        "electron-39.8.10"
       ];
     };
 
@@ -97,14 +89,20 @@
       warn-dirty = false;
       trusted-users = [ "@admin" ];
       build-users-group = "nixbld";
-      extra-platforms = [ "aarch64-linux" ];
+      # extra-platforms = [ "aarch64-linux" ];
+      # substituters = https://cache.nixos.org https://cache.nixos.org/ https://hs3city.cachix.org https://pre-commit-hooks.cachix.org https://doomhammer.cachix.org https://pub-solar.cachix.org
+      # trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= hs3city.cachix.org-1:k3r3VNxW9YI+FjzWzseXrZSi799bgRRtFVONVu+ILYk= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= doomhammer.cachix.org-1:ujxIGZYl1rYL7oDj0AIsE7yrBhyD7iIRxJ8jSf70aMc= hs3city.cachix.org-1:WCzLf8vx3AsyX1tVQOLHI0sEu+veYWkw2rQGnE2q0ho= pub-solar.cachix.org-1:ZicXIxKgdxMtgSJECWR8iihZxHRvu8ObL4n2cuBmtos=
+      extra-substituters = [ "https://virby-nix-darwin.cachix.org" ];
+      extra-trusted-public-keys = [
+        "virby-nix-darwin.cachix.org-1:z9GiEZeBU5bEeoDQjyfHPMGPBaIQJOOvYOOjGMKIlLo="
+      ];
     };
     extraOptions = ''
       trusted-users = root ${username}
     '';
     linux-builder = {
       enable = true;
-      #   ephemeral = true;
+      ephemeral = true;
       #   maxJobs = 4;
       #   config = {
       #     virtualisation = {
@@ -116,24 +114,24 @@
       #     };
       #   };
     };
-  };
 
-  nix-rosetta-builder = {
+    registry = {
+      nixpkgs = {
+        flake = inputs.nixpkgs;
+      };
+    };
+  };
+  services.virby = {
     enable = true;
-
-    cores = 6;
-    memory = "24GiB";
-    diskSize = "320GiB";
-
-    onDemand = true;
+    onDemand = {
+      enable = true;
+      ttl = 180;
+    };
+    cores = 4;
+    rosetta = true;
+    allowUserSsh = true;
+    debug = true;
   };
-
-  # services.virby = {
-  #   enable = true;
-  #   onDemand.enable = true;
-  #   onDemand.ttl = 30; # Idle timeout in minutes
-  #   rosetta = true;
-  # };
 
   networking.hostName = hostname;
   networking.computerName = hostname;
@@ -303,6 +301,7 @@
         };
       };
       NSGlobalDomain = {
+        _HIHideMenuBar = lib.mkForce true;
         AppleICUForce24HourTime = true;
         AppleInterfaceStyle = null;
         AppleInterfaceStyleSwitchesAutomatically = false;

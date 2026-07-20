@@ -19,6 +19,7 @@ in
     ghq
     git
     git-lfs
+    gitpane
     lazygit
     zsh-forgit
   ];
@@ -31,12 +32,40 @@ in
       ];
     };
     git-cliff.enable = true;
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+    };
     # git = {
     #   difftastic = {
     #     display = "side-by-side-show-both";
     #     enable = true;
     #   };
-    # };
+
+    lazygit = {
+      enable = true;
+      settings = {
+        gui = {
+          showIcons = true;
+        };
+        git = {
+          overrideGpg = true;
+          pagers = [
+            {
+              colorArg = "always";
+              pager = "delta --light --paging=never";
+            }
+            {
+              externalDiffCommand = "difft --color=always";
+            }
+          ];
+        };
+      };
+    };
+
+    difftastic = {
+      enable = true;
+    };
   };
   # TODO: Migrate gitconfig to https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
   home.file = {

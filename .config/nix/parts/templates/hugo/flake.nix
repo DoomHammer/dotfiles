@@ -28,7 +28,7 @@
           buildInputs = [
             hugo
             nodejs
-            nodePackages.npm
+            npm
           ];
         };
       }
