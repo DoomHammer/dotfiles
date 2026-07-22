@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   systems = import inputs.systems;
 
@@ -14,7 +14,9 @@
           allowUnfree = true;
           allowUnsupportedSystem = true;
         };
-        overlays = [ ];
+        overlays = [
+          self.outputs.overlays.unstable-packages
+        ];
       };
     };
 }

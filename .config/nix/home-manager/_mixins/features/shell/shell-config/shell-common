@@ -3,6 +3,6 @@
 ##
 ## Make
 ##
-export MAKEFLAGS="-j $(sysctl -n hw.ncpu)"
+export MAKEFLAGS="-j $(nproc --all)"
 
 test -r ~/.shell-common.local && source ~/.shell-common.local

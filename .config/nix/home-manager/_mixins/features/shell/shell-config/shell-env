@@ -46,7 +46,6 @@ export LESS='-iFMRSX -x4'
 export XDG_CONFIG_HOME=$HOME/.config
 export CONAN_USER_HOME=$XDG_CONFIG_HOME/conan
 export CONAN_HOME=$XDG_CONFIG_HOME/conan2
-export COLIMA_HOME=$XDG_CONFIG_HOME/colima
 
 if [ -f "$HOME/.shell-env.local" ]; then
   . "$HOME/.shell-env.local"

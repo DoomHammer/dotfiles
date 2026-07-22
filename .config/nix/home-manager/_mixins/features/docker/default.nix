@@ -12,12 +12,16 @@ let
   dir = "${flakePath config}/home-manager/_mixins/features/docker";
 in
 {
-  home.packages = with pkgs; [
-    colima
-    unstable.docker
-  ];
+  home.packages =
+    with pkgs;
+    [
+      unstable.docker
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      colima
+    ];
 
-  home.sessionVariables = {
+  home.sessionVariables = pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
     COLIMA_HOME = "$HOME/.config/colima";
   };
 

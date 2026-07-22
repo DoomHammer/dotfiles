@@ -21,6 +21,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    system-manager = {
+      url = "github:numtide/system-manager/nix-channel-flakes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     virby.url = "github:quinneden/virby-nix-darwin";
     # Prebuilt package index - provides comma package
     nix-index-database = {
@@ -132,6 +136,10 @@
             platform = "aarch64-darwin";
             desktop = "aqua";
           };
+          "doomhammer@precision" = helper.mkHome {
+            hostname = "precision";
+            platform = "x86_64-linux";
+          };
         };
         #nix run nix-darwin -- switch --flake ~/.config/nix
         #nix build .#darwinConfigurations.{hostname}.config.system.build.toplevel
@@ -139,6 +147,21 @@
           "Piotrs-MacBook-Air" = helper.mkDarwin { hostname = "Piotrs-MacBook-Air"; };
           "helios" = helper.mkDarwin { hostname = "helios"; };
           "eos" = helper.mkDarwin { hostname = "eos"; };
+        };
+        # nix run 'github:numtide/system-manager' --accept-flake-config -- switch --flake ~/.config/nix --sudo
+        systemConfigs = {
+          "precision" = inputs.system-manager.lib.makeSystemConfig {
+            modules = [
+              ./system-manager/default.nix
+            ];
+            extraSpecialArgs = {
+              inherit
+                inputs
+                outputs
+                stateVersion
+                ;
+            };
+          };
         };
         # Custom packages and modifications, exported as overlays
         overlays = import ./parts/overlays { inherit inputs; };

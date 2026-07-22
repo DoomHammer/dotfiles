@@ -6,6 +6,7 @@
     {
       lib,
       config,
+      pkgs,
       system,
       ...
     }:
@@ -13,8 +14,8 @@
       # don't format these
       excludes = [
         "flake.lock"
-        "r'.+\.age$'"
-        "r'.+\.patch$'"
+        "r'.+\\.age$'"
+        "r'.+\\.patch$'"
         ".gitignore.global"
         "lazy-lock.json"
       ];
@@ -55,7 +56,7 @@
 
             # check for dead links
             lychee = mkHook {
-              excludes = [ "^(?!.*\.md$).*" ];
+              excludes = [ "^(?!.*\\.md$).*" ];
               settings = {
                 flags = "--exclude github.com";
               };
@@ -78,7 +79,7 @@
 
             # Git police
             check-merge-conflicts = mkHook { };
-            commitizen = mkHook { };
+            commitizen = mkHook { package = pkgs.unstable.commitizen; };
 
             # Various Artists
             check-added-large-files = mkHook { };

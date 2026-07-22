@@ -8,7 +8,7 @@
   ...
 }:
 let
-  inherit (pkgs.stdenv) isDarwin;
+  inherit (pkgs.stdenv) isDarwin isLinux;
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
   nix-colors = import inputs.nix-colors { };
 in
@@ -55,14 +55,13 @@ in
     ./_mixins/features/zsh
   ]
   # ++ lib.optionals isDarwin [
-  ++ [
-    # ./_mixins/features/jankyborders
-    # ./_mixins/features/hammerspoon
-    # ./_mixins/features/sketchybar
+  # ./_mixins/features/jankyborders
+  # ./_mixins/features/hammerspoon
+  # ./_mixins/features/sketchybar
+  # ]
+  ++ lib.optionals isLinux [
+    ./features/gdb
   ];
-  # ] ++ lib.optionals isLinux [
-  #   ./features/gdb
-  # ];
   home = {
     inherit stateVersion;
     inherit username;
@@ -99,6 +98,16 @@ in
       ];
     };
 
+  };
+
+  nix = {
+    channels = { inherit (inputs) nixpkgs; };
+
+    registry = {
+      nixpkgs = {
+        flake = inputs.nixpkgs;
+      };
+    };
   };
 
   home.activation = {

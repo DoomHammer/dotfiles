@@ -1,6 +1,7 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example'
-pkgs: {
+pkgs:
+pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.isDarwin {
   backblaze-downloader = pkgs.callPackage ./backblaze-downloader { };
   brother-printer-driver = pkgs.callPackage ./brother-printer-driver { };
   camtasia2019 = pkgs.callPackage ./camtasia2019 { };

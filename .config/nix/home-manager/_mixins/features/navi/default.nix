@@ -19,6 +19,7 @@
             gawk
             ghq
             git
+            openssh
           ]
         )
       }:$PATH"
@@ -35,6 +36,8 @@
     '';
   };
 
+  # Use `C-a + C-g` in tmux to open tmux-navi
+  # Use `C-g` in shell to open navi widget
   programs.navi = {
     enable = true;
     enableBashIntegration = true;
@@ -51,7 +54,7 @@
           "$HOME/src/github.com/papanito/cheats"
           "$HOME/src/github.com/tsologub/navi-cheats"
           "$HOME/src/github.com/kbknapp/navi-cheats"
-          "$HOME/src/github.com/doomhammer/personal-navi-cheats"
+          # "$HOME/src/github.com/doomhammer/personal-navi-cheats"
           # "$HOME/src/github.com/denisidoro/dotfiles"
           # "$HOME/src/github.com/mrVanDalo/navi-cheats"
           # "$HOME/src/github.com/chazeon/my-navi-cheats"
