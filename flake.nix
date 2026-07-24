@@ -1,7 +1,8 @@
 {
   description = "DoomHammer's repository of flake templates";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -34,6 +35,11 @@
   outputs =
     inputs@{ ... }:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ./.config/nix/parts ];
+      flake = {
+        overlays = import ./.config/nix/parts/overlays { inherit inputs; };
+      };
+      imports = [
+        ./.config/nix/parts
+      ];
     };
 }
