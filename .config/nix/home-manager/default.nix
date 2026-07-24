@@ -8,7 +8,7 @@
   ...
 }:
 let
-  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (pkgs.stdenv) isDarwin;
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
   nix-colors = import inputs.nix-colors { };
 in
@@ -53,14 +53,14 @@ in
     ./_mixins/features/vscode
     ./_mixins/features/yazi
     ./_mixins/features/zsh
-  ]
-  # ++ lib.optionals isDarwin [
-  # ./_mixins/features/jankyborders
-  # ./_mixins/features/hammerspoon
-  # ./_mixins/features/sketchybar
-  # ]
-  ++ lib.optionals isLinux [
-    ./features/gdb
+    # ]
+    # ++ lib.optionals isDarwin [
+    # ./_mixins/features/jankyborders
+    # ./_mixins/features/hammerspoon
+    # ./_mixins/features/sketchybar
+    # ]
+    # ++ lib.optionals isLinux [
+    #   ./features/gdb
   ];
   home = {
     inherit stateVersion;
