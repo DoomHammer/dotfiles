@@ -54,13 +54,22 @@
               always_run = true;
             };
 
+            # GitHub Actions delivers:
+            # Error loading CA root certificate: failed to read PEM from file: No such file or directory (os error 2) at '/no-cert-file.crt'
+            # Error: Failed to create request client
+            # >
+            # > Caused by:
+            # >     0: Failed to create HTTP request client: builder error
+            # >     1: builder error
+            # >     2: unexpected error: No CA certificates were loaded from the system
+
             # check for dead links
-            lychee = mkHook {
-              excludes = [ "^(?!.*\\.md$).*" ];
-              settings = {
-                flags = "--exclude github.com";
-              };
-            };
+            # lychee = mkHook {
+            #   excludes = [ "^(?!.*\\.md$).*" ];
+            #   settings = {
+            #     flags = "--exclude github.com";
+            #   };
+            # };
 
             check-yaml = mkHook { };
 

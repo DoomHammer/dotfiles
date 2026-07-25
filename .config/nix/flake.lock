@@ -347,6 +347,21 @@
         "type": "github"
       }
     },
+    "nix-apt": {
+      "locked": {
+        "lastModified": 1777391370,
+        "narHash": "sha256-oeiwJqmg//S7vyo/WWUbzbSll/0t4lVFL+b6bCU9KxM=",
+        "owner": "xom11",
+        "repo": "nix-apt",
+        "rev": "ca2a9af48c3cdae3ec6632a3abe99501c09ed119",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xom11",
+        "repo": "nix-apt",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -563,6 +578,7 @@
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "nix-apt": "nix-apt",
         "nix-colors": "nix-colors",
         "nix-darwin": "nix-darwin",
         "nix-darwin-unstable": "nix-darwin-unstable",

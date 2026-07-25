@@ -31,5 +31,14 @@
         };
       };
     };
+
+    services.nix-apt = {
+      enable = true;
+      aptPackages = [
+        "git"
+        "curl"
+        "openssh-server"
+      ];
+    };
   };
 }

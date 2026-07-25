@@ -29,7 +29,7 @@
       for path in $PATHLIST; do
         path=$(eval echo "$path")
         if [ ! -d "$path" ]; then
-          repo=$(echo "$path" | sed -e 's/.*github.com\//git@github.com:/')
+          repo=$(echo "$path" | sed -e 's/.*github.com\//https:\/\/github.com\//')
           ghq get "''${repo}.git"
         fi
       done
