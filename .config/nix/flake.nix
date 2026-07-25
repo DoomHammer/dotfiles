@@ -25,6 +25,7 @@
       url = "github:numtide/system-manager/nix-channel-flakes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-apt.url = "github:xom11/nix-apt";
     virby.url = "github:quinneden/virby-nix-darwin";
     # Prebuilt package index - provides comma package
     nix-index-database = {
@@ -152,6 +153,7 @@
         systemConfigs = {
           "precision" = inputs.system-manager.lib.makeSystemConfig {
             modules = [
+              inputs.nix-apt.systemManagerModules.default
               ./system-manager/default.nix
             ];
             extraSpecialArgs = {
