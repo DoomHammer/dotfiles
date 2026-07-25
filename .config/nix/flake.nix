@@ -151,18 +151,8 @@
         };
         # nix run 'github:numtide/system-manager' --accept-flake-config -- switch --flake ~/.config/nix --sudo
         systemConfigs = {
-          "precision" = inputs.system-manager.lib.makeSystemConfig {
-            modules = [
-              inputs.nix-apt.systemManagerModules.default
-              ./system-manager/default.nix
-            ];
-            extraSpecialArgs = {
-              inherit
-                inputs
-                outputs
-                stateVersion
-                ;
-            };
+          "precision" = helper.mkSysMan {
+            hostname = "precision";
           };
         };
         # Custom packages and modifications, exported as overlays
