@@ -5,6 +5,7 @@
   lib,
   stateVersion,
   username,
+  platform,
   ...
 }:
 let
@@ -53,14 +54,15 @@ in
     ./_mixins/features/vscode
     ./_mixins/features/yazi
     ./_mixins/features/zsh
-    # ]
-    # ++ lib.optionals isDarwin [
-    # ./_mixins/features/jankyborders
-    # ./_mixins/features/hammerspoon
-    # ./_mixins/features/sketchybar
-    # ]
-    # ++ lib.optionals isLinux [
-    #   ./features/gdb
+  ]
+  # FIXME: This looks dirty, make a nice little helper for checking platform
+  ++ lib.optionals (platform == "aarch64-darwin") [
+    ./_mixins/features/jankyborders
+    ./_mixins/features/hammerspoon
+    ./_mixins/features/sketchybar
+  ]
+  ++ lib.optionals (platform == "x86_64-linux") [
+    ./_mixins/features/gdb
   ];
   home = {
     inherit stateVersion;
