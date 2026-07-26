@@ -118,6 +118,38 @@
       ];
     };
 
+  mkSysMan =
+    {
+      hostname,
+      username ? "doomhammer",
+      desktop ? null,
+      platform ? "x86_64-linux",
+    }:
+    let
+      isISO = false;
+      isInstall = true;
+      isLima = false;
+      isWorkstation = true;
+    in
+    inputs.system-manager.lib.makeSystemConfig {
+      specialArgs = {
+        inherit
+          inputs
+          outputs
+          desktop
+          hostname
+          platform
+          username
+          stateVersion
+          isInstall
+          isLima
+          isISO
+          isWorkstation
+          ;
+      };
+      modules = [ ../../systems/linux ];
+    };
+
   forAllSystems = inputs.nixpkgs.lib.genAttrs [
     "aarch64-linux"
     "x86_64-linux"

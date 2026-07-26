@@ -1,8 +1,16 @@
 {
   inputs,
+  pkgs,
+  username,
+  hostname,
   ...
 }:
 {
+  imports = [
+    inputs.nix-apt.systemManagerModules.default
+
+    ./${hostname}
+  ];
   config = {
     nixpkgs.hostPlatform = "x86_64-linux";
 
@@ -40,5 +48,12 @@
         "openssh-server"
       ];
     };
+
+    users.users.${username} = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      ignoreShellProgramCheck = true;
+    };
+
   };
 }
