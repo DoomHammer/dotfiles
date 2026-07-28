@@ -45,7 +45,7 @@
 
     settings = {
       finder = {
-        command = "skim";
+        command = "fzf";
       };
       cheats = {
         paths = [
