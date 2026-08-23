@@ -44,7 +44,7 @@
 
             actionlint = mkHook { files = "^.github/workflows/"; };
 
-            shellcheck = mkHook { };
+            shellcheck = mkHook { files = "^.+\\.sh"; };
 
             # ensure we have nice formatting
             treefmt = mkHook { package = config.treefmt.build.wrapper; };

@@ -4,4 +4,10 @@
     ../_mixins/desktop-minimal
     ../_mixins/desktop
   ];
+
+  services = {
+    awl = {
+      enable = true;
+    };
+  };
 }

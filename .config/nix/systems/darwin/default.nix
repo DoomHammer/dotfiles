@@ -14,6 +14,7 @@
     inputs.nix-index-database.darwinModules.nix-index
     inputs.nix-homebrew.darwinModules.nix-homebrew
     inputs.virby.darwinModules.default
+    inputs.doomhammer-nur.darwinModules.default
 
     ./${hostname}
 
@@ -100,20 +101,20 @@
     extraOptions = ''
       trusted-users = root ${username}
     '';
-    linux-builder = {
-      enable = true;
-      ephemeral = true;
-      #   maxJobs = 4;
-      #   config = {
-      #     virtualisation = {
-      #       darwin-builder = {
-      #         diskSize = 40 * 1024;
-      #         memorySize = 8 * 1024;
-      #       };
-      #       cores = 6;
-      #     };
-      #   };
-    };
+    # linux-builder = {
+    #   enable = true;
+    #   ephemeral = true;
+    #   #   maxJobs = 4;
+    #   #   config = {
+    #   #     virtualisation = {
+    #   #       darwin-builder = {
+    #   #         diskSize = 40 * 1024;
+    #   #         memorySize = 8 * 1024;
+    #   #       };
+    #   #       cores = 6;
+    #   #     };
+    #   #   };
+    # };
 
     registry = {
       nixpkgs = {
@@ -127,7 +128,8 @@
       enable = true;
       ttl = 180;
     };
-    cores = 4;
+    cores = 16;
+    memory = 16 * 1024;
     rosetta = true;
     allowUserSsh = true;
     debug = true;
@@ -194,6 +196,8 @@
         # app_target="$app_target_base/$moniker"
         # mkdir -p "$app_target"
         # ${pkgs.rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
+
+        ${pkgs.define-keyboards}/bin/define-keyboards
       '';
     };
 

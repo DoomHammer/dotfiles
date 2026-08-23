@@ -16,6 +16,7 @@ in
 {
   imports = [
     inputs.nix-index-database.homeModules.nix-index
+    inputs.glide-browser.homeModules.default
     inputs.zen-browser.homeModules.default
     inputs.doomhammer-nur.homeModules.default
     nix-colors.homeManagerModules.default
@@ -33,6 +34,7 @@ in
     ./_mixins/features/direnv
     ./_mixins/features/docker
     ./_mixins/features/git
+    ./_mixins/features/glide-browser
     ./_mixins/features/gnu
     ./_mixins/features/go
     ./_mixins/features/gpg
@@ -57,9 +59,9 @@ in
   ]
   # FIXME: This looks dirty, make a nice little helper for checking platform
   ++ lib.optionals (platform == "aarch64-darwin") [
-    ./_mixins/features/jankyborders
-    ./_mixins/features/hammerspoon
-    ./_mixins/features/sketchybar
+    # ./_mixins/features/jankyborders
+    # ./_mixins/features/hammerspoon
+    # ./_mixins/features/sketchybar
   ]
   ++ lib.optionals (platform == "x86_64-linux") [
     ./_mixins/features/gdb
@@ -131,7 +133,6 @@ in
   # environment.
   home.packages = [
     pkgs.cachix
-    pkgs.mermaid-rs-renderer
     pkgs.sops
     pkgs.yadm
 
