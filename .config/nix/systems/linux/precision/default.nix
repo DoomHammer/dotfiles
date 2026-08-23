@@ -1,9 +1,20 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  inputs,
+  platform,
+  ...
+}:
+{
   # Ubuntu 24.04
 
   environment.systemPackages = with pkgs; [
     lima
   ];
+
+  services.awl = {
+    enable = true;
+    package = inputs.doomhammer-nur.packages.${platform}.awl;
+  };
 
   # AppArmor profile for bubblewrap
   environment.etc."apparmor.d/nix-bwrap".text = ''

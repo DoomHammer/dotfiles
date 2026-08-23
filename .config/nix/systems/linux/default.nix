@@ -8,11 +8,14 @@
 {
   imports = [
     inputs.nix-apt.systemManagerModules.default
+    inputs.doomhammer-nur.nixosModules.default
 
     ./${hostname}
   ];
   config = {
-    nixpkgs.hostPlatform = "x86_64-linux";
+    nixpkgs = {
+      hostPlatform = "x86_64-linux";
+    };
 
     nix = {
       enable = true;
