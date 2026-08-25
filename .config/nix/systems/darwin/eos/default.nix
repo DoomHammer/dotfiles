@@ -9,5 +9,8 @@
     awl = {
       enable = true;
     };
+    eternal-terminal = {
+      enable = true;
+    };
   };
 }
