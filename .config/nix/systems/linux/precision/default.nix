@@ -4,6 +4,12 @@
   platform,
   ...
 }:
+let
+  unstable = import inputs.nixpkgs-unstable {
+    system = platform;
+    config.allowUnfree = true;
+  };
+in
 {
   # Ubuntu 24.04
   imports = [
@@ -12,7 +18,8 @@
   config = {
 
     environment.systemPackages = with pkgs; [
-      lima
+      eternal-terminal
+      unstable.lima
     ];
 
     services = {
