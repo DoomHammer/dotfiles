@@ -43,6 +43,17 @@
       };
     };
 
+    environment.etc = {
+      # Workaround for https://github.com/numtide/system-manager/issues/543
+      zprofile = {
+        text = ''
+          if [ -e '/etc/profile' ]; then
+              . '/etc/profile'
+          fi
+        '';
+      };
+    };
+
     services.nix-apt = {
       enable = true;
       aptPackages = [
