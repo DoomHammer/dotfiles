@@ -92,7 +92,7 @@ in
     siteFunctions = {
       zi = ''
         local dir
-        dir=$(zoxide query -l | fzf) && z "$dir"
+        dir=$(zoxide query -l | fzf) && __zoxide_z "$dir"
       '';
 
     };
