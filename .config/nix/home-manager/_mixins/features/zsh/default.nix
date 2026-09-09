@@ -54,16 +54,6 @@ in
         src = pkgs.zsh-forgit;
         file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
       }
-      # {
-      #   name = "zsh-you-should-use";
-      #   src = pkgs.zsh-you-should-use;
-      #   file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
-      # }
-      {
-        name = "zsh-nix-shell";
-        src = pkgs.zsh-nix-shell;
-        file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
-      }
       {
         name = "zsh-sensible";
         src = plugins.zsh-sensible;
@@ -99,6 +89,13 @@ in
     ];
     autocd = true;
     # autosuggestions.enable = true;
+    siteFunctions = {
+      zi = ''
+        local dir
+        dir=$(zoxide query -l | fzf) && z "$dir"
+      '';
+
+    };
     syntaxHighlighting.enable = true;
     shellAliases = {
       tree = "${pkgs.eza}/bin/eza --tree";
