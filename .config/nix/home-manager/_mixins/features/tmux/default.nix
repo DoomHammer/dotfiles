@@ -172,6 +172,20 @@ in
       #   plugin = plugins.colortag;
       #   extraConfig = '''';
       # }
+      {
+        plugin = plugins.tmux-navi;
+        extraConfig = "";
+      }
+      {
+        plugin = plugins.colortag;
+        extraConfig = ''
+          TMUX_COLORTAG_TAG_ONLY=yes
+          TMUX_COLORTAG_USE_POWERLINE=yes
+          TMUX_COLORTAG_ROUNDED_POWERLINE=yes
+          TMUX_COLORTAG_KEY=T
+          TMUX_COLORTAG_TAG_BOLD=yes
+        '';
+      }
       # TODO: take a look at https://github.com/rafi/tmux-pass
     ];
     prefix = "C-a";

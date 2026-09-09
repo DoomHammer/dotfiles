@@ -11,6 +11,11 @@ in
       url = "https://github.com/Determinant/tmux-colortag/archive/${version}.tar.gz";
       sha256 = "19fjlzyrmha10jjcxd25a24rz1wsc5k3k6jl4y868rnc6dclxf5z";
     };
+
+    postPatch = ''
+      sed -i 's?^#!/usr/bin/env python.*?#!'${pkgs.python3}/bin/python3'?' name2color.py
+    '';
+
     rtpFilePath = "tmux-colortag.tmux";
   };
   man = buildTmuxPlugin {
@@ -49,6 +54,16 @@ in
     };
     rtpFilePath = "newline-detector.tmux";
   };
+  tmux-navi = buildTmuxPlugin {
+    pluginName = "tmux-navi";
+    version = "v0.0.1+ae4e4d6203c783b98ba1ee20962e8d7f8f560224";
+    src = fetchTarball {
+      url = "https://codeberg.org/l-lin/tmux-navi/archive/ae4e4d6203c783b98ba1ee20962e8d7f8f560224.tar.gz";
+      sha256 = "sha256:0rzxadkacq07prpv4yfv0qslp1i41b7h0g8rxzn0v8mamh41iadw";
+    };
+    rtpFilePath = "navi.tmux";
+  };
+
   which-key = buildTmuxPlugin {
     pluginName = "which-key";
     version = "v0.0.1+1f419775caf136a60aac8e3a269b51ad10b51eb6";
