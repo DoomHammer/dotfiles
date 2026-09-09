@@ -34,7 +34,6 @@ in
     ./_mixins/features/direnv
     ./_mixins/features/docker
     ./_mixins/features/git
-    ./_mixins/features/glide-browser
     ./_mixins/features/gnu
     ./_mixins/features/go
     ./_mixins/features/gpg
@@ -43,17 +42,14 @@ in
     ./_mixins/features/lldb
     ./_mixins/features/mailsync
     ./_mixins/features/mosh
-    ./_mixins/features/music
     ./_mixins/features/navi
     ./_mixins/features/neovim
     ./_mixins/features/rsync
     ./_mixins/features/ruby
     ./_mixins/features/shell
-    ./_mixins/features/terminal
     ./_mixins/features/tmate
     ./_mixins/features/tmux
     ./_mixins/features/video
-    ./_mixins/features/vscode
     ./_mixins/features/yazi
     ./_mixins/features/zsh
   ]
@@ -62,6 +58,12 @@ in
     # ./_mixins/features/jankyborders
     # ./_mixins/features/hammerspoon
     # ./_mixins/features/sketchybar
+
+    # FIXME: They should actually go to the desktop config
+    ./_mixins/features/glide-browser
+    ./_mixins/features/music
+    ./_mixins/features/terminal
+    ./_mixins/features/vscode
   ]
   ++ lib.optionals (platform == "x86_64-linux") [
     ./_mixins/features/gdb
