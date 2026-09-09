@@ -296,22 +296,23 @@
     "glide-browser": {
       "inputs": {
         "home-manager": [
-          "home-manager"
+          "home-manager-unstable"
         ],
         "nixpkgs": [
           "nixpkgs-unstable"
         ]
       },
       "locked": {
-        "lastModified": 1782680989,
-        "narHash": "sha256-7OxxwIdXZRagnvsnVVp4Ju3Qhmht8hljiS8b7SfGOe4=",
-        "owner": "glide-browser",
+        "lastModified": 1788190823,
+        "narHash": "sha256-9KbfQ66n/hRE0Gya8Bmpm0Xibk0/JRw0ENt4sAUXJTw=",
+        "owner": "doomhammer",
         "repo": "glide.nix",
-        "rev": "bba480c72761ded14314811c440c106360da5572",
+        "rev": "3b7895a269a3482dc9cc097d4064ba986af4bd6d",
         "type": "github"
       },
       "original": {
-        "owner": "glide-browser",
+        "owner": "doomhammer",
+        "ref": "use-proper-path-for-darwin",
         "repo": "glide.nix",
         "type": "github"
       }
@@ -333,6 +334,27 @@
       "original": {
         "owner": "nix-community",
         "ref": "release-26.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager-unstable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788146656,
+        "narHash": "sha256-XmJmvk9rytTb7dCotO/aqR+YysB8HOqnprlOdv+LAF4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "82c265faf4e3161d6015db07c9b0f1ee36a9029b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
         "repo": "home-manager",
         "type": "github"
       }
@@ -599,6 +621,7 @@
         "git-hooks": "git-hooks",
         "glide-browser": "glide-browser",
         "home-manager": "home-manager",
+        "home-manager-unstable": "home-manager-unstable",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "nix-apt": "nix-apt",
@@ -774,7 +797,7 @@
     "zen-browser": {
       "inputs": {
         "home-manager": [
-          "home-manager"
+          "home-manager-unstable"
         ],
         "nixpkgs": [
           "nixpkgs-unstable"

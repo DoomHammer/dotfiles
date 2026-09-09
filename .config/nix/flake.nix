@@ -21,6 +21,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     system-manager = {
       url = "github:numtide/system-manager/nix-channel-flakes";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -92,13 +96,13 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = "home-manager-unstable";
     };
 
     glide-browser = {
-      url = "github:glide-browser/glide.nix";
+      url = "github:doomhammer/glide.nix/use-proper-path-for-darwin";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = "home-manager-unstable";
     };
 
     firefox-addons = {
