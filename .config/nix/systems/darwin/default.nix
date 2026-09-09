@@ -135,8 +135,18 @@
     debug = true;
   };
 
-  networking.hostName = hostname;
-  networking.computerName = hostname;
+  networking = {
+    hostName = hostname;
+    computerName = hostname;
+    dns = [
+      # DNS4EU Protective + Ad-blocking
+      "86.54.11.13"
+      "9.9.9.9"
+    ];
+    knownNetworkServices = [
+      "Wi-Fi"
+    ];
+  };
 
   programs = {
     gnupg.agent = {
