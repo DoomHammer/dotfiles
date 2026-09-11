@@ -18,15 +18,6 @@ in
 
     rtpFilePath = "tmux-colortag.tmux";
   };
-  man = buildTmuxPlugin {
-    pluginName = "tmux-man";
-    version = "v0.0.1+acfde12eb182fda4a320dfd0b3918d77d9cd6cfa";
-    src = fetchTarball {
-      url = "https://github.com/knakayama/tmux-man/archive/acfde12eb182fda4a320dfd0b3918d77d9cd6cfa.tar.gz";
-      sha256 = "1c2dc9vwmq7n3kngrdn6hpp3si57qjl5hihp25xy6sp2bi5gyga0";
-    };
-    rtpFilePath = "tmux-man.tmux";
-  };
   floax = buildTmuxPlugin {
     pluginName = "floax";
     version = "v0.0.1+61c7f466b9a4ceed56f99d403250164170d586cd";
@@ -44,6 +35,15 @@ in
       sha256 = "08n03h32x5i14407j7s21bk43mr35q5mxhr6h6mg82m17y6q3fss";
     };
     rtpFilePath = "sensible.tmux";
+  };
+  man = buildTmuxPlugin {
+    pluginName = "tmux-man";
+    version = "v0.0.1+acfde12eb182fda4a320dfd0b3918d77d9cd6cfa";
+    src = fetchTarball {
+      url = "https://github.com/knakayama/tmux-man/archive/acfde12eb182fda4a320dfd0b3918d77d9cd6cfa.tar.gz";
+      sha256 = "1c2dc9vwmq7n3kngrdn6hpp3si57qjl5hihp25xy6sp2bi5gyga0";
+    };
+    rtpFilePath = "tmux-man.tmux";
   };
   newline-detector = buildTmuxPlugin {
     pluginName = "newline-detector";
@@ -63,7 +63,6 @@ in
     };
     rtpFilePath = "navi.tmux";
   };
-
   which-key = buildTmuxPlugin {
     pluginName = "which-key";
     version = "v0.0.1+1f419775caf136a60aac8e3a269b51ad10b51eb6";

@@ -10,6 +10,131 @@ in
     tmux
     zsh
   ];
+  navi-cheats = {
+    tmux.sections = [
+      {
+        tags = [ "tmux" ];
+        entries = [
+          {
+            description = "Toggle prefix on/off with F12 (for nested remote sessions)";
+            command = "<F12>";
+          }
+        ];
+      }
+    ];
+    tmux-colortag.sections = [
+      {
+        tags = [ "tmux" ];
+        entries = [
+          {
+            description = "Open colortag menu";
+            command = "<Prefix> T";
+          }
+        ];
+      }
+    ];
+    tmux-floax.sections = [
+      {
+        tags = [
+          "tmux"
+          "tmux-floax"
+        ];
+        entries = [
+          {
+            description = "open a floating scratch window";
+            command = "<Alt>-p";
+          }
+        ];
+      }
+    ];
+    tmux-fuzzback.sections = [
+      {
+        tags = [
+          "tmux"
+          "tmux-fuzzback"
+        ];
+        entries = [
+          {
+            description = "fuzzy search in scrollback buffer";
+            command = "<Prefix> ?";
+          }
+        ];
+      }
+    ];
+    fzf-tmux-url.sections = [
+      {
+        tags = [
+          "tmux"
+          "url"
+        ];
+        entries = [
+          {
+            description = "fuzzy find and open a URL from tmux scrollback buffer";
+            command = "<Prefix> u";
+          }
+        ];
+      }
+    ];
+    tmux-man.sections = [
+      {
+        tags = [
+          "tmux"
+          "man"
+        ];
+        entries = [
+          {
+            description = "Open man in a tmux split";
+            command = "<Prefix> m";
+          }
+        ];
+      }
+    ];
+    tmux-navi.sections = [
+      {
+        tags = [
+          "tmux"
+          "navi"
+        ];
+        entries = [
+          {
+            description = "Open navi in a tmux split";
+            command = "<Prefix> <Ctrl>-g";
+          }
+          {
+            description = "Open navi in a floating window in tmux";
+            command = "<Prefix> <Ctrl>-f";
+          }
+        ];
+      }
+    ];
+    tmux-thumbs.sections = [
+      {
+        tags = [
+          "tmux"
+        ];
+        entries = [
+          {
+            description = "select and copy a matched pattern with tmux-thumbs";
+            command = "<Prefix> F";
+          }
+        ];
+      }
+    ];
+    tmux-which-key.sections = [
+      {
+        tags = [
+          "tmux"
+          "tmux-which-key"
+        ];
+        entries = [
+          {
+            description = "which-key menu";
+            command = "<Prefix> <Space>";
+          }
+        ];
+      }
+    ];
+  };
   # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.tmux.enable
   programs.tmux = {
     enable = true;
@@ -83,24 +208,47 @@ in
     newSession = true;
     plugins = [
       {
-        plugin = plugins.irrational;
-        extraConfig = "";
+        plugin = plugins.colortag;
+        extraConfig = ''
+          TMUX_COLORTAG_TAG_ONLY=yes
+          TMUX_COLORTAG_USE_POWERLINE=yes
+          TMUX_COLORTAG_ROUNDED_POWERLINE=yes
+          TMUX_COLORTAG_KEY=T
+          TMUX_COLORTAG_TAG_BOLD=yes
+        '';
       }
       {
-        plugin = plugins.pain-control;
-        extraConfig = "";
+        plugin = plugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '5'
+        '';
       }
       {
-        plugin = plugins.yank;
-        extraConfig = "set -g @yank_selection 'primary'";
+        plugin = plugins.floax;
+        extraConfig = ''
+          # M- means "hold Meta/Alt"
+          set -g @floax-bind '-n M-p'
+
+          # The default width and height of the floating pane
+          set -g @floax-width '90%'
+          set -g @floax-height '90%'
+        '';
       }
       {
-        plugin = plugins.sessionist;
-        extraConfig = "";
+        plugin = plugins.fuzzback;
+        extraConfig = ''
+          set -g @fuzzback-finder 'sk'
+          set -g @fuzzback-popup 1
+          set -g @fuzzback-popup-size '90%'
+        '';
       }
-      # <Prefix>+u to select URL
       {
         plugin = plugins.fzf-tmux-url;
+        extraConfig = "";
+      }
+      {
+        plugin = plugins.irrational;
         extraConfig = "";
       }
       {
@@ -116,14 +264,33 @@ in
         extraConfig = "";
       }
       {
-        plugin = plugins.floax;
+        plugin = plugins.pain-control;
+        extraConfig = "";
+      }
+      {
+        plugin = plugins.resurrect;
         extraConfig = ''
-          # M- means "hold Meta/Alt"
-          set -g @floax-bind '-n M-p'
-
-          # The default width and height of the floating pane
-          set -g @floax-width '90%'
-          set -g @floax-height '90%'
+          set -g @resurrect-strategy-vim 'session'
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-processes 'vi vim nvim cat less more tail watch'
+          set -g @resurrect-dir ~/.local/share/tmux/resurrect
+          set -g @resurrect-capture-pane-contents 'on'
+          # Borrowed from: https://github.com/tmux-plugins/tmux-resurrect/issues/247#issuecomment-2387643976
+          set -g @resurrect-hook-post-save-all "sed -i 's| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/nix/store/.*/bin/||g' $(readlink -f ~/.local/share/tmux/resurrect)"
+        '';
+      }
+      {
+        plugin = plugins.sessionist;
+        extraConfig = "";
+      }
+      {
+        plugin = plugins.tmux-navi;
+        extraConfig = "";
+      }
+      {
+        plugin = plugins.tmux-thumbs;
+        extraConfig = ''
+          set -g @thumbs-key F
         '';
       }
       {
@@ -134,57 +301,8 @@ in
         '';
       }
       {
-        plugin = plugins.resurrect;
-        extraConfig = ''
-          set -g @resurrect-strategy-vim 'session'
-          set -g @resurrect-strategy-nvim 'session'
-          set -g @resurrect-processes 'vi vim nvim nvim-ruby cat less more tail watch'
-          set -g @resurrect-dir ~/.local/share/tmux/resurrect
-          set -g @resurrect-capture-pane-contents 'on'
-          # Borrowed from: https://github.com/tmux-plugins/tmux-resurrect/issues/247#issuecomment-2387643976
-          set -g @resurrect-hook-post-save-all "sed -i 's| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/nix/store/.*/bin/||g' $(readlink -f ~/.local/share/tmux/resurrect)"
-        '';
-      }
-      {
-        plugin = plugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5'
-        '';
-      }
-      # To use tmux-fuzzback, start it in a tmux session by typing prefix + ?.
-      # Now you can start fuzzy searching in your scrollback buffer using fzf.
-      {
-        plugin = plugins.fuzzback;
-        extraConfig = ''
-          set -g @fuzzback-finder 'sk'
-          set -g @fuzzback-popup 1
-          set -g @fuzzback-popup-size '90%'
-        '';
-      }
-      {
-        plugin = plugins.tmux-thumbs;
-        extraConfig = ''
-          set -g @thumbs-key F
-        '';
-      }
-      # {
-      #   plugin = plugins.colortag;
-      #   extraConfig = '''';
-      # }
-      {
-        plugin = plugins.tmux-navi;
-        extraConfig = "";
-      }
-      {
-        plugin = plugins.colortag;
-        extraConfig = ''
-          TMUX_COLORTAG_TAG_ONLY=yes
-          TMUX_COLORTAG_USE_POWERLINE=yes
-          TMUX_COLORTAG_ROUNDED_POWERLINE=yes
-          TMUX_COLORTAG_KEY=T
-          TMUX_COLORTAG_TAG_BOLD=yes
-        '';
+        plugin = plugins.yank;
+        extraConfig = "set -g @yank_selection 'primary'";
       }
       # TODO: take a look at https://github.com/rafi/tmux-pass
     ];

@@ -21,6 +21,8 @@ in
     inputs.doomhammer-nur.homeModules.default
     nix-colors.homeManagerModules.default
 
+    ./lib/navi-cheats.nix
+
     ./_mixins/scripts
 
     ./_mixins/features/basics
