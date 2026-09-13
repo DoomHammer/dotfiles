@@ -1,5 +1,5 @@
 return {
-	"snacks.nvim",
+	"folke/snacks.nvim",
 	opts = {
 		terminal = {
 			win = {
